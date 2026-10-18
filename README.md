@@ -16,7 +16,7 @@
 │   ├── essay-writing.html  # 示例文章：短文（含引用 / 列表）
 │   └── toolkit.html        # 示例文章：清单体（含表格）
 ├── assets/
-│   ├── css/style.css       # 全站样式（含暗色模式、响应式、打印样式）
+│   ├── css/reading.css       # 全站样式（含暗色模式、响应式、打印样式）
 │   ├── js/main.js          # 主题切换、移动端菜单、导航高亮
 │   ├── favicon.svg         # 站点图标
 │   └── avatar.svg          # 头像占位图
@@ -61,7 +61,7 @@ python -m http.server 8000
 | 作者名 / 简介 | `index.html` 的 `.home-intro` |
 | 头像 | 替换 `assets/avatar.svg`，或改 `about.html` 里 `img.avatar` 的 `src` |
 | 邮箱 / GitHub 链接 | 搜索 `you@example.com` 和 `href="#"` |
-| 配色 | `style.css` 开头的 `:root` 变量（`--accent` 是主色） |
+| 配色 | `reading.css` 开头的 `:root` 变量（`--accent` 是主色） |
 | 暗色模式配色 | `[data-theme="dark"]` 那一组变量 |
 
 站点采用窄栏、衬线字体和日期列表，浅色主题为雾白与松绿，深色主题为墨绿灰与浅绿。
