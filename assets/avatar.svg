@@ -1,17 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 440" role="img" aria-label="头像占位图">
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#eef2ff"/>
-      <stop offset="1" stop-color="#e6e0ff"/>
-    </linearGradient>
-    <linearGradient id="ink" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#2f6fed"/>
-      <stop offset="1" stop-color="#7b5cff"/>
-    </linearGradient>
-  </defs>
-  <rect width="440" height="440" fill="url(#bg)"/>
-  <circle cx="220" cy="176" r="62" fill="url(#ink)" opacity=".92"/>
-  <path d="M96 430c0-74 55-134 124-134s124 60 124 134z" fill="url(#ink)" opacity=".92"/>
-  <text x="220" y="404" text-anchor="middle" font-family="'PingFang SC','Microsoft YaHei',sans-serif"
-        font-size="22" fill="#6b7280" letter-spacing="4">把你的头像放这里</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" role="img" aria-label="再也的鱼形印记">
+  <rect width="160" height="160" rx="80" fill="#e1ede5"/>
+  <g fill="none" stroke="#386a55" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M35 80c17-27 51-30 73 0-22 30-56 27-73 0Z"/>
+    <path d="m108 80 20-18v36Z"/>
+    <path d="M64 60c8-14 17-16 25-9M62 100c10 11 18 12 26 7"/>
+    <path d="M37 116c15-6 29 6 44 0s29 6 43 0" opacity=".4"/>
+  </g>
+  <circle cx="52" cy="78" r="3" fill="#386a55"/>
 </svg>

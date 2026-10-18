@@ -27,6 +27,10 @@
     themeBtn.setAttribute("aria-label", isDark ? "切换到浅色模式" : "切换到暗色模式");
     themeBtn.setAttribute("title", isDark ? "切换到浅色模式" : "切换到暗色模式");
     themeBtn.setAttribute("aria-pressed", String(isDark));
+    var label = themeBtn.querySelector(".theme-toggle__label");
+    if (label) label.textContent = isDark ? "浅色" : "深色";
+    var meta = document.querySelector('meta[name="theme-color"]:not([media])');
+    if (meta) meta.setAttribute("content", isDark ? "#141c1b" : "#f5f7f6");
   }
 
   if (themeBtn) {

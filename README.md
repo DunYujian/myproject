@@ -1,4 +1,4 @@
-# 炖鱼尖的博客
+# 再也的博客
 
 一个**零依赖**的静态博客框架：纯 HTML + CSS + JavaScript，没有构建步骤、没有 npm、没有框架。
 改完文件直接提交，GitHub Pages 就会更新。
@@ -7,7 +7,7 @@
 
 ```
 .
-├── index.html              # 首页：Hero + 最新文章 + 简介
+├── index.html              # 首页：作者简介 + 最近文章
 ├── about.html              # 关于页：头像、简介、经历时间线
 ├── 404.html                # 404 页（GitHub Pages 会自动使用）
 ├── posts/
@@ -47,7 +47,7 @@ python -m http.server 8000
    - 文末的标签，以及上一篇 / 下一篇
 3. 把文章加进两个列表：
    - `posts/index.html` 的 `<ul class="post-list">` 里复制一个 `<li>`
-   - `index.html` 首页「最新文章」的 `.grid` 里复制一张 `.card`
+   - `index.html` 首页「最近文章」的 `.recent-list` 里复制一个 `<li>`
 
 正文可用的样式（见示例文章）：`<h2>` `<h3>`、`<p>`、`<ul>`/`<ol>`、`<blockquote>`、
 `<pre data-lang="js"><code>` 代码块（会自动显示语言角标）、`<table>`、`<figure>` + `<figcaption>`、`<hr>`。
@@ -56,13 +56,16 @@ python -m http.server 8000
 
 | 想改什么 | 改哪里 |
 | --- | --- |
-| 站点名「炖鱼尖的博客」 | 每个页面里 `.brand` 的文字，以及 `<title>` |
-| 品牌图标里的字母 | `.brand__mark` 里的 `M` |
-| 首页大标题 / 副标题 | `index.html` 的 `.hero` |
+| 站点名「再也的博客」 | 每个页面里 `.brand` 的文字，以及 `<title>` |
+| 头像 / 站点图标 | `assets/avatar.svg` / `assets/favicon.svg` |
+| 作者名 / 简介 | `index.html` 的 `.home-intro` |
 | 头像 | 替换 `assets/avatar.svg`，或改 `about.html` 里 `img.avatar` 的 `src` |
 | 邮箱 / GitHub 链接 | 搜索 `you@example.com` 和 `href="#"` |
 | 配色 | `style.css` 开头的 `:root` 变量（`--accent` 是主色） |
 | 暗色模式配色 | `[data-theme="dark"]` 那一组变量 |
+
+站点采用窄栏、衬线字体和日期列表，浅色主题为雾白与松绿，深色主题为墨绿灰与浅绿。
+页面右上角可切换两种主题，文章评论同步切换。
 
 主题切换会记住你的选择（存在 `localStorage`），没选过时跟随系统设置。颜色全部集中在 CSS 变量里，改一处全站生效。
 
