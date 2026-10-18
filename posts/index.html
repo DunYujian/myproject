@@ -1,14 +1,15 @@
 ﻿<!DOCTYPE html>
+
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f5f7f6">
-  <title>文章 · 再也的博客</title>
-  <meta name="description" content="全部文章列表，按时间倒序排列。">
-  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="../assets/css/reading.css?v=20261019-2">
-  <script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="#f5f7f6" name="theme-color"/>
+<title>文章 · 再也的博客</title>
+<meta content="全部文章列表，按时间倒序排列。" name="description"/>
+<link href="../assets/favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="../assets/css/reading.css?v=20261019-3" rel="stylesheet"/>
+<script>
     (function () {
       var t = null;
       try { t = localStorage.getItem("theme"); } catch (e) {}
@@ -18,133 +19,119 @@
       document.documentElement.setAttribute("data-theme", t);
     })();
   </script>
+<link rel="preload" href="../assets/fonts/ZCOOLXiaoWei-Regular.woff2" as="font" type="font/woff2" crossorigin>
 </head>
-
 <body data-page="posts">
-  <a class="skip-link" href="#main">跳到主要内容</a>
-
-  <header class="site-header">
-    <div class="wrap site-header__inner">
-      <a class="brand" aria-label="再也的博客首页" href="../index.html">
-        <span>再也的博客</span>
-      </a>
-
-      <button class="icon-btn theme-toggle" type="button" aria-label="切换主题" aria-pressed="false">
-        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
-             stroke-linecap="round" aria-hidden="true">
-          <circle cx="12" cy="12" r="4"></circle>
-          <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>
-        </svg>
-        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
-             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"></path>
-        </svg>
-        <span class="theme-toggle__label">深色</span>
-      </button>
-
-      <button class="icon-btn nav-toggle" type="button" aria-label="打开菜单" aria-expanded="false" aria-controls="nav">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true">
-          <path d="M4 7h16M4 12h16M4 17h16"></path>
-        </svg>
-      </button>
-
-      <nav class="nav" id="nav" aria-label="主导航">
-        <a href="../index.html" data-nav="home">首页</a>
-        <a href="../posts/index.html" data-nav="posts">文章</a>
-        <a href="../about.html" data-nav="about">关于</a>
-      </nav>
-    </div>
-  </header>
-
-  <main id="main">
-    <section class="section">
-      <div class="wrap wrap--narrow">
-        <div class="section__head">
-          <h1 class="page-title">全部文章</h1>
-          <span class="more">共 4 篇</span>
-        </div>
-
-        <!-- 文章列表：复制一个 <li> 就能加一篇；时间倒序排，最新的放最上面 -->
-        <ul class="post-list">
-          <li class="post-item">
-            <a href="welcome.html">
-              <time datetime="2026-10-18">2026-10-18</time>
-              <div>
-                <h3>从一个空仓库开始：这个站是怎么搭起来的</h3>
-                <p>没有框架、没有构建步骤，只有三个文件。记录一下这个博客从零到上线的最小路径。</p>
-                <ul class="tags post-item__tags">
-                  <li><span class="tag">建站</span></li>
-                  <li><span class="tag">GitHub Pages</span></li>
-                </ul>
-              </div>
-            </a>
-          </li>
-
-          <li class="post-item">
-            <a href="essay-writing.html">
-              <time datetime="2026-10-12">2026-10-12</time>
-              <div>
-                <h3>写作是思考的副产品</h3>
-                <p>为什么我开始坚持写笔记：不是为了输出，而是为了让模糊的感觉被迫变成句子。</p>
-                <ul class="tags post-item__tags">
-                  <li><span class="tag">随笔</span></li>
-                  <li><span class="tag">写作</span></li>
-                </ul>
-              </div>
-            </a>
-          </li>
-
-          <li class="post-item">
-            <a href="toolkit.html">
-              <time datetime="2026-10-03">2026-10-03</time>
-              <div>
-                <h3>我的极简工具清单</h3>
-                <p>工具越少，注意力越集中。列出我每天真正打开的那几个软件，以及被我删掉的那些。</p>
-                <ul class="tags post-item__tags">
-                  <li><span class="tag">效率</span></li>
-                  <li><span class="tag">工具</span></li>
-                </ul>
-              </div>
-            </a>
-          </li>
-          <li class="post-item"><a href="lanqiao-hal-key-click.html"><time datetime="2024-03-03">2024-03-03</time><div><h3>3、蓝桥杯嵌入式—HAL库-按键单击</h3><p>GPIO 与定时器配置、按键消抖和中断回调代码，记录蓝桥杯嵌入式开发中的按键单击操作。</p><ul class="tags post-item__tags"><li><span class="tag">嵌入式</span></li><li><span class="tag">蓝桥杯</span></li></ul></div></a></li>
-        </ul>
-
-        <!-- 没有文章时，用下面这块代替上面的 <ul>：
+<a class="skip-link" href="#main">跳到主要内容</a>
+<header class="site-header">
+<div class="wrap site-header__inner">
+<a aria-label="再也的博客首页" class="brand" href="../index.html">
+<span>再也的博客</span>
+</a>
+<button aria-label="切换主题" aria-pressed="false" class="icon-btn theme-toggle" type="button">
+<svg aria-hidden="true" class="icon-sun" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" viewbox="0 0 24 24">
+<circle cx="12" cy="12" r="4"></circle>
+<path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>
+</svg>
+<svg aria-hidden="true" class="icon-moon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"></path>
+</svg>
+<span class="theme-toggle__label">深色</span>
+</button>
+<button aria-controls="nav" aria-expanded="false" aria-label="打开菜单" class="icon-btn nav-toggle" type="button">
+<svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.9" viewbox="0 0 24 24">
+<path d="M4 7h16M4 12h16M4 17h16"></path>
+</svg>
+</button>
+<nav aria-label="主导航" class="nav" id="nav">
+<a data-nav="home" href="../index.html">首页</a>
+<a data-nav="posts" href="../posts/index.html">文章</a>
+<a data-nav="about" href="../about.html">关于</a>
+</nav>
+</div>
+</header>
+<main id="main">
+<section class="section">
+<div class="wrap wrap--narrow">
+<div class="section__head">
+<h1 class="page-title">全部文章</h1>
+<span aria-atomic="true" aria-live="polite" class="more" data-category-count="">共 4 篇</span>
+</div>
+<!-- 文章列表：复制一个 <li> 就能加一篇；时间倒序排，最新的放最上面 -->
+<section aria-label="按分类筛选文章" class="category-filter" data-category-controls="" hidden=""><div aria-label="文章分类，可多选" class="category-filter__buttons" role="group"><button aria-pressed="true" data-category="" type="button">全部 <span class="category-filter__count">4</span></button><button aria-pressed="false" data-category="生活" type="button">生活 <span class="category-filter__count">2</span></button><button aria-pressed="false" data-category="学习" type="button">学习 <span class="category-filter__count">3</span></button><button aria-pressed="false" data-category="工作" type="button">工作 <span class="category-filter__count">2</span></button><button aria-pressed="false" data-category="小叙" type="button">小叙 <span class="category-filter__count">1</span></button><button aria-pressed="false" data-category="闲谈" type="button">闲谈 <span class="category-filter__count">0</span></button><button aria-pressed="false" data-category="感悟" type="button">感悟 <span class="category-filter__count">1</span></button></div><p class="category-filter__hint">可多选，显示同时属于所选分类的文章。</p></section><ul class="post-list">
+<li class="post-item" data-categories="学习 工作">
+<a href="welcome.html">
+<time datetime="2026-10-18">2026-10-18</time>
+<div>
+<h3>从一个空仓库开始：这个站是怎么搭起来的</h3>
+<p>没有框架、没有构建步骤，只有三个文件。记录一下这个博客从零到上线的最小路径。</p>
+<ul class="tags post-item__tags">
+<li><span class="tag">建站</span></li>
+<li><span class="tag">GitHub Pages</span></li>
+</ul>
+<div aria-label="文章分类" class="post-item__categories"><span class="category-tag">学习</span><span class="category-tag">工作</span></div></div>
+</a>
+</li>
+<li class="post-item" data-categories="生活 小叙 感悟">
+<a href="essay-writing.html">
+<time datetime="2026-10-12">2026-10-12</time>
+<div>
+<h3>写作是思考的副产品</h3>
+<p>为什么我开始坚持写笔记：不是为了输出，而是为了让模糊的感觉被迫变成句子。</p>
+<ul class="tags post-item__tags">
+<li><span class="tag">随笔</span></li>
+<li><span class="tag">写作</span></li>
+</ul>
+<div aria-label="文章分类" class="post-item__categories"><span class="category-tag">生活</span><span class="category-tag">小叙</span><span class="category-tag">感悟</span></div></div>
+</a>
+</li>
+<li class="post-item" data-categories="生活 学习 工作">
+<a href="toolkit.html">
+<time datetime="2026-10-03">2026-10-03</time>
+<div>
+<h3>我的极简工具清单</h3>
+<p>工具越少，注意力越集中。列出我每天真正打开的那几个软件，以及被我删掉的那些。</p>
+<ul class="tags post-item__tags">
+<li><span class="tag">效率</span></li>
+<li><span class="tag">工具</span></li>
+</ul>
+<div aria-label="文章分类" class="post-item__categories"><span class="category-tag">生活</span><span class="category-tag">学习</span><span class="category-tag">工作</span></div></div>
+</a>
+</li>
+<li class="post-item" data-categories="学习"><a href="lanqiao-hal-key-click.html"><time datetime="2024-03-03">2024-03-03</time><div><h3>3、蓝桥杯嵌入式—HAL库-按键单击</h3><p>GPIO 与定时器配置、按键消抖和中断回调代码，记录蓝桥杯嵌入式开发中的按键单击操作。</p><ul class="tags post-item__tags"><li><span class="tag">嵌入式</span></li><li><span class="tag">蓝桥杯</span></li></ul><div aria-label="文章分类" class="post-item__categories"><span class="category-tag">学习</span></div></div></a></li>
+</ul><div class="category-empty" data-category-empty="" hidden="" role="status"><p>暂无同时属于这些分类的文章。</p><button data-category-reset="" type="button">查看全部文章 →</button></div>
+<!-- 没有文章时，用下面这块代替上面的 <ul>：
         <div class="empty">还没有文章。把 posts/ 里的示例复制一份，改个名字就开始写吧。</div>
         -->
-      </div>
-    </section>
-  </main>
-
-  <aside class="music-section wrap" aria-label="音乐播放器">
-    <details class="music-player" data-music-player>
-      <summary><span class="music-player__icon" aria-hidden="true">♫</span><span>听点音乐</span><span class="music-player__expand" aria-hidden="true">＋</span></summary>
-      <div class="music-player__body">
-        <p class="music-player__status" data-music-status role="status">展开后加载歌单，点击播放即可聆听。</p>
-        <div data-music-controls hidden>
-          <label class="sr-only" for="music-track">选择歌曲</label>
-          <select id="music-track" data-music-select></select>
-          <audio controls preload="none" aria-label="音乐播放控制">浏览器不支持音频播放。</audio>
-          <div class="music-player__actions"><button type="button" data-music-previous>← 上一首</button><button type="button" data-music-next>下一首 →</button></div>
-        </div>
-        <noscript><p>启用 JavaScript 后可使用音乐播放器。</p></noscript>
-      </div>
-    </details>
-  </aside>
-
-  <footer class="site-footer">
-    <div class="wrap site-footer__inner">
-      <p style="margin:0">© <span data-year>2026</span> 再也的博客</p>
-      <nav class="footer-links" aria-label="页脚导航">
-        <a href="../posts/index.html">文章</a>
-        <a href="../about.html">关于</a>
-        <a href="https://github.com/DunYujian" rel="me noopener">GitHub · 再也</a>
-      </nav>
-    </div>
-  </footer>
-
-  <script src="../assets/js/main.js" defer></script>
-  <script src="../assets/js/music.js?v=20261019-1" defer></script>
-</body>
+</div>
+</section>
+</main>
+<aside aria-label="音乐播放器" class="music-section wrap">
+<details class="music-player" data-music-player="">
+<summary><span aria-hidden="true" class="music-player__icon">♫</span><span>听点音乐</span><span aria-hidden="true" class="music-player__expand">＋</span></summary>
+<div class="music-player__body">
+<p class="music-player__status" data-music-status="" role="status">展开后加载歌单，点击播放即可聆听。</p>
+<div data-music-controls="" hidden="">
+<label class="sr-only" for="music-track">选择歌曲</label>
+<select data-music-select="" id="music-track"></select>
+<audio aria-label="音乐播放控制" controls="" preload="none">浏览器不支持音频播放。</audio>
+<div class="music-player__actions"><button data-music-previous="" type="button">← 上一首</button><button data-music-next="" type="button">下一首 →</button></div>
+</div>
+<noscript><p>启用 JavaScript 后可使用音乐播放器。</p></noscript>
+</div>
+</details>
+</aside>
+<footer class="site-footer">
+<div class="wrap site-footer__inner">
+<p style="margin:0">© <span data-year="">2026</span> 再也的博客</p>
+<nav aria-label="页脚导航" class="footer-links">
+<a href="../posts/index.html">文章</a>
+<a href="../about.html">关于</a>
+<a href="https://github.com/DunYujian" rel="me noopener">GitHub · 再也</a>
+</nav>
+</div>
+</footer>
+<script defer="" src="../assets/js/main.js"></script>
+<script defer="" src="../assets/js/music.js?v=20261019-1"></script>
+<script defer="" src="../assets/js/categories.js?v=20261019-1"></script></body>
 </html>

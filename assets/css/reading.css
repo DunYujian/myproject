@@ -262,3 +262,73 @@ hr { border: 0; border-top: 1px solid var(--line); margin: 2.5em 0; }
 .music-player__actions button { padding: 7px 0; border: 0; color: var(--accent); background: none; font-size: 12px; cursor: pointer; }
 .music-player__actions button:disabled { color: var(--text-faint); cursor: default; opacity: .6; }
 @media print { .music-section { display: none !important; } }
+
+/* Display typography stays outside article titles, prose and code. */
+@font-face {
+  font-family: "Zaiye Shoujin";
+  src: local("FZShouJinShu-S10S"), local("方正瘦金书简体"), local("HYShouJinShuJ"), local("汉仪瘦金书简"), local("DFShouJinGB-W3");
+  font-style: normal; font-weight: 400; font-display: swap;
+}
+@font-face {
+  font-family: "ZCOOL XiaoWei";
+  src: url("../fonts/ZCOOLXiaoWei-Regular.woff2") format("woff2");
+  font-style: normal; font-weight: 400; font-display: swap;
+}
+@font-face {
+  font-family: "Zhi Mang Xing";
+  src: url("../fonts/ZhiMangXing-Regular.woff2") format("woff2");
+  font-style: normal; font-weight: 400; font-display: swap;
+}
+:root {
+  --font-art: "Zaiye Shoujin", "ZCOOL XiaoWei", var(--font-serif);
+  --font-hand: "Zhi Mang Xing", "KaiTi", "STKaiti", cursive;
+}
+body:not([data-page="post"]) { font-family: var(--font-art); }
+.brand { font-family: var(--font-art); font-size: 28px; font-weight: 400; letter-spacing: .1em; }
+.nav { font-family: var(--font-art); font-size: 18px; }
+.home-intro { margin-bottom: 43px; }
+.home-intro h1 { font-family: var(--font-art); font-size: 42px; font-weight: 400; letter-spacing: .18em; }
+.home-motto { font-family: var(--font-hand); font-size: 23px; line-height: 1.7; letter-spacing: .04em; }
+.section__head h2, .page-title { font-family: var(--font-art); font-weight: 400; letter-spacing: .08em; }
+.section__head h2 { font-size: 24px; }
+.recent-list__title, .post-item h3 { font-family: var(--font-art); font-weight: 400; }
+.recent-list__title { font-size: 19px; }
+.post-item h3 { font-size: 22px; }
+.home-note__mark { font-family: var(--font-hand); font-size: 25px; }
+.home-note p { font-family: var(--font-art); font-size: 15px; }
+/* Six overlapping categories; selecting several means their intersection. */
+.category-links { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 23px; margin-bottom: 42px; }
+.category-links__label { color: var(--text-faint); font: 11px var(--font-sans); letter-spacing: .12em; margin-right: 2px; }
+.category-links a { font-family: var(--font-art); font-size: 20px; color: var(--text-soft); }
+.category-links a:hover { color: var(--accent); }
+.category-filter { margin: 26px 0 24px; }
+.category-filter__buttons { display: flex; flex-wrap: wrap; gap: 10px; }
+.category-filter__buttons button { padding: 7px 12px; border: 1px solid var(--line); border-radius: 3px; background: transparent; color: var(--text-soft); font-family: var(--font-art); font-size: 18px; line-height: 1.6; cursor: pointer; }
+.category-filter__buttons button:hover { border-color: var(--accent); color: var(--accent); }
+.category-filter__buttons button[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent-ink); }
+.category-filter__count { font: 10px var(--font-mono); margin-left: 5px; color: var(--text-faint); }
+.category-filter__hint { margin: 13px 0 0; color: var(--text-faint); font: 12px/1.8 var(--font-sans); }
+.post-item[hidden], .category-filter[hidden], .category-empty[hidden] { display: none !important; }
+.post-item__categories, .post-categories { display: flex; flex-wrap: wrap; gap: 8px; }
+.post-item__categories { margin-top: 12px; }
+.post-categories { margin-top: 20px; }
+.category-tag { display: inline-block; padding: 2px 9px; border: 1px solid var(--line); border-radius: 3px; color: var(--accent); font: 12px/1.7 var(--font-sans); }
+a.category-tag:hover { text-decoration: none; border-color: var(--accent); background: var(--accent-soft); }
+.category-empty { padding: 36px 0; color: var(--text-soft); font-size: 18px; }
+.category-empty button { border: 0; padding: 0; background: none; color: var(--accent); font: 14px var(--font-sans); cursor: pointer; }
+@media (max-width: 600px) {
+  .brand { font-size: 24px; }
+  .nav { font-size: 18px; }
+  .home-intro h1 { font-size: 35px; }
+  .home-motto { font-size: 21px; }
+  .home-intro { margin-bottom: 30px; }
+  .category-links { gap: 9px 19px; margin-bottom: 32px; }
+  .category-links a { font-size: 19px; }
+  .category-links__label { width: 100%; margin-bottom: 2px; }
+  .recent-list__title { font-size: 18px; }
+  .post-item h3 { font-size: 21px; }
+  .category-filter__buttons { gap: 8px; }
+  .category-filter__buttons button { padding: 6px 10px; }
+  .section__head { flex-wrap: wrap; }
+}
+@media print { .category-filter, .category-empty { display: none !important; } }

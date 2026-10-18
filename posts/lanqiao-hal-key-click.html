@@ -8,7 +8,7 @@
 <title>3、蓝桥杯嵌入式—HAL库-按键单击 · 再也的博客</title>
 <meta content="蓝桥杯嵌入式 HAL 库按键单击教程：GPIO 与定时器配置、按键消抖和中断回调代码。" name="description"/>
 <link href="../assets/favicon.svg" rel="icon" type="image/svg+xml"/>
-<link href="../assets/css/reading.css?v=20261019-2" rel="stylesheet"/>
+<link href="../assets/css/reading.css?v=20261019-3" rel="stylesheet"/>
 <script>
     (function () {
       var t = null;
@@ -19,7 +19,9 @@
       document.documentElement.setAttribute("data-theme", t);
     })();
   </script>
-<link href="https://zxhtta.cc.cd/posts/lanqiao-hal-key-click.html" rel="canonical"/></head>
+<link href="https://zxhtta.cc.cd/posts/lanqiao-hal-key-click.html" rel="canonical"/><meta content="学习" name="categories"/>
+<link rel="preload" href="../assets/fonts/ZCOOLXiaoWei-Regular.woff2" as="font" type="font/woff2" crossorigin>
+</head>
 <body data-page="post">
 <a class="skip-link" href="#main">跳到主要内容</a>
 <header class="site-header">
@@ -53,7 +55,8 @@
 <article class="post">
 <div class="wrap">
 <!-- ============ 文章头：标题 / 日期 / 阅读时间 / 标签 ============ -->
-<header class="post__head"><span class="kicker">嵌入式 · 公众号存档</span><h1>3、蓝桥杯嵌入式—HAL库-按键单击</h1><div class="post__meta"><time datetime="2024-03-03">2024 年 3 月 3 日</time><span aria-hidden="true" class="sep"></span><span>原文署名：雨尘</span></div><p class="post-source">原载微信公众号，<a href="https://mp.weixin.qq.com/s/x9el_iW7pZ3QLxqanaUeZg" rel="noopener noreferrer">阅读微信原文 ↗</a></p></header>
+<header class="post__head"><span class="kicker">嵌入式 · 公众号存档</span><h1>3、蓝桥杯嵌入式—HAL库-按键单击</h1><div class="post__meta"><time datetime="2024-03-03">2024 年 3 月 3 日</time><span aria-hidden="true" class="sep"></span><span>原文署名：雨尘</span></div><p class="post-source">原载微信公众号，<a href="https://mp.weixin.qq.com/s/x9el_iW7pZ3QLxqanaUeZg" rel="noopener noreferrer">阅读微信原文 ↗</a></p><nav aria-label="文章分类" class="post-categories"><a class="category-tag" href="index.html?category=%E5%AD%A6%E4%B9%A0">学习</a></nav>
+</header>
 <!-- ============ 正文：往这里写内容 ============ -->
 <div class="prose"><h2>1、配置引脚和定时器<br/></h2><p><img alt="按键单击教程插图 1" decoding="async" loading="lazy" src="../assets/images/wechat-key-click/image-01.png"/></p><p>图片来源：《CT117E-M4产品手册》<br/></p><p>1.从图中可以得知按键引脚情况以及所需配置如下：</p><table><tbody><tr><th scope="col">按键代号</th><th scope="col">按键引脚代号<br/></th><th scope="col">输入模式<br/></th><th scope="col">需要配置模式<br/></th></tr><tr><td>B1<br/></td><td>PB0<br/></td><td>硬件上拉<br/></td><td>浮空输入<br/></td></tr><tr><td>B2<br/></td><td>PB1<br/></td><td>硬件上拉</td><td>浮空输入</td></tr><tr><td>B3<br/></td><td>PB2<br/></td><td>硬件上拉</td><td>浮空输入</td></tr><tr><td>B4<br/></td><td>PA0<br/></td><td>硬件上拉</td><td>浮空输入</td></tr></tbody></table><p>按键在cubeMX中的配置如下：</p><p><img alt="按键单击教程插图 2" decoding="async" loading="lazy" src="../assets/images/wechat-key-click/image-02.png"/></p><h3>2.配置定时器<br/></h3><p><img alt="按键单击教程插图 3" decoding="async" loading="lazy" src="../assets/images/wechat-key-click/image-03.png"/></p><p><img alt="按键单击教程插图 4" decoding="async" loading="lazy" src="../assets/images/wechat-key-click/image-04.png"/></p><p>我们可以在timers中任意选择其中的一个定时器，假设我们选择的定时器为TIM4，则需要开启该定时器的外部时钟和中断回调功能，随后配置分频系数和重装载值。</p><p>计算周期和分配系数与重装载值：每个计数周期=外部时钟频率/((分频系数-1)x(重装载值-1))，关于为何要减一，小雨也是不太清楚<img alt="表情" class="wechat-emoji" decoding="async" loading="lazy" src="../assets/images/wechat-key-click/image-05.png"/>，有知道的伙伴可以留言指导指导<img alt="表情" class="wechat-emoji" decoding="async" loading="lazy" src="../assets/images/wechat-key-click/image-06.png"/><img alt="表情" class="wechat-emoji" decoding="async" loading="lazy" src="../assets/images/wechat-key-click/image-07.png"/></p><h2>2、代码撰写</h2><h3>1.源文件加载</h3><p>我们先来创建一个中断函数库（例如：interrupt.c和interrupt.h）。如果已了解则跳过。</p><p>创建方法：</p><p>a.找到Inc同级文件夹，新建一个自命名函数库文件夹（如命名为bsp文件夹）打开bsp文件夹，新建两个text文件，重命名为interrupt，分别更改后缀为.h和.c</p><p><img alt="按键单击教程插图 8" decoding="async" loading="lazy" src="../assets/images/wechat-key-click/image-08.png"/></p><p>b.按照<a href="https://mp.weixin.qq.com/s?__biz=Mzk0MzY1MzcyOQ==&amp;mid=2247483682&amp;idx=1&amp;sn=583e614c090c48fac681d4064061389b&amp;chksm=c331d72cf4465e3a52883efe69bd190ce197f34029304347d3dc8a04c65c168fed0be2c50d48&amp;scene=21#wechat_redirect" rel="noopener noreferrer">2、蓝桥杯嵌入式—HAL库TFT-LCD</a>步骤2加载源文件进行源文件的添加<br/></p><h3>2.代码配置</h3><p>1.在main.c文件中我们首先要包含到interrupt.h头文件，然后在主函数中使用HAL_TIM_Base_Start_IT(&amp;htim4);开启定时器4中断回调功能函数。</p><p><img alt="按键单击教程插图 9" decoding="async" loading="lazy" src="../assets/images/wechat-key-click/image-09.png"/></p><p><img alt="按键单击教程插图 10" decoding="async" loading="lazy" src="../assets/images/wechat-key-click/image-10.png"/></p><p>2.在interrupt.h文件中</p><pre data-lang="c"><code>#ifndef __INTERRUPT_H
 #define __INTERRUPT_H
