@@ -9,10 +9,10 @@
   <!--
     注意：404 页可能被 GitHub Pages 在任意层级的错误 URL 上展示，
     所以这里的资源与链接统一用「站点根路径」，不能写相对路径。
-    换仓库名或绑定自定义域名时，把下面所有 /myproject/ 换成新的根路径。
+    自定义域名部署在根目录，资源与链接统一从 / 开始。
   -->
-  <link rel="icon" href="/myproject/assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/myproject/assets/css/style.css">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/css/style.css">
   <script>
     (function () {
       var t = null;
@@ -28,14 +28,14 @@
 <body data-page="404">
   <header class="site-header">
     <div class="wrap site-header__inner">
-      <a class="brand" href="/myproject/index.html">
+      <a class="brand" href="/index.html">
         <span class="brand__mark" aria-hidden="true">M</span>
         <span>我的博客</span>
       </a>
       <nav class="nav" aria-label="主导航">
-        <a href="/myproject/index.html" data-nav="home">首页</a>
-        <a href="/myproject/posts/index.html" data-nav="posts">文章</a>
-        <a href="/myproject/about.html" data-nav="about">关于</a>
+        <a href="/index.html" data-nav="home">首页</a>
+        <a href="/posts/index.html" data-nav="posts">文章</a>
+        <a href="/about.html" data-nav="about">关于</a>
       </nav>
     </div>
   </header>
@@ -47,8 +47,8 @@
         <h1>这一页不存在</h1>
         <p>可能是链接写错了，也可能是这篇文章已经搬走或者还没写出来。</p>
         <div class="hero__actions" style="justify-content:center">
-          <a class="btn btn--primary" href="/myproject/index.html">回到首页</a>
-          <a class="btn btn--ghost" href="/myproject/posts/index.html">浏览文章</a>
+          <a class="btn btn--primary" href="/index.html">回到首页</a>
+          <a class="btn btn--ghost" href="/posts/index.html">浏览文章</a>
         </div>
       </div>
     </section>
@@ -58,12 +58,12 @@
     <div class="wrap site-footer__inner">
       <p style="margin:0">© <span data-year>2026</span> 我的博客</p>
       <nav class="footer-links" aria-label="页脚导航">
-        <a href="/myproject/posts/index.html">文章</a>
-        <a href="/myproject/about.html">关于</a>
+        <a href="/posts/index.html">文章</a>
+        <a href="/about.html">关于</a>
       </nav>
     </div>
   </footer>
 
-  <script src="/myproject/assets/js/main.js" defer></script>
+  <script src="/assets/js/main.js" defer></script>
 </body>
 </html>

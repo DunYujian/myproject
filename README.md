@@ -74,11 +74,25 @@ Settings → Pages → Build and deployment
   Branch: main  /  (root)
 ```
 
-推送后等 1 分钟，访问 **https://dunyujian.github.io/myproject/**。
+站点地址：**https://zxhtta.cc.cd/**。
 
-**路径说明**：本项目是「项目页」，部署在 `/myproject/` 子路径下。
-除 `404.html` 之外，所有页面都用相对链接，所以不需要改；`404.html` 因为可能在任意层级被展示，
-用的是 `/myproject/...` 绝对路径——**换仓库名或绑定自定义域名时，记得同步改这个文件里的前缀**。
+仓库根目录的 `CNAME` 文件保存自定义域名 `zxhtta.cc.cd`。
+在仓库 Settings → Pages 中确认 Custom domain 为 `zxhtta.cc.cd`，并启用 Enforce HTTPS。
+
+域名 DNS 使用以下四条 A 记录（当前已配置）：
+
+| 类型 | 主机记录（以 zxhtta.cc.cd 为 DNS 区域） | 目标 |
+| --- | --- | --- |
+| A | @ | 185.199.108.153 |
+| A | @ | 185.199.109.153 |
+| A | @ | 185.199.110.153 |
+| A | @ | 185.199.111.153 |
+
+DNS 和证书变更可能需要最多 24 小时生效。配置说明见 [GitHub 官方文档](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site)。
+
+**路径说明**：自定义域名将网站部署在 `/` 根目录。
+普通页面使用相对链接；`404.html` 使用 `/assets/...`、`/posts/...` 等根路径，确保访问任意层级的错误地址时仍能加载样式并返回首页。
+更换域名时同步修改 `CNAME` 和 `index.html` 的 canonical、og:url。
 
 ## 下一步可以加什么
 
