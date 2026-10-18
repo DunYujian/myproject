@@ -1,0 +1,197 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>从一个空仓库开始：这个站是怎么搭起来的 · 我的博客</title>
+  <meta name="description" content="没有框架、没有构建步骤，用三个文件把个人博客放到 GitHub Pages 上。">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script>
+    (function () {
+      var t = null;
+      try { t = localStorage.getItem("theme"); } catch (e) {}
+      if (!t) {
+        t = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      }
+      document.documentElement.setAttribute("data-theme", t);
+    })();
+  </script>
+</head>
+
+<body data-page="post">
+  <a class="skip-link" href="#main">跳到主要内容</a>
+
+  <header class="site-header">
+    <div class="wrap site-header__inner">
+      <a class="brand" href="../index.html">
+        <span class="brand__mark" aria-hidden="true">M</span>
+        <span>我的博客</span>
+      </a>
+
+      <button class="icon-btn theme-toggle" type="button" aria-label="切换主题" aria-pressed="false">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+             stroke-linecap="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>
+        </svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"></path>
+        </svg>
+      </button>
+
+      <button class="icon-btn nav-toggle" type="button" aria-label="打开菜单" aria-expanded="false" aria-controls="nav">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true">
+          <path d="M4 7h16M4 12h16M4 17h16"></path>
+        </svg>
+      </button>
+
+      <nav class="nav" id="nav" aria-label="主导航">
+        <a href="../index.html" data-nav="home">首页</a>
+        <a href="index.html" data-nav="posts">文章</a>
+        <a href="../about.html" data-nav="about">关于</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <article class="post">
+      <div class="wrap">
+        <!-- ============ 文章头：标题 / 日期 / 阅读时间 / 标签 ============ -->
+        <header class="post__head">
+          <span class="kicker">建站</span>
+          <h1>从一个空仓库开始：这个站是怎么搭起来的</h1>
+          <div class="post__meta">
+            <time datetime="2026-10-18">2026 年 10 月 18 日</time>
+            <span class="sep" aria-hidden="true"></span>
+            <span>约 5 分钟读完</span>
+            <span class="sep" aria-hidden="true"></span>
+            <ul class="tags">
+              <li><span class="tag">建站</span></li>
+              <li><span class="tag">GitHub Pages</span></li>
+            </ul>
+          </div>
+        </header>
+
+        <!-- ============ 正文：往这里写内容 ============ -->
+        <div class="prose">
+          <p>
+            这个站点没有用任何静态站点生成器。三个文件，一次提交，GitHub Pages 就会把它变成一个能访问的网站。
+            听起来简陋，但它有一个好处：<strong>任何一次修改，我都能立刻知道它会影响哪里</strong>。
+          </p>
+
+          <h2>为什么不用框架</h2>
+          <p>
+            Hugo、Jekyll、Astro 都很好，但它们都要求我先理解一套约定：目录放哪、前置元数据怎么填、模板语法怎么写。
+            而我想写的东西，本质上就是几段文字加一张图。于是问题变成了：
+            <em>我到底是想要一个博客，还是想要一个能写博客的系统？</em>
+          </p>
+
+          <blockquote>
+            <p>工具应该消失在工作里。当我在写一篇文章时，最好完全感觉不到工具的存在。</p>
+          </blockquote>
+
+          <h2>三个文件的分工</h2>
+          <ul>
+            <li><code>index.html</code>：结构与内容，也是文章列表的入口。</li>
+            <li><code>assets/css/style.css</code>：所有样式，用 CSS 变量管理颜色，暗色模式只是换一组值。</li>
+            <li><code>assets/js/main.js</code>：主题切换、移动端菜单，一共不到一百行。</li>
+          </ul>
+          <p>
+            如果需要新的样式，我加一条规则；如果需要新的交互，我加一个函数。
+            没有打包、没有依赖树、没有<code>node_modules</code>。
+          </p>
+
+          <h3>一段最小的 HTML</h3>
+          <p>文章页的骨架其实就这么点东西，剩下的全是 CSS 的事：</p>
+
+          <pre data-lang="html"><code>&lt;article class="post"&gt;
+  &lt;header class="post__head"&gt;
+    &lt;h1&gt;标题&lt;/h1&gt;
+    &lt;div class="post__meta"&gt;&lt;time&gt;2026-10-18&lt;/time&gt;&lt;/div&gt;
+  &lt;/header&gt;
+  &lt;div class="prose"&gt;
+    &lt;p&gt;正文……&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/article&gt;</code></pre>
+
+          <h3>用 CSS 变量做主题</h3>
+          <p>
+            所有颜色都定义在 <code>:root</code> 里，暗色模式只覆盖同名变量。
+            这样切换主题时，不需要改任何一条具体规则：
+          </p>
+
+          <pre data-lang="css"><code>:root {
+  --bg: #fbfaf8;
+  --text: #1a1b1f;
+  --accent: #2f6fed;
+}
+
+[data-theme="dark"] {
+  --bg: #101216;
+  --text: #e9eaee;
+  --accent: #6f9cff;
+}</code></pre>
+
+          <h2>发布流程</h2>
+          <ol>
+            <li>在仓库里新建或修改页面文件。</li>
+            <li>提交并推送到 <code>main</code> 分支。</li>
+            <li>等一分钟，GitHub Pages 自动构建完成。</li>
+          </ol>
+
+          <table>
+            <thead>
+              <tr><th>文件</th><th>作用</th><th>要不要常改</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>index.html</code></td><td>首页</td><td>偶尔</td></tr>
+              <tr><td><code>posts/*.html</code></td><td>文章</td><td>每次写作</td></tr>
+              <tr><td><code>style.css</code></td><td>样式</td><td>很少</td></tr>
+            </tbody>
+          </table>
+
+          <hr>
+
+          <p>
+            接下来想加的东西：标签归档、全文搜索、RSS。
+            每一样都可以用几十行原生代码做到——只要我还没被“框架”这两个字劝退。
+          </p>
+        </div>
+
+        <!-- ============ 文章尾：返回与标签 ============ -->
+        <footer class="post__foot">
+          <ul class="tags">
+            <li><span class="tag">建站</span></li>
+            <li><span class="tag">GitHub Pages</span></li>
+          </ul>
+          <a class="btn btn--ghost btn--sm" href="index.html">← 返回文章列表</a>
+        </footer>
+
+        <!-- ============ 上一篇 / 下一篇：没有就整段删掉 ============ -->
+        <nav class="post-nav" aria-label="文章翻页">
+          <a href="essay-writing.html" class="next">
+            <span>下一篇</span>
+            写作是思考的副产品
+          </a>
+        </nav>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap site-footer__inner">
+      <p style="margin:0">© <span data-year>2026</span> 我的博客 · 用 HTML / CSS / JS 手写</p>
+      <nav class="footer-links" aria-label="页脚导航">
+        <a href="../posts/index.html">文章</a>
+        <a href="../about.html">关于</a>
+        <a href="https://github.com/DunYujian" rel="me noopener">GitHub</a>
+        <a href="mailto:you@example.com">Email</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>写作是思考的副产品 · 我的博客</title>
+  <meta name="description" content="为什么我开始坚持写笔记：不是为了输出，而是为了让模糊的感觉被迫变成句子。">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script>
+    (function () {
+      var t = null;
+      try { t = localStorage.getItem("theme"); } catch (e) {}
+      if (!t) {
+        t = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      }
+      document.documentElement.setAttribute("data-theme", t);
+    })();
+  </script>
+</head>
+
+<body data-page="post">
+  <a class="skip-link" href="#main">跳到主要内容</a>
+
+  <header class="site-header">
+    <div class="wrap site-header__inner">
+      <a class="brand" href="../index.html">
+        <span class="brand__mark" aria-hidden="true">M</span>
+        <span>我的博客</span>
+      </a>
+
+      <button class="icon-btn theme-toggle" type="button" aria-label="切换主题" aria-pressed="false">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+             stroke-linecap="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>
+        </svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"></path>
+        </svg>
+      </button>
+
+      <button class="icon-btn nav-toggle" type="button" aria-label="打开菜单" aria-expanded="false" aria-controls="nav">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true">
+          <path d="M4 7h16M4 12h16M4 17h16"></path>
+        </svg>
+      </button>
+
+      <nav class="nav" id="nav" aria-label="主导航">
+        <a href="../index.html" data-nav="home">首页</a>
+        <a href="index.html" data-nav="posts">文章</a>
+        <a href="../about.html" data-nav="about">关于</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <article class="post">
+      <div class="wrap">
+        <!-- ============ 文章头：标题 / 日期 / 阅读时间 / 标签 ============ -->
+        <header class="post__head">
+          <span class="kicker">随笔</span>
+          <h1>写作是思考的副产品</h1>
+          <div class="post__meta">
+            <time datetime="2026-10-12">2026 年 10 月 12 日</time>
+            <span class="sep" aria-hidden="true"></span>
+            <span>约 8 分钟读完</span>
+            <span class="sep" aria-hidden="true"></span>
+            <ul class="tags">
+              <li><span class="tag">随笔</span></li>
+              <li><span class="tag">写作</span></li>
+            </ul>
+          </div>
+        </header>
+
+        <!-- ============ 正文：往这里写内容 ============ -->
+        <div class="prose">
+          <p>
+            我一开始写东西，是因为觉得应该写。后来发现，真正让我坐下来打开编辑器的时刻，
+            往往不是“有话要说”，而是<strong>某件事在脑子里转了三圈还没转明白</strong>。
+          </p>
+
+          <h2>写作不是为了被读</h2>
+          <p>
+            如果把写作当成表达，那它天然是面向读者的：要吸引人、要结构清晰、要有结论。
+            但如果把它当成思考，读者是谁就变得不那么重要了——重要的是，
+            模糊的直觉必须被压缩成一句能被证伪的话。
+          </p>
+
+          <blockquote>
+            <p>写作是把一团雾，逼成一个句子。至于这个句子漂不漂亮，是后面的事。</p>
+          </blockquote>
+
+          <h2>三个让我坚持下来的习惯</h2>
+          <ul>
+            <li><strong>只写能写完的。</strong> 每次只挑一个能在一小时内讲清楚的点，而不是“聊聊人生”。</li>
+            <li><strong>先写完，再改好。</strong> 草稿允许丑陋。第一遍的任务是把话倒出来，不是把话说漂亮。</li>
+            <li><strong>不公开发表也算数。</strong> 日记、便签、给自己的信，都算写。发表只是副产品。</li>
+          </ul>
+
+          <h2>写完之后发生了什么</h2>
+          <p>
+            最明显的变化是：我能更快地发现自己错了。因为写下来的东西是可以回头读的，
+            而脑子里的想法不行——它每次都会悄悄变形，好让你觉得自己一直是对的。
+          </p>
+          <p>
+            第二个变化是，我开始注意到自己反复关心什么。翻看半年的笔记，
+            有几个词出现了几十次。那些词大概率就是我以为自己不在乎、其实很在乎的事。
+          </p>
+
+          <hr>
+
+          <p>
+            所以如果有人问我怎么开始写作，我大概会说：<em>别把它当写作，把它当整理</em>。
+            整理完顺便贴出来，就已经比大多数人做得多了。
+          </p>
+        </div>
+
+        <!-- ============ 文章尾：返回与标签 ============ -->
+        <footer class="post__foot">
+          <ul class="tags">
+            <li><span class="tag">随笔</span></li>
+            <li><span class="tag">写作</span></li>
+          </ul>
+          <a class="btn btn--ghost btn--sm" href="index.html">← 返回文章列表</a>
+        </footer>
+
+        <!-- ============ 上一篇 / 下一篇：没有就整段删掉 ============ -->
+        <nav class="post-nav" aria-label="文章翻页">
+          <a href="toolkit.html" class="next">
+            <span>下一篇</span>
+            我的极简工具清单
+          </a>
+        </nav>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap site-footer__inner">
+      <p style="margin:0">© <span data-year>2026</span> 我的博客 · 用 HTML / CSS / JS 手写</p>
+      <nav class="footer-links" aria-label="页脚导航">
+        <a href="../posts/index.html">文章</a>
+        <a href="../about.html">关于</a>
+        <a href="https://github.com/DunYujian" rel="me noopener">GitHub</a>
+        <a href="mailto:you@example.com">Email</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js" defer></script>
+</body>
+</html>

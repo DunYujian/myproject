@@ -1,0 +1,95 @@
+# 我的博客
+
+一个**零依赖**的静态博客框架：纯 HTML + CSS + JavaScript，没有构建步骤、没有 npm、没有框架。
+改完文件直接提交，GitHub Pages 就会更新。
+
+## 目录结构
+
+```
+.
+├── index.html              # 首页：Hero + 最新文章 + 简介
+├── about.html              # 关于页：头像、简介、经历时间线
+├── 404.html                # 404 页（GitHub Pages 会自动使用）
+├── posts/
+│   ├── index.html          # 文章列表
+│   ├── welcome.html        # 示例文章：长文（含代码块 / 表格）
+│   ├── essay-writing.html  # 示例文章：短文（含引用 / 列表）
+│   └── toolkit.html        # 示例文章：清单体（含表格）
+├── assets/
+│   ├── css/style.css       # 全站样式（含暗色模式、响应式、打印样式）
+│   ├── js/main.js          # 主题切换、移动端菜单、导航高亮
+│   ├── favicon.svg         # 站点图标
+│   └── avatar.svg          # 头像占位图
+├── .nojekyll               # 告诉 GitHub Pages 不要跑 Jekyll
+└── README.md
+```
+
+## 本地预览
+
+不用装任何东西，任选一种：
+
+```powershell
+# Python（本机已装）
+python -m http.server 8000
+# 然后浏览器打开 http://localhost:8000
+```
+
+直接双击 `index.html` 也能看，但用服务器预览更接近线上效果。
+
+## 写一篇新文章
+
+1. 复制 `posts/welcome.html`，重命名为 `posts/你的标题.html`（建议用英文短横线，如 `reading-2026.html`）。
+2. 改这几处：
+   - `<title>` 和 `<meta name="description">`
+   - `<span class="kicker">` 分类文字
+   - `<h1>` 标题、`<time datetime="...">` 日期、阅读时间
+   - `<div class="prose">` 里的正文
+   - 文末的标签，以及上一篇 / 下一篇
+3. 把文章加进两个列表：
+   - `posts/index.html` 的 `<ul class="post-list">` 里复制一个 `<li>`
+   - `index.html` 首页「最新文章」的 `.grid` 里复制一张 `.card`
+
+正文可用的样式（见示例文章）：`<h2>` `<h3>`、`<p>`、`<ul>`/`<ol>`、`<blockquote>`、
+`<pre data-lang="js"><code>` 代码块（会自动显示语言角标）、`<table>`、`<figure>` + `<figcaption>`、`<hr>`。
+
+## 修改站点信息
+
+| 想改什么 | 改哪里 |
+| --- | --- |
+| 站点名「我的博客」 | 每个页面里 `.brand` 的文字，以及 `<title>` |
+| 品牌图标里的字母 | `.brand__mark` 里的 `M` |
+| 首页大标题 / 副标题 | `index.html` 的 `.hero` |
+| 头像 | 替换 `assets/avatar.svg`，或改 `about.html` 里 `img.avatar` 的 `src` |
+| 邮箱 / GitHub 链接 | 搜索 `you@example.com` 和 `href="#"` |
+| 配色 | `style.css` 开头的 `:root` 变量（`--accent` 是主色） |
+| 暗色模式配色 | `[data-theme="dark"]` 那一组变量 |
+
+主题切换会记住你的选择（存在 `localStorage`），没选过时跟随系统设置。颜色全部集中在 CSS 变量里，改一处全站生效。
+
+## 部署到 GitHub Pages
+
+```
+Settings → Pages → Build and deployment
+  Source: Deploy from a branch
+  Branch: main  /  (root)
+```
+
+推送后等 1 分钟，访问 **https://dunyujian.github.io/myproject/**。
+
+**路径说明**：本项目是「项目页」，部署在 `/myproject/` 子路径下。
+除 `404.html` 之外，所有页面都用相对链接，所以不需要改；`404.html` 因为可能在任意层级被展示，
+用的是 `/myproject/...` 绝对路径——**换仓库名或绑定自定义域名时，记得同步改这个文件里的前缀**。
+
+## 下一步可以加什么
+
+- 标签归档页：新建 `tags.html`，用 JS 扫描文章列表生成
+- RSS：手写一个 `feed.xml`，注意日期用 RFC 822 格式
+- 全文搜索：把文章标题和摘要写成 `search.json`，用 JS 做客户端搜索
+- 文章内目录（TOC）：JS 扫描 `.prose h2, h3` 生成侧边栏
+
+## 说明
+
+- 没有构建步骤：不需要 node、npm、打包工具
+- 字体用系统字体，不依赖 CDN，国内访问也不会卡在字体加载上
+- 已做基础可访问性：跳过导航链接、`aria-current`、键盘焦点样式、`prefers-reduced-motion`
+- 已做打印样式：打印时只留正文
