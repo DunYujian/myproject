@@ -7,7 +7,7 @@
   <title>文章 · 再也的博客</title>
   <meta name="description" content="全部文章列表，按时间倒序排列。">
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="../assets/css/reading.css?v=20261019-1">
+  <link rel="stylesheet" href="../assets/css/reading.css?v=20261019-2">
   <script>
     (function () {
       var t = null;
@@ -61,7 +61,7 @@
       <div class="wrap wrap--narrow">
         <div class="section__head">
           <h1 class="page-title">全部文章</h1>
-          <span class="more">共 3 篇</span>
+          <span class="more">共 4 篇</span>
         </div>
 
         <!-- 文章列表：复制一个 <li> 就能加一篇；时间倒序排，最新的放最上面 -->
@@ -107,6 +107,7 @@
               </div>
             </a>
           </li>
+          <li class="post-item"><a href="lanqiao-hal-key-click.html"><time datetime="2024-03-03">2024-03-03</time><div><h3>3、蓝桥杯嵌入式—HAL库-按键单击</h3><p>GPIO 与定时器配置、按键消抖和中断回调代码，记录蓝桥杯嵌入式开发中的按键单击操作。</p><ul class="tags post-item__tags"><li><span class="tag">嵌入式</span></li><li><span class="tag">蓝桥杯</span></li></ul></div></a></li>
         </ul>
 
         <!-- 没有文章时，用下面这块代替上面的 <ul>：
@@ -115,6 +116,22 @@
       </div>
     </section>
   </main>
+
+  <aside class="music-section wrap" aria-label="音乐播放器">
+    <details class="music-player" data-music-player>
+      <summary><span class="music-player__icon" aria-hidden="true">♫</span><span>听点音乐</span><span class="music-player__expand" aria-hidden="true">＋</span></summary>
+      <div class="music-player__body">
+        <p class="music-player__status" data-music-status role="status">展开后加载歌单，点击播放即可聆听。</p>
+        <div data-music-controls hidden>
+          <label class="sr-only" for="music-track">选择歌曲</label>
+          <select id="music-track" data-music-select></select>
+          <audio controls preload="none" aria-label="音乐播放控制">浏览器不支持音频播放。</audio>
+          <div class="music-player__actions"><button type="button" data-music-previous>← 上一首</button><button type="button" data-music-next>下一首 →</button></div>
+        </div>
+        <noscript><p>启用 JavaScript 后可使用音乐播放器。</p></noscript>
+      </div>
+    </details>
+  </aside>
 
   <footer class="site-footer">
     <div class="wrap site-footer__inner">
@@ -128,5 +145,6 @@
   </footer>
 
   <script src="../assets/js/main.js" defer></script>
+  <script src="../assets/js/music.js?v=20261019-1" defer></script>
 </body>
 </html>

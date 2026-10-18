@@ -7,7 +7,7 @@
   <title>从一个空仓库开始：这个站是怎么搭起来的 · 再也的博客</title>
   <meta name="description" content="没有框架、没有构建步骤，用三个文件把个人博客放到 GitHub Pages 上。">
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="../assets/css/reading.css?v=20261019-1">
+  <link rel="stylesheet" href="../assets/css/reading.css?v=20261019-2">
   <script>
     (function () {
       var t = null;
@@ -190,7 +190,23 @@
     </article>
   </main>
 
-  <footer class="site-footer">
+    <aside class="music-section wrap" aria-label="音乐播放器">
+    <details class="music-player" data-music-player>
+      <summary><span class="music-player__icon" aria-hidden="true">♫</span><span>听点音乐</span><span class="music-player__expand" aria-hidden="true">＋</span></summary>
+      <div class="music-player__body">
+        <p class="music-player__status" data-music-status role="status">展开后加载歌单，点击播放即可聆听。</p>
+        <div data-music-controls hidden>
+          <label class="sr-only" for="music-track">选择歌曲</label>
+          <select id="music-track" data-music-select></select>
+          <audio controls preload="none" aria-label="音乐播放控制">浏览器不支持音频播放。</audio>
+          <div class="music-player__actions"><button type="button" data-music-previous>← 上一首</button><button type="button" data-music-next>下一首 →</button></div>
+        </div>
+        <noscript><p>启用 JavaScript 后可使用音乐播放器。</p></noscript>
+      </div>
+    </details>
+  </aside>
+
+<footer class="site-footer">
     <div class="wrap site-footer__inner">
       <p style="margin:0">© <span data-year>2026</span> 再也的博客</p>
       <nav class="footer-links" aria-label="页脚导航">
@@ -203,5 +219,6 @@
 
   <script src="../assets/js/main.js" defer></script>
   <script src="../assets/js/comments.js" defer></script>
+  <script src="../assets/js/music.js?v=20261019-1" defer></script>
 </body>
 </html>

@@ -126,3 +126,15 @@ DNS 和证书变更可能需要最多 24 小时生效。配置说明见 [GitHub 
 - 字体用系统字体，不依赖 CDN，国内访问也不会卡在字体加载上
 - 已做基础可访问性：跳过导航链接、`aria-current`、键盘焦点样式、`prefers-reduced-motion`
 - 已做打印样式：打印时只留正文
+
+## 微信文章存档
+
+已迁入 `posts/lanqiao-hal-key-click.html`，原文《3、蓝桥杯嵌入式—HAL库-按键单击》，发布日期保留为 2024-03-03。
+正文的 10 张图片已存入 `assets/images/wechat-key-click/`，代码、表格与原文出处均已保留，评论沿用 Utterances。
+`wxgzh` 中第 1、2 篇目前只有资源目录，缺少文章 HTML，尚未导入。原始下载资料保留在本地，不随此次发布上传。
+
+## 音乐播放器
+
+各页底部提供可展开的音乐播放器，默认不自动播放。MP3 放入根目录 `music/` 后提交到 `main` 即可被播放器识别。
+上传音乐前运行 `python scripts/update_music.py` 更新备用歌单；详细用法见 [music/README.md](music/README.md)。
+播放器无需 Token，优先读取本仓库的音乐目录；GitHub API 不可用时回退到 `music/playlist.json`。

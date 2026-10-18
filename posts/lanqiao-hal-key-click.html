@@ -1,0 +1,179 @@
+﻿<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="#f5f7f6" name="theme-color"/>
+<title>3、蓝桥杯嵌入式—HAL库-按键单击 · 再也的博客</title>
+<meta content="蓝桥杯嵌入式 HAL 库按键单击教程：GPIO 与定时器配置、按键消抖和中断回调代码。" name="description"/>
+<link href="../assets/favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="../assets/css/reading.css?v=20261019-2" rel="stylesheet"/>
+<script>
+    (function () {
+      var t = null;
+      try { t = localStorage.getItem("theme"); } catch (e) {}
+      if (!t) {
+        t = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      }
+      document.documentElement.setAttribute("data-theme", t);
+    })();
+  </script>
+<link href="https://zxhtta.cc.cd/posts/lanqiao-hal-key-click.html" rel="canonical"/></head>
+<body data-page="post">
+<a class="skip-link" href="#main">跳到主要内容</a>
+<header class="site-header">
+<div class="wrap site-header__inner">
+<a aria-label="再也的博客首页" class="brand" href="../index.html">
+<span>再也的博客</span>
+</a>
+<button aria-label="切换主题" aria-pressed="false" class="icon-btn theme-toggle" type="button">
+<svg aria-hidden="true" class="icon-sun" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" viewbox="0 0 24 24">
+<circle cx="12" cy="12" r="4"></circle>
+<path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>
+</svg>
+<svg aria-hidden="true" class="icon-moon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"></path>
+</svg>
+<span class="theme-toggle__label">深色</span>
+</button>
+<button aria-controls="nav" aria-expanded="false" aria-label="打开菜单" class="icon-btn nav-toggle" type="button">
+<svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.9" viewbox="0 0 24 24">
+<path d="M4 7h16M4 12h16M4 17h16"></path>
+</svg>
+</button>
+<nav aria-label="主导航" class="nav" id="nav">
+<a data-nav="home" href="../index.html">首页</a>
+<a data-nav="posts" href="../posts/index.html">文章</a>
+<a data-nav="about" href="../about.html">关于</a>
+</nav>
+</div>
+</header>
+<main id="main">
+<article class="post">
+<div class="wrap">
+<!-- ============ 文章头：标题 / 日期 / 阅读时间 / 标签 ============ -->
+<header class="post__head"><span class="kicker">嵌入式 · 公众号存档</span><h1>3、蓝桥杯嵌入式—HAL库-按键单击</h1><div class="post__meta"><time datetime="2024-03-03">2024 年 3 月 3 日</time><span aria-hidden="true" class="sep"></span><span>原文署名：雨尘</span></div><p class="post-source">原载微信公众号，<a href="https://mp.weixin.qq.com/s/x9el_iW7pZ3QLxqanaUeZg" rel="noopener noreferrer">阅读微信原文 ↗</a></p></header>
+<!-- ============ 正文：往这里写内容 ============ -->
+<div class="prose"><h2>1、配置引脚和定时器<br/></h2><p><img alt="按键单击教程插图 1" decoding="async" loading="lazy" src="../assets/images/wechat-key-click/image-01.png"/></p><p>图片来源：《CT117E-M4产品手册》<br/></p><p>1.从图中可以得知按键引脚情况以及所需配置如下：</p><table><tbody><tr><th scope="col">按键代号</th><th scope="col">按键引脚代号<br/></th><th scope="col">输入模式<br/></th><th scope="col">需要配置模式<br/></th></tr><tr><td>B1<br/></td><td>PB0<br/></td><td>硬件上拉<br/></td><td>浮空输入<br/></td></tr><tr><td>B2<br/></td><td>PB1<br/></td><td>硬件上拉</td><td>浮空输入</td></tr><tr><td>B3<br/></td><td>PB2<br/></td><td>硬件上拉</td><td>浮空输入</td></tr><tr><td>B4<br/></td><td>PA0<br/></td><td>硬件上拉</td><td>浮空输入</td></tr></tbody></table><p>按键在cubeMX中的配置如下：</p><p><img alt="按键单击教程插图 2" decoding="async" loading="lazy" src="../assets/images/wechat-key-click/image-02.png"/></p><h3>2.配置定时器<br/></h3><p><img alt="按键单击教程插图 3" decoding="async" loading="lazy" src="../assets/images/wechat-key-click/image-03.png"/></p><p><img alt="按键单击教程插图 4" decoding="async" loading="lazy" src="../assets/images/wechat-key-click/image-04.png"/></p><p>我们可以在timers中任意选择其中的一个定时器，假设我们选择的定时器为TIM4，则需要开启该定时器的外部时钟和中断回调功能，随后配置分频系数和重装载值。</p><p>计算周期和分配系数与重装载值：每个计数周期=外部时钟频率/((分频系数-1)x(重装载值-1))，关于为何要减一，小雨也是不太清楚<img alt="表情" class="wechat-emoji" decoding="async" loading="lazy" src="../assets/images/wechat-key-click/image-05.png"/>，有知道的伙伴可以留言指导指导<img alt="表情" class="wechat-emoji" decoding="async" loading="lazy" src="../assets/images/wechat-key-click/image-06.png"/><img alt="表情" class="wechat-emoji" decoding="async" loading="lazy" src="../assets/images/wechat-key-click/image-07.png"/></p><h2>2、代码撰写</h2><h3>1.源文件加载</h3><p>我们先来创建一个中断函数库（例如：interrupt.c和interrupt.h）。如果已了解则跳过。</p><p>创建方法：</p><p>a.找到Inc同级文件夹，新建一个自命名函数库文件夹（如命名为bsp文件夹）打开bsp文件夹，新建两个text文件，重命名为interrupt，分别更改后缀为.h和.c</p><p><img alt="按键单击教程插图 8" decoding="async" loading="lazy" src="../assets/images/wechat-key-click/image-08.png"/></p><p>b.按照<a href="https://mp.weixin.qq.com/s?__biz=Mzk0MzY1MzcyOQ==&amp;mid=2247483682&amp;idx=1&amp;sn=583e614c090c48fac681d4064061389b&amp;chksm=c331d72cf4465e3a52883efe69bd190ce197f34029304347d3dc8a04c65c168fed0be2c50d48&amp;scene=21#wechat_redirect" rel="noopener noreferrer">2、蓝桥杯嵌入式—HAL库TFT-LCD</a>步骤2加载源文件进行源文件的添加<br/></p><h3>2.代码配置</h3><p>1.在main.c文件中我们首先要包含到interrupt.h头文件，然后在主函数中使用HAL_TIM_Base_Start_IT(&amp;htim4);开启定时器4中断回调功能函数。</p><p><img alt="按键单击教程插图 9" decoding="async" loading="lazy" src="../assets/images/wechat-key-click/image-09.png"/></p><p><img alt="按键单击教程插图 10" decoding="async" loading="lazy" src="../assets/images/wechat-key-click/image-10.png"/></p><p>2.在interrupt.h文件中</p><pre data-lang="c"><code>#ifndef __INTERRUPT_H
+#define __INTERRUPT_H
+#include "main.h"
+struct keys{
+  bool key_level;//按键电平读取值，根据上文（按键已经配置了硬件上拉电阻）因此默认不被按下时的电平为1
+  bool key_state;//按键状态，我们约定状态值为1时，按键处于按下状态，反之放松状态
+  uint8_t key_index；//用于按键消抖
+};
+
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim);
+#endif
+//最后需要空一行，否则会报警</code></pre><p>3.在interrupt.c文件中</p><pre data-lang="c"><code>#include "interrupt.h"
+
+struct keys key[4]={0};
+
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+  if(htim-&gt;Instance==TIM4)
+  {//读取按键电平状态
+    key[0].key_level=HAL_GPIO_ReadPin(GPIOB,GPIO_PIN_0);
+    key[1].key_level=HAL_GPIO_ReadPin(GPIOB,GPIO_PIN_1);
+    key[2].key_level=HAL_GPIO_ReadPin(GPIOB,GPIO_PIN_2);
+    key[3].key_level=HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_0);
+    for(uint8_t i=0;i&lt;4;i++)//遍历按键
+    {
+      switch(key[i].key_index)//判断按键状态
+      {
+        case 0://当按键从放松到被按下时
+          if(key[i].key_level==0)
+          {
+            key[i].key_index=1;
+          }
+          else
+          {
+            key[i].key_index=0;
+          }
+          break;
+        case 1://当按键从放松到被按下一个回调周期后
+          if(key[i].key_level==0)
+          {
+            key[i].key_state=1;
+            key[i].key_index=0;
+          }
+          break;
+        case 2://当按键放松时
+          if(key[i].key_level==1)
+          {
+            key[i].key_index=0;
+          }
+          break;        
+      }      
+    }    
+  }
+}</code></pre><h3>3.代码使用</h3><p>我们使用点灯操作来练习<br/></p><pre data-lang="c"><code>  /* Infinite loop */
+  /* USER CODE BEGIN WHILE */
+  while (1)
+  {
+    if(key[0].key_state==1)//按下B1按键点亮LD1
+    {
+      led(0x01);
+      key[0].key_state=0;
+    }
+    if(key[1].key_state==1)//按下B2按键熄灭LD1
+    {
+      led(0x00);
+      key[1].key_state=0;
+    }
+    /* USER CODE END WHILE */
+
+    /* USER CODE BEGIN 3 */
+  }
+  /* USER CODE END 3 */</code></pre><p>以上即是蓝桥杯嵌入式按键单击操作</p></div>
+<!-- ============ 文章尾：返回与标签 ============ -->
+<footer class="post__foot">
+<ul class="tags"><li><span class="tag">嵌入式</span></li><li><span class="tag">蓝桥杯</span></li><li><span class="tag">STM32</span></li></ul>
+<a class="btn btn--ghost btn--sm" href="index.html">← 返回文章列表</a>
+</footer>
+<!-- ============ 上一篇 / 下一篇：没有就整段删掉 ============ -->
+
+<section aria-labelledby="comments-title" class="post-comments">
+<h2 id="comments-title">评论</h2>
+<p class="post-comments__hint">登录 GitHub 即可发表评论。评论公开保存在
+            <a href="https://github.com/DunYujian/myproject/issues">GitHub Issues</a>。
+          </p>
+<div data-comments=""></div>
+<noscript><p>请启用 JavaScript 加载评论，或前往上方 GitHub Issues 链接参与讨论。</p></noscript>
+</section>
+</div>
+</article>
+</main>
+  <aside class="music-section wrap" aria-label="音乐播放器">
+    <details class="music-player" data-music-player>
+      <summary><span class="music-player__icon" aria-hidden="true">♫</span><span>听点音乐</span><span class="music-player__expand" aria-hidden="true">＋</span></summary>
+      <div class="music-player__body">
+        <p class="music-player__status" data-music-status role="status">展开后加载歌单，点击播放即可聆听。</p>
+        <div data-music-controls hidden>
+          <label class="sr-only" for="music-track">选择歌曲</label>
+          <select id="music-track" data-music-select></select>
+          <audio controls preload="none" aria-label="音乐播放控制">浏览器不支持音频播放。</audio>
+          <div class="music-player__actions"><button type="button" data-music-previous>← 上一首</button><button type="button" data-music-next>下一首 →</button></div>
+        </div>
+        <noscript><p>启用 JavaScript 后可使用音乐播放器。</p></noscript>
+      </div>
+    </details>
+  </aside>
+
+<footer class="site-footer">
+<div class="wrap site-footer__inner">
+<p style="margin:0">© <span data-year="">2026</span> 再也的博客</p>
+<nav aria-label="页脚导航" class="footer-links">
+<a href="../posts/index.html">文章</a>
+<a href="../about.html">关于</a>
+<a href="https://github.com/DunYujian" rel="me noopener">GitHub · 再也</a>
+</nav>
+</div>
+</footer>
+<script defer="" src="../assets/js/main.js"></script>
+<script defer="" src="../assets/js/comments.js"></script>
+  <script src="../assets/js/music.js?v=20261019-1" defer></script>
+</body>
+</html>
+
