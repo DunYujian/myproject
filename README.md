@@ -1,4 +1,4 @@
-# 我的博客
+# 炖鱼尖的博客
 
 一个**零依赖**的静态博客框架：纯 HTML + CSS + JavaScript，没有构建步骤、没有 npm、没有框架。
 改完文件直接提交，GitHub Pages 就会更新。
@@ -56,7 +56,7 @@ python -m http.server 8000
 
 | 想改什么 | 改哪里 |
 | --- | --- |
-| 站点名「我的博客」 | 每个页面里 `.brand` 的文字，以及 `<title>` |
+| 站点名「炖鱼尖的博客」 | 每个页面里 `.brand` 的文字，以及 `<title>` |
 | 品牌图标里的字母 | `.brand__mark` 里的 `M` |
 | 首页大标题 / 副标题 | `index.html` 的 `.hero` |
 | 头像 | 替换 `assets/avatar.svg`，或改 `about.html` 里 `img.avatar` 的 `src` |
