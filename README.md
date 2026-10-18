@@ -94,6 +94,22 @@ DNS 和证书变更可能需要最多 24 小时生效。配置说明见 [GitHub 
 普通页面使用相对链接；`404.html` 使用 `/assets/...`、`/posts/...` 等根路径，确保访问任意层级的错误地址时仍能加载样式并返回首页。
 更换域名时同步修改 `CNAME` 和 `index.html` 的 canonical、og:url。
 
+## 文章评论（Utterances）
+
+文章页已接入 [Utterances](https://utteranc.es/)，评论公开存储在 `DunYujian/myproject` 的 Issues 中。
+
+首次启用：
+
+1. 保持仓库为公开仓库，并开启 Settings → General → Features → Issues。
+2. 安装 [Utterances GitHub App](https://github.com/apps/utterances/installations/new)，选择 **Only select repositories**，只授权 `myproject`。
+3. 打开文章页面，登录 GitHub 发表评论；首次评论会自动创建对应的 Issue。
+
+每篇文章以 `pathname` 关联独立评论，更改文章标题或域名不会改变关联；更改文章路径会对应新的讨论。
+`assets/js/comments.js` 负责加载评论，并使其跟随站点的明暗主题切换。
+复制现有文章创建新文章时，保留 `.post-comments` 区块和 `comments.js` 引用即可。
+页面不需要配置 GitHub Token、Client Secret 或自建数据库。访客登录授权由 Utterances 处理。
+如果评论无法加载，可使用评论区的 GitHub Issues 链接；若提示未安装应用，请检查 App 对 `myproject` 的授权。
+
 ## 下一步可以加什么
 
 - 标签归档页：新建 `tags.html`，用 JS 扫描文章列表生成

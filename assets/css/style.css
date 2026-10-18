@@ -1178,3 +1178,29 @@ hr {
     max-width: none;
   }
 }
+
+/* Article comments */
+.post-comments {
+  margin-top: 40px;
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
+}
+
+.post-comments h2 {
+  margin: 0 0 12px;
+}
+
+.post-comments__hint {
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.post-comments .utterances {
+  max-width: 100%;
+}
+
+@media print {
+  .post-comments {
+    display: none !important;
+  }
+}
