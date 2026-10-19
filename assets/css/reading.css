@@ -332,3 +332,9 @@ a.category-tag:hover { text-decoration: none; border-color: var(--accent); backg
   .section__head { flex-wrap: wrap; }
 }
 @media print { .category-filter, .category-empty { display: none !important; } }
+
+/* Counts stay hidden until the statistics service returns actual values. */
+.site-statistics { display: flex; flex-wrap: wrap; gap: 7px 20px; flex-basis: 100%; color: var(--text-faint); font: 11px/1.8 var(--font-sans); }
+.site-statistics [id^="busuanzi_value_"], .post-views [id^="busuanzi_value_"] { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.post-views { white-space: nowrap; }
+@media print { .site-statistics, .post-views { display: none !important; } }
