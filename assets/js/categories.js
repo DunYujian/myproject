@@ -24,7 +24,7 @@
     });
     counter.textContent = selected.size ? "筛选出 " + visible + " 篇 / 共 " + items.length + " 篇" : "共 " + items.length + " 篇";
     empty.hidden = visible !== 0;
-    document.title = (selected.size ? Array.from(selected).join(" · ") : "文章") + " · 再也的博客";
+    document.title = (selected.size ? Array.from(selected).join(" · ") : "文章") + " · 再也的小站";
 
     if (writeHistory) {
       var url = new URL(location.href);

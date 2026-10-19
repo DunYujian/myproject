@@ -1,4 +1,4 @@
-# 再也的博客
+# 再也的小站
 
 一个**零依赖**的静态博客框架：纯 HTML + CSS + JavaScript，没有构建步骤、没有 npm、没有框架。
 改完文件直接提交，GitHub Pages 就会更新。
@@ -56,7 +56,7 @@ python -m http.server 8000
 
 | 想改什么 | 改哪里 |
 | --- | --- |
-| 站点名「再也的博客」 | 每个页面里 `.brand` 的文字，以及 `<title>` |
+| 站点名「再也的小站」 | 每个页面里 `.brand` 的文字，以及 `<title>` |
 | 头像 / 站点图标 | `assets/avatar.svg` / `assets/favicon.svg` |
 | 作者名 / 简介 | `index.html` 的 `.home-intro` |
 | 头像 | 替换 `assets/avatar.svg`，或改 `about.html` 里 `img.avatar` 的 `src` |
