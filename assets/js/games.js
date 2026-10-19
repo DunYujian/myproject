@@ -167,7 +167,7 @@
 
   var tabs = Array.from(document.querySelectorAll("[data-game-tab]"));
   function switchGame(name, changeURL) {
-    name = name === "memory" ? "memory" : "snake";
+    name = ["memory", "story"].includes(name) ? name : "snake";
     if (name !== "snake") pause();
     tabs.forEach(function (tab) {
       var selected = tab.dataset.gameTab === name;

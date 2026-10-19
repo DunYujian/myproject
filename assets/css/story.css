@@ -1,0 +1,45 @@
+.story-intro { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 10px 20px; }
+.story-intro h2 { font-size: 29px; margin: 0; }
+.story-duration, .story-save-note { color: var(--text-faint); font: 11px/1.8 var(--font-sans); }
+.story-lead { color: var(--text-soft); margin: 12px 0 22px; font-size: 16px; }
+.story-chapters { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); padding: 0; margin: 0 0 24px; gap: 12px; font: 12px/1.7 var(--font-sans); color: var(--text-faint); }
+.story-chapters li { border-top: 2px solid var(--line); padding-top: 9px; }
+.story-chapters .is-current, .story-chapters .is-done { color: var(--accent); border-color: var(--accent); }
+.story-room-nav { display: flex; flex-wrap: wrap; gap: 9px; margin-bottom: 18px; }
+.story-room-nav button[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent-ink); }
+.story-room-nav button:disabled { opacity: .45; cursor: not-allowed; }
+.story-scene { margin: 0 0 22px; border: 1px solid var(--line); border-radius: 5px; color: var(--accent); background: var(--surface); }
+.story-scene svg { display: block; width: 100%; max-height: 285px; padding: 12px; }
+.story-flame { fill: var(--accent-soft); }
+.story-room-title { font: 400 24px/1.6 var(--font-art); margin: 0 0 10px; }
+.story-description { color: var(--text-soft); font-size: 17px; line-height: 1.95; }
+.story-actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0; }
+.story-puzzle { border-left: 2px solid var(--accent); padding: 13px 17px; margin: 20px 0; background: var(--bg-soft); }
+.story-puzzle label, .story-puzzle__label { display: block; color: var(--text-soft); font: 13px/1.8 var(--font-sans); margin: 0 0 10px; }
+.story-code-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.story-code-row input { width: 100px; padding: 7px 10px; background: var(--surface); color: var(--text); border: 1px solid var(--line-strong); border-radius: 3px; font: 20px/1.4 var(--font-mono); letter-spacing: .2em; }
+.story-puzzle button:disabled { opacity: .45; cursor: default; }
+.story-symbols { display: flex; flex-wrap: wrap; gap: 9px; margin: 10px 0; }
+.story-symbols button { min-width: 45px; font: 22px var(--font-art); }
+.story-sequence { margin: 12px 0; color: var(--accent); font-size: 17px; }
+.story-notebook { display: grid; grid-template-columns: 1fr 1.4fr; gap: 20px; border-top: 1px solid var(--line); padding-top: 20px; margin-top: 25px; }
+.story-notebook h4 { font: 400 18px/1.6 var(--font-art); margin: 0 0 9px; }
+.story-inventory { display: flex; flex-wrap: wrap; list-style: none; gap: 8px; margin: 0; padding: 0; }
+.story-inventory li { padding: 3px 8px; border: 1px solid var(--line); border-radius: 3px; font: 12px/1.8 var(--font-sans); color: var(--text-soft); }
+.story-clues { white-space: pre-line; color: var(--text-soft); font: 12px/1.9 var(--font-sans); margin: 0; }
+.story-message { border-left: 2px solid var(--line-strong); padding-left: 14px; margin: 22px 0; color: var(--accent); font: 14px/1.95 var(--font-sans); min-height: 2em; }
+.story-bottom { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.story-ending { padding: 35px 25px; border: 1px solid var(--line); background: var(--surface); margin: 20px 0; }
+.story-ending__mark { font: 38px var(--font-hand); color: var(--accent); margin-bottom: 18px; }
+.story-ending h3 { font: 400 28px/1.6 var(--font-art); }
+.story-ending p { font-size: 17px; line-height: 2; color: var(--text-soft); }
+#story-playing[hidden], .story-ending[hidden], .story-puzzle[hidden] { display: none !important; }
+.game-tabs { flex-wrap: wrap; gap: 8px 24px; }
+@media (max-width: 600px) {
+  .story-notebook { grid-template-columns: 1fr; gap: 18px; }
+  .story-description { font-size: 16px; }
+  .story-chapters { gap: 8px; font-size: 11px; }
+  .story-ending { padding: 26px 18px; }
+  .story-ending h3 { font-size: 24px; }
+  .story-actions .game-button { padding: 8px 10px; }
+}

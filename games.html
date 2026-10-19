@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f5f7f6">
   <title>游戏 · 再也的博客</title>
-  <meta name="description" content="玩一局贪吃蛇或记忆翻牌，给思绪放个小假。">
+  <meta name="description" content="贪吃蛇、记忆翻牌与剧情解谜《雨夜邮局》，给思绪放个小假。">
 
  
   <link rel="canonical" href="https://zxhtta.cc.cd/games.html">
   <meta property="og:type" content="website">
   <meta property="og:title" content="游戏 · 再也的博客">
-  <meta property="og:description" content="贪吃蛇和记忆翻牌，支持电脑和手机。">
+  <meta property="og:description" content="贪吃蛇、记忆翻牌和剧情解谜，支持电脑和手机。">
   <meta property="og:url" content="https://zxhtta.cc.cd/games.html">
   <meta property="og:locale" content="zh_CN">
 
@@ -32,6 +32,7 @@
 <link rel="preload" href="assets/fonts/ZCOOLXiaoWei-Regular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/fish.css?v=20261019-1">
 <link rel="stylesheet" href="assets/css/games.css?v=20261019-1">
+<link rel="stylesheet" href="assets/css/story.css?v=20261019-1">
 </head>
 
 <body data-page="games">
@@ -80,6 +81,7 @@
     <div class="game-tabs" role="tablist" aria-label="选择小游戏">
       <button type="button" id="tab-snake" role="tab" data-game-tab="snake" aria-controls="snake-panel" aria-selected="true">贪吃蛇</button>
       <button type="button" id="tab-memory" role="tab" data-game-tab="memory" aria-controls="memory-panel" aria-selected="false" tabindex="-1">记忆翻牌</button>
+      <button type="button" id="tab-story" role="tab" data-game-tab="story" aria-controls="story-panel" aria-selected="false" tabindex="-1">剧情解谜</button>
     </div>
     <section id="snake-panel" class="game-panel" data-game-panel="snake" role="tabpanel" aria-labelledby="tab-snake">
       <h2>贪吃蛇</h2>
@@ -106,8 +108,34 @@
       <div id="memory-board" class="memory-board" role="group" aria-label="十二张记忆卡牌"></div>
       <p id="memory-status" class="game-status" role="status" aria-live="polite">翻开两张牌，找出相同的汉字。</p>
     </section>
+    <section id="story-panel" class="game-panel" data-game-panel="story" role="tabpanel" aria-labelledby="tab-story" hidden>
+      <header class="story-intro"><h2>雨夜邮局</h2><span class="story-duration">约 5–10 分钟 · 两个结局</span></header>
+      <p class="story-lead">天亮以前，替自己寄一封信。</p>
+      <ol class="story-chapters" aria-label="故事进度"><li data-story-chapter="1">一 · 灯下寻信</li><li data-story-chapter="2">二 · 归途邮戳</li><li data-story-chapter="3">三 · 寄给明天</li></ol>
+      <div id="story-playing">
+        <nav class="story-room-nav" aria-label="探索场景"><button type="button" class="game-button" data-story-room="hall" aria-pressed="true">候信厅</button><button type="button" class="game-button" data-story-room="office" aria-pressed="false" disabled>旧值班室</button><button type="button" class="game-button" data-story-room="pier" aria-pressed="false" disabled>渡口</button></nav>
+        <figure id="story-scene" class="story-scene" aria-label="场景线稿"></figure>
+        <h3 id="story-room-title" class="story-room-title">候信厅</h3>
+        <p id="story-description" class="story-description"></p>
+        <div id="story-actions" class="story-actions" role="group" aria-label="调查场景中的物件"></div>
+        <form id="story-code-form" class="story-puzzle">
+          <label for="story-code">木箱的三位数字锁 · 点亮油灯后可输入</label>
+          <div class="story-code-row"><input id="story-code" type="text" inputmode="numeric" pattern="[0-9０-９]{3}" maxlength="3" autocomplete="off" placeholder="···" aria-label="木箱的三位密码" disabled required><button id="story-code-submit" type="submit" class="game-button" disabled>打开木箱</button></div>
+        </form>
+        <form id="story-symbol-form" class="story-puzzle" hidden>
+          <p class="story-puzzle__label">抽屉上的图案锁 · 依次选择三个图案</p>
+          <div class="story-symbols" role="group" aria-label="选择图案顺序"><button type="button" class="game-button" data-story-symbol="月">月</button><button type="button" class="game-button" data-story-symbol="舟">舟</button><button type="button" class="game-button" data-story-symbol="鱼">鱼</button><button type="button" class="game-button" data-story-symbol="叶">叶</button></div>
+          <p id="story-sequence" class="story-sequence" aria-live="polite">尚未选择</p>
+          <div class="game-toolbar"><button type="submit" id="story-symbol-submit" class="game-button" disabled>确认顺序</button><button type="button" id="story-symbol-clear" class="game-button">重新排列</button></div>
+        </form>
+        <div class="story-notebook"><section><h4>随身物品</h4><ul id="story-inventory" class="story-inventory"></ul></section><section><h4>线索手记</h4><p id="story-clues" class="story-clues"></p></section></div>
+      </div>
+      <section id="story-ending" class="story-ending" aria-label="故事结局" hidden><div class="story-ending__mark" aria-hidden="true">再出发</div><h3 id="story-ending-title" tabindex="-1"></h3><p id="story-ending-text"></p><button type="button" class="game-button" data-story-action="revisit">回到最后的选择</button></section>
+      <p id="story-message" class="story-message" role="status" aria-live="polite"></p>
+      <div class="story-bottom"><button type="button" id="story-hint" class="game-button">给我一点提示</button><button type="button" class="game-button" data-story-action="restart">重新开始（清空本局）</button><span id="story-save-note" class="story-save-note"></span></div>
+    </section>
     <noscript><p class="game-status">启用 JavaScript 后即可玩小游戏。</p></noscript>
-    <p class="games-note">贪吃蛇最高分保存在本机。游戏不会自动开始，离开页面后本局进度会重置。</p>
+    <p class="games-note">贪吃蛇最高分和剧情存档保存在本机。贪吃蛇与翻牌离开页面后重置本局；剧情解谜可以继续上次的进度。</p>
   </main>
 
   <!-- ==================== 页脚 ==================== -->
@@ -146,7 +174,9 @@
   <script src="assets/js/music.js?v=20261019-1" defer></script>
   <script src="assets/js/fish.js?v=20261019-1" defer></script>
   <script src="assets/js/snake-engine.js?v=20261019-1" defer></script>
-  <script src="assets/js/games.js?v=20261019-1" defer></script>
+  <script src="assets/js/games.js?v=20261019-2" defer></script>
   <script src="assets/js/stats.js?v=20261019-1" defer></script>
+  <script src="assets/js/story-engine.js?v=20261019-1" defer></script>
+  <script src="assets/js/story.js?v=20261019-1" defer></script>
 </body>
 </html>
