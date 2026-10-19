@@ -1,0 +1,26 @@
+/* Shared visual conventions, kept with each standalone game. */
+.games-page { padding-top: 30px; padding-bottom: 65px; }
+.game-back { display: inline-block; font: 12px/1.8 var(--font-sans); margin-bottom: 24px; }
+.games-intro { margin-bottom: 28px; }
+.games-intro h1 { font: 400 36px/1.5 var(--font-art); letter-spacing: .1em; margin-bottom: 8px; }
+.games-intro p { color: var(--text-soft); font-size: 16px; }
+.game-instructions { font: 13px/1.9 var(--font-sans); color: var(--text-soft); max-width: 58ch; margin-bottom: 20px; }
+.game-stats { display: flex; gap: 28px; flex-wrap: wrap; font: 12px/1.8 var(--font-sans); color: var(--text-faint); margin-bottom: 16px; }
+.game-stats strong { margin-left: 6px; color: var(--text); font: 18px var(--font-mono); }
+.game-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 20px; }
+.game-button { padding: 8px 13px; border: 1px solid var(--line-strong); border-radius: 3px; background: var(--surface); color: var(--text-soft); cursor: pointer; font: 13px/1.6 var(--font-sans); }
+.game-button:hover { border-color: var(--accent); color: var(--accent); }
+.game-button--primary { background: var(--accent-soft); border-color: var(--accent); color: var(--accent-ink); }
+.game-status { font: 12px/1.9 var(--font-sans); min-height: 2em; color: var(--text-soft); margin: 15px 0 0; }
+.games-note { margin-top: 35px; font: 11px/1.8 var(--font-sans); color: var(--text-faint); }
+@media (max-width: 600px) { .games-page { padding-top: 24px; } .games-intro h1 { font-size: 32px; } }
+.memory-board { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; max-width: 560px; }
+.memory-card { aspect-ratio: 1.1; min-width: 0; border: 1px solid var(--line-strong); border-radius: 5px; color: var(--accent); background: var(--surface); cursor: pointer; font: 40px var(--font-art); transition: background .15s ease, border-color .15s ease; }
+.memory-card:hover { border-color: var(--accent); }
+.memory-card.is-open { background: var(--accent-soft); border-color: var(--accent); }
+.memory-card.is-matched { background: var(--bg-soft); border-style: dashed; color: var(--text-soft); cursor: default; }
+.memory-card__back { font: 24px var(--font-hand); color: var(--text-faint); }
+.memory-card:focus-visible { outline-offset: 3px; }
+@media (max-width: 600px) { .memory-board { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; } .memory-card { font-size: 34px; } }
+@media (prefers-reduced-motion: reduce) { .memory-card { transition: none; } }
+

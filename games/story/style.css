@@ -1,3 +1,19 @@
+/* Shared visual conventions, kept with each standalone game. */
+.games-page { padding-top: 30px; padding-bottom: 65px; }
+.game-back { display: inline-block; font: 12px/1.8 var(--font-sans); margin-bottom: 24px; }
+.games-intro { margin-bottom: 28px; }
+.games-intro h1 { font: 400 36px/1.5 var(--font-art); letter-spacing: .1em; margin-bottom: 8px; }
+.games-intro p { color: var(--text-soft); font-size: 16px; }
+.game-instructions { font: 13px/1.9 var(--font-sans); color: var(--text-soft); max-width: 58ch; margin-bottom: 20px; }
+.game-stats { display: flex; gap: 28px; flex-wrap: wrap; font: 12px/1.8 var(--font-sans); color: var(--text-faint); margin-bottom: 16px; }
+.game-stats strong { margin-left: 6px; color: var(--text); font: 18px var(--font-mono); }
+.game-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 20px; }
+.game-button { padding: 8px 13px; border: 1px solid var(--line-strong); border-radius: 3px; background: var(--surface); color: var(--text-soft); cursor: pointer; font: 13px/1.6 var(--font-sans); }
+.game-button:hover { border-color: var(--accent); color: var(--accent); }
+.game-button--primary { background: var(--accent-soft); border-color: var(--accent); color: var(--accent-ink); }
+.game-status { font: 12px/1.9 var(--font-sans); min-height: 2em; color: var(--text-soft); margin: 15px 0 0; }
+.games-note { margin-top: 35px; font: 11px/1.8 var(--font-sans); color: var(--text-faint); }
+@media (max-width: 600px) { .games-page { padding-top: 24px; } .games-intro h1 { font-size: 32px; } }
 .story-intro { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 10px 20px; }
 .story-intro h2 { font-size: 29px; margin: 0; }
 .story-duration, .story-save-note { color: var(--text-faint); font: 11px/1.8 var(--font-sans); }
@@ -34,7 +50,6 @@
 .story-ending h3 { font: 400 28px/1.6 var(--font-art); }
 .story-ending p { font-size: 17px; line-height: 2; color: var(--text-soft); }
 #story-playing[hidden], .story-ending[hidden], .story-puzzle[hidden] { display: none !important; }
-.game-tabs { flex-wrap: wrap; gap: 8px 24px; }
 @media (max-width: 600px) {
   .story-notebook { grid-template-columns: 1fr; gap: 18px; }
   .story-description { font-size: 16px; }

@@ -172,7 +172,8 @@ DNS 和证书变更可能需要最多 24 小时生效。配置说明见 [GitHub 
 - 剧情解谜《雨夜邮局》：三处场景、两道机关、两个结局，支持线索提示和本机存档。
 
 游戏适配现有浅色/深色主题。无需账号、数据库、外部脚本或游戏素材。
-规则与界面分别位于 `assets/js/snake-engine.js`、`assets/js/games.js`，样式为 `assets/css/games.css`。
+每个游戏的页面、脚本与样式分别放在 `games/snake/`、`games/memory/`、`games/story/`。
+`games.html` 仅作为游戏选择页，`assets/css/games.css` 只用于该选择页。
 
 ## 浏览统计（不蒜子）
 
@@ -187,9 +188,9 @@ DNS 和证书变更可能需要最多 24 小时生效。配置说明见 [GitHub 
 
 ## 剧情解谜《雨夜邮局》
 
-游戏页新增“剧情解谜”标签，可通过 `games.html#story` 直接打开。
+从游戏选择页进入“雨夜邮局”，或直接打开 `games/story/`；旧链接 `games.html#story` 会自动跳转。
 短篇原创故事约 5–10 分钟：探索候信厅、旧值班室和渡口，收集物品，解开数字锁和图案锁，完成两个可切换的结局。
 提供随身物品、线索手记、分阶段提示与重新开始；进度保存在本机 localStorage，刷新或切换游戏后可继续，不需要注册或联网存档。
 浏览器禁止本地存储时仍可游玩，但不能保留刷新后的进度。
 
-故事规则与存档检查位于 `assets/js/story-engine.js`，界面与线稿位于 `assets/js/story.js`，样式为 `assets/css/story.css`。
+故事规则与存档检查位于 `games/story/engine.js`，界面与线稿位于 `games/story/game.js`，样式为 `games/story/style.css`。

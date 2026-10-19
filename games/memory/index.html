@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f7f6">
+  <title>记忆翻牌 · 再也的博客</title>
+  <meta name="description" content="贪吃蛇、记忆翻牌与剧情解谜《雨夜邮局》，给思绪放个小假。">
+
+ 
+  <link rel="canonical" href="https://zxhtta.cc.cd/games/memory/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="记忆翻牌 · 再也的博客">
+  <meta property="og:description" content="贪吃蛇、记忆翻牌和剧情解谜，支持电脑和手机。">
+  <meta property="og:url" content="https://zxhtta.cc.cd/games/memory/">
+  <meta property="og:locale" content="zh_CN">
+
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/css/reading.css?v=20261019-4">
+
+ 
+  <script>
+    (function () {
+      var t = null;
+      try { t = localStorage.getItem("theme"); } catch (e) {}
+      if (!t) {
+        t = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      }
+      document.documentElement.setAttribute("data-theme", t);
+    })();
+  </script>
+<link rel="preload" href="../../assets/fonts/ZCOOLXiaoWei-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../assets/css/fish.css?v=20261019-1">
+<link rel="stylesheet" href="style.css?v=20261019-1">
+</head>
+
+<body data-page="games">
+  <a class="skip-link" href="#main">跳到主要内容</a>
+
+  <!-- ==================== 页头（全站统一，改这里要同步其他页面） ==================== -->
+  <header class="site-header">
+    <div class="wrap site-header__inner">
+      <a class="brand" aria-label="再也的博客首页" href="../../index.html">
+        <span>再也的博客</span>
+      </a>
+
+      <button class="icon-btn theme-toggle" type="button" aria-label="切换主题" aria-pressed="false">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+             stroke-linecap="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>
+        </svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"></path>
+        </svg>
+        <span class="theme-toggle__label">深色</span>
+      </button>
+
+      <button class="icon-btn nav-toggle" type="button" aria-label="打开菜单" aria-expanded="false" aria-controls="nav">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true">
+          <path d="M4 7h16M4 12h16M4 17h16"></path>
+        </svg>
+      </button>
+
+      <nav class="nav" id="nav" aria-label="主导航">
+        <a href="../../index.html" data-nav="home">首页</a>
+        <a href="../../posts/index.html" data-nav="posts">文章</a>
+        <a href="../../about.html" data-nav="about">关于</a>
+              <a href="../../games.html" data-nav="games">游戏</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="games-page wrap">
+    <a class="game-back" href="../../games.html">← 返回游戏</a>
+    <header class="games-intro"><h1 id="game-title">记忆翻牌</h1><p>把相同的汉字，一对一对找回来。</p></header>
+    <section aria-labelledby="game-title" class="game-panel" id="memory-panel" role="region">
+
+<p class="game-instructions">翻开两张牌，找到相同的汉字。六组全部配对就能完成，试着用更少的次数找到它们。</p>
+<div class="game-stats"><span>尝试 <strong id="memory-moves">0</strong></span><span>已配对 <strong id="memory-matched">0 / 6</strong></span></div>
+<div class="game-toolbar"><button class="game-button" id="memory-restart" type="button">重新洗牌</button></div>
+<div aria-label="十二张记忆卡牌" class="memory-board" id="memory-board" role="group"></div>
+<p aria-live="polite" class="game-status" id="memory-status" role="status">翻开两张牌，找出相同的汉字。</p>
+</section>
+    <p class="games-note">无需账号，支持电脑和手机。离开页面后本局会重置。</p>
+  </main>
+
+  <!-- ==================== 页脚 ==================== -->
+  <aside class="music-section wrap" aria-label="音乐播放器">
+    <details class="music-player" data-music-player>
+      <summary><span class="music-player__icon" aria-hidden="true">♫</span><span>听点音乐</span><span class="music-player__expand" aria-hidden="true">＋</span></summary>
+      <div class="music-player__body">
+        <p class="music-player__status" data-music-status role="status">展开后加载歌单，点击播放即可聆听。</p>
+        <div data-music-controls hidden>
+          <label class="sr-only" for="music-track">选择歌曲</label>
+          <select id="music-track" data-music-select></select>
+          <audio controls preload="none" aria-label="音乐播放控制">浏览器不支持音频播放。</audio>
+          <div class="music-player__actions"><button type="button" data-music-previous>← 上一首</button><button type="button" data-music-next>下一首 →</button></div>
+        </div>
+        <noscript><p>启用 JavaScript 后可使用音乐播放器。</p></noscript>
+      </div>
+    </details>
+  </aside>
+
+  <footer class="site-footer">
+    <div class="wrap site-footer__inner">
+      <p style="margin:0">© <span data-year>2026</span> 再也的博客</p>
+      <nav class="footer-links" aria-label="页脚导航">
+        <a href="../../posts/index.html">文章</a>
+        <a href="../../about.html">关于</a>
+        <a href="https://github.com/DunYujian" rel="me noopener">GitHub · 再也</a>
+      </nav>
+          <div class="site-statistics" aria-label="站点访问统计" title="由不蒜子提供访问统计">
+        <span id="busuanzi_container_site_pv" style="display:none">访问 <span id="busuanzi_value_site_pv">—</span> 次</span>
+        <span id="busuanzi_container_site_uv" style="display:none">访客 <span id="busuanzi_value_site_uv">—</span> 人</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/main.js" defer></script>
+  <script src="../../assets/js/music.js?v=20261019-1" defer></script>
+  <script src="../../assets/js/fish.js?v=20261019-1" defer></script>
+  <script src="../../assets/js/stats.js?v=20261019-1" defer></script>
+    <script src="game.js?v=20261019-1" defer></script>
+</body>
+</html>

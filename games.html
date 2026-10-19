@@ -31,8 +31,7 @@
   </script>
 <link rel="preload" href="assets/fonts/ZCOOLXiaoWei-Regular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/fish.css?v=20261019-1">
-<link rel="stylesheet" href="assets/css/games.css?v=20261019-1">
-<link rel="stylesheet" href="assets/css/story.css?v=20261019-1">
+<link rel="stylesheet" href="assets/css/games.css?v=20261019-2">
 </head>
 
 <body data-page="games">
@@ -74,68 +73,13 @@
   </header>
 
   <main id="main" class="games-page wrap">
-    <header class="games-intro">
-      <h1>游戏</h1>
-      <p>给思绪放个小假。玩一局，再继续出发。</p>
-    </header>
-    <div class="game-tabs" role="tablist" aria-label="选择小游戏">
-      <button type="button" id="tab-snake" role="tab" data-game-tab="snake" aria-controls="snake-panel" aria-selected="true">贪吃蛇</button>
-      <button type="button" id="tab-memory" role="tab" data-game-tab="memory" aria-controls="memory-panel" aria-selected="false" tabindex="-1">记忆翻牌</button>
-      <button type="button" id="tab-story" role="tab" data-game-tab="story" aria-controls="story-panel" aria-selected="false" tabindex="-1">剧情解谜</button>
+    <header class="games-intro"><h1>游戏</h1><p>给思绪放个小假。选一个喜欢的故事，或玩一局小游戏。</p></header>
+    <div class="game-library">
+      <a class="game-entry" href="games/snake/"><span class="game-entry__number">01</span><div><h2>贪吃蛇</h2><p>绕过边界，吃到下一颗圆点。经典的小小挑战。</p><span class="game-entry__meta">键盘 / 触屏 · 最高分记录</span></div><span class="game-entry__arrow" aria-hidden="true">→</span></a>
+      <a class="game-entry" href="games/memory/"><span class="game-entry__number">02</span><div><h2>记忆翻牌</h2><p>鱼、月、舟、叶、雨、山。把十二张牌配成六对。</p><span class="game-entry__meta">汉字配对 · 轻松一局</span></div><span class="game-entry__arrow" aria-hidden="true">→</span></a>
+      <a class="game-entry" href="games/story/"><span class="game-entry__number">03</span><div><h2>雨夜邮局</h2><p>天亮以前，替自己寄一封信。循着线索，走到渡口。</p><span class="game-entry__meta">剧情解谜 · 两个结局 · 自动存档</span></div><span class="game-entry__arrow" aria-hidden="true">→</span></a>
     </div>
-    <section id="snake-panel" class="game-panel" data-game-panel="snake" role="tabpanel" aria-labelledby="tab-snake">
-      <h2>贪吃蛇</h2>
-      <p class="game-instructions">吃到金色圆点得 10 分，别撞到边界或自己。点击开始后，用方向键 / WASD、手机滑动或方向按钮移动；空格键暂停。</p>
-      <div class="game-stats"><span>得分 <strong id="snake-score">0</strong></span><span>本机最高 <strong id="snake-best">0</strong></span></div>
-      <div class="snake-layout">
-        <div class="snake-board">
-          <canvas id="snake-board" width="400" height="400" tabindex="0" role="img" aria-label="贪吃蛇棋盘，聚焦后可用方向键或 WASD 操作，空格键暂停">浏览器需要支持 Canvas 才能显示贪吃蛇。</canvas>
-          <div id="snake-overlay" class="game-overlay" hidden><strong>本局结束</strong><span>点击「再玩一次」，开始新的一局。</span></div>
-        </div>
-        <div class="snake-controls">
-          <div class="game-toolbar"><button type="button" id="snake-start" class="game-button game-button--primary">开始游戏</button><button type="button" id="snake-restart" class="game-button">重新开始</button></div>
-          <label class="game-speed" for="snake-speed">速度<select id="snake-speed"><option value="230">慢速 · 慢慢来</option><option value="170" selected>标准 · 刚刚好</option><option value="110">快速 · 试试看</option></select></label>
-          <div class="direction-pad" role="group" aria-label="贪吃蛇方向控制"><button type="button" data-direction="up" aria-label="向上">↑</button><button type="button" data-direction="left" aria-label="向左">←</button><button type="button" data-direction="down" aria-label="向下">↓</button><button type="button" data-direction="right" aria-label="向右">→</button></div>
-        </div>
-      </div>
-      <p id="snake-status" class="game-status" role="status" aria-live="polite">准备好了，点击开始游戏。</p>
-    </section>
-    <section id="memory-panel" class="game-panel" data-game-panel="memory" role="tabpanel" aria-labelledby="tab-memory" hidden>
-      <h2>记忆翻牌</h2>
-      <p class="game-instructions">翻开两张牌，找到相同的汉字。六组全部配对就能完成，试着用更少的次数找到它们。</p>
-      <div class="game-stats"><span>尝试 <strong id="memory-moves">0</strong></span><span>已配对 <strong id="memory-matched">0 / 6</strong></span></div>
-      <div class="game-toolbar"><button type="button" id="memory-restart" class="game-button">重新洗牌</button></div>
-      <div id="memory-board" class="memory-board" role="group" aria-label="十二张记忆卡牌"></div>
-      <p id="memory-status" class="game-status" role="status" aria-live="polite">翻开两张牌，找出相同的汉字。</p>
-    </section>
-    <section id="story-panel" class="game-panel" data-game-panel="story" role="tabpanel" aria-labelledby="tab-story" hidden>
-      <header class="story-intro"><h2>雨夜邮局</h2><span class="story-duration">约 5–10 分钟 · 两个结局</span></header>
-      <p class="story-lead">天亮以前，替自己寄一封信。</p>
-      <ol class="story-chapters" aria-label="故事进度"><li data-story-chapter="1">一 · 灯下寻信</li><li data-story-chapter="2">二 · 归途邮戳</li><li data-story-chapter="3">三 · 寄给明天</li></ol>
-      <div id="story-playing">
-        <nav class="story-room-nav" aria-label="探索场景"><button type="button" class="game-button" data-story-room="hall" aria-pressed="true">候信厅</button><button type="button" class="game-button" data-story-room="office" aria-pressed="false" disabled>旧值班室</button><button type="button" class="game-button" data-story-room="pier" aria-pressed="false" disabled>渡口</button></nav>
-        <figure id="story-scene" class="story-scene" aria-label="场景线稿"></figure>
-        <h3 id="story-room-title" class="story-room-title">候信厅</h3>
-        <p id="story-description" class="story-description"></p>
-        <div id="story-actions" class="story-actions" role="group" aria-label="调查场景中的物件"></div>
-        <form id="story-code-form" class="story-puzzle">
-          <label for="story-code">木箱的三位数字锁 · 点亮油灯后可输入</label>
-          <div class="story-code-row"><input id="story-code" type="text" inputmode="numeric" pattern="[0-9０-９]{3}" maxlength="3" autocomplete="off" placeholder="···" aria-label="木箱的三位密码" disabled required><button id="story-code-submit" type="submit" class="game-button" disabled>打开木箱</button></div>
-        </form>
-        <form id="story-symbol-form" class="story-puzzle" hidden>
-          <p class="story-puzzle__label">抽屉上的图案锁 · 依次选择三个图案</p>
-          <div class="story-symbols" role="group" aria-label="选择图案顺序"><button type="button" class="game-button" data-story-symbol="月">月</button><button type="button" class="game-button" data-story-symbol="舟">舟</button><button type="button" class="game-button" data-story-symbol="鱼">鱼</button><button type="button" class="game-button" data-story-symbol="叶">叶</button></div>
-          <p id="story-sequence" class="story-sequence" aria-live="polite">尚未选择</p>
-          <div class="game-toolbar"><button type="submit" id="story-symbol-submit" class="game-button" disabled>确认顺序</button><button type="button" id="story-symbol-clear" class="game-button">重新排列</button></div>
-        </form>
-        <div class="story-notebook"><section><h4>随身物品</h4><ul id="story-inventory" class="story-inventory"></ul></section><section><h4>线索手记</h4><p id="story-clues" class="story-clues"></p></section></div>
-      </div>
-      <section id="story-ending" class="story-ending" aria-label="故事结局" hidden><div class="story-ending__mark" aria-hidden="true">再出发</div><h3 id="story-ending-title" tabindex="-1"></h3><p id="story-ending-text"></p><button type="button" class="game-button" data-story-action="revisit">回到最后的选择</button></section>
-      <p id="story-message" class="story-message" role="status" aria-live="polite"></p>
-      <div class="story-bottom"><button type="button" id="story-hint" class="game-button">给我一点提示</button><button type="button" class="game-button" data-story-action="restart">重新开始（清空本局）</button><span id="story-save-note" class="story-save-note"></span></div>
-    </section>
-    <noscript><p class="game-status">启用 JavaScript 后即可玩小游戏。</p></noscript>
-    <p class="games-note">贪吃蛇最高分和剧情存档保存在本机。贪吃蛇与翻牌离开页面后重置本局；剧情解谜可以继续上次的进度。</p>
+    <noscript><p class="games-note">启用 JavaScript 后即可游玩。</p></noscript>
   </main>
 
   <!-- ==================== 页脚 ==================== -->
@@ -173,10 +117,7 @@
   <script src="assets/js/main.js" defer></script>
   <script src="assets/js/music.js?v=20261019-1" defer></script>
   <script src="assets/js/fish.js?v=20261019-1" defer></script>
-  <script src="assets/js/snake-engine.js?v=20261019-1" defer></script>
-  <script src="assets/js/games.js?v=20261019-2" defer></script>
   <script src="assets/js/stats.js?v=20261019-1" defer></script>
-  <script src="assets/js/story-engine.js?v=20261019-1" defer></script>
-  <script src="assets/js/story.js?v=20261019-1" defer></script>
+    <script src="assets/js/games-hub.js?v=20261019-1" defer></script>
 </body>
 </html>
