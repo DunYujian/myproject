@@ -23,4 +23,3 @@
 .memory-card:focus-visible { outline-offset: 3px; }
 @media (max-width: 600px) { .memory-board { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; } .memory-card { font-size: 34px; } }
 @media (prefers-reduced-motion: reduce) { .memory-card { transition: none; } }
-
