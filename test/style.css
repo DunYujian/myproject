@@ -1,0 +1,9 @@
+.test-page { width: 100%; padding-top: 65px; padding-bottom: 85px; }
+.test-eyebrow { color: var(--text-soft); font-size: 14px; letter-spacing: .12em; }
+.test-page h1 { font: 400 38px/1.6 var(--font-art); margin-bottom: 18px; }
+.test-intro { color: var(--text-soft); max-width: 32em; }
+.test-space { margin: 38px 0; padding: 32px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.test-space h2 { font: 400 25px/1.6 var(--font-art); }
+.test-space p { color: var(--text-soft); margin-bottom: 0; }
+.test-back { font-size: 15px; }
+@media (max-width: 600px) { .test-page { padding-top: 35px; padding-bottom: 55px; } }
