@@ -53,5 +53,6 @@
   });
   document.querySelector("#memory-restart").addEventListener("click", newMemory);
   newMemory();
+  document.addEventListener("site:before-navigate", function () { clearTimeout(mismatchTimer); }, { once: true });
 
 })();

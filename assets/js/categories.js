@@ -56,6 +56,7 @@
     buttons[0].focus();
   });
   window.addEventListener("popstate", readURL);
+  document.addEventListener("site:before-navigate", function () { window.removeEventListener("popstate", readURL); }, { once: true });
   controls.hidden = false;
   readURL();
 })();

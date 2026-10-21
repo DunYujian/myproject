@@ -20,7 +20,7 @@
   </script>
 <link rel="preload" href="assets/fonts/ZCOOLXiaoWei-Regular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/fish.css?v=20261019-1">
-<link rel="stylesheet" href="assets/css/widgets.css?v=20261021-1">
+<link rel="stylesheet" href="assets/css/widgets.css?v=20261021-3">
 <link rel="stylesheet" href="assets/css/music.css?v=20261021-2">
 </head>
 
@@ -128,11 +128,11 @@
             <h2>联系</h2>
             <p>
               最快的联系方式是邮件：
-              <a href="mailto:you@example.com">you@example.com</a>。
+              <a href="mailto:zsh191983@gmail.com">zsh191983@gmail.com</a>。
               也可以在 <a href="https://github.com/DunYujian" rel="me noopener">GitHub · 再也</a> 上找到我。
             </p>
             <div class="hero__actions" style="margin-top:20px">
-              <a class="btn btn--primary" href="mailto:you@example.com">发邮件</a>
+              <a class="btn btn--primary" href="mailto:zsh191983@gmail.com">发邮件</a>
               <a class="btn btn--ghost" href="posts/index.html">看看文章</a>
             </div>
           </div>
@@ -141,11 +141,16 @@
     </section>
   </main>
 <aside class="site-sidebar site-sidebar--right" aria-label="日历与网站详情">
-<section class="sidebar-widget" data-calendar>
+<section class="sidebar-widget" data-clock aria-label="实时钟表">
+<h2>此刻</h2><time class="widget-clock" datetime="">--:--:--</time><p class="clock-date" data-clock-date></p><p class="clock-zone" data-clock-zone>当地时间 · 24小时制</p>
+</section>
+<section class="sidebar-widget calendar-widget" data-calendar>
 <h2>日历</h2>
 <div class="calendar-toolbar"><button type="button" data-calendar-step="-1" aria-label="上个月">‹</button><span class="calendar-label" data-calendar-label aria-live="polite"></span><button type="button" data-calendar-step="1" aria-label="下个月">›</button></div>
-<table class="widget-calendar" aria-label="日历"><thead><tr><th scope="col">一</th><th scope="col">二</th><th scope="col">三</th><th scope="col">四</th><th scope="col">五</th><th scope="col">六</th><th scope="col">日</th></tr></thead><tbody></tbody></table>
-<div class="calendar-footer"><span data-calendar-date></span><button type="button" class="calendar-today" data-calendar-today>今天</button></div>
+<table class="widget-calendar" aria-label="公历与农历"><thead><tr><th scope="col">一</th><th scope="col">二</th><th scope="col">三</th><th scope="col">四</th><th scope="col">五</th><th scope="col">六</th><th scope="col">日</th></tr></thead><tbody></tbody></table>
+<div class="calendar-detail" aria-live="polite"><p data-calendar-date></p><p data-calendar-lunar></p><p class="calendar-festival" data-calendar-festival></p></div>
+<div class="calendar-footer"><span>点击日期查看 · 农历/节日</span><button type="button" class="calendar-today" data-calendar-today>今天</button></div>
+<details class="calendar-events"><summary>本月节日</summary><ul data-calendar-events></ul><p data-calendar-events-empty>本月暂无收录的节日。</p></details>
 <noscript><p>启用 JavaScript 后显示日历。</p></noscript>
 </section>
 <section class="sidebar-widget" data-site-facts><h2>网站详情</h2><dl class="site-facts">
@@ -174,7 +179,10 @@
   <script src="assets/js/main.js?v=20261021-2" defer></script>
   <script src="assets/js/music.js?v=20261021-2" defer></script>
   <script src="assets/js/fish.js?v=20261019-1" defer></script>
-  <script src="assets/js/stats.js?v=20261019-1" defer></script>
-  <script src="assets/js/widgets.js?v=20261021-1" defer></script>
+  <script src="assets/js/stats.js?v=20261021-3" defer></script>
+  <script src="assets/js/widgets.js?v=20261021-3" defer></script>
+<script src="assets/js/calendar-engine.js?v=20261021-3" defer></script>
+<script src="assets/js/calendar.js?v=20261021-3" defer></script>
+<script src="assets/js/navigation.js?v=20261021-3" defer></script>
 </body>
 </html>

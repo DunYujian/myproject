@@ -20,10 +20,12 @@
 
   // Apply the latest theme when the lazy-loaded iframe becomes ready.
   container.addEventListener("load", syncTheme, true);
-  new MutationObserver(syncTheme).observe(root, {
+  var observer = new MutationObserver(syncTheme);
+  observer.observe(root, {
     attributes: true,
     attributeFilter: ["data-theme"]
   });
+  document.addEventListener("site:before-navigate", function () { observer.disconnect(); }, { once: true });
 
   var script = document.createElement("script");
   script.src = origin + "/client.js";

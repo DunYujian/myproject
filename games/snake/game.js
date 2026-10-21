@@ -107,9 +107,13 @@
     if (Math.max(Math.abs(dx), Math.abs(dy)) >= 15) game.turn(Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? "right" : "left") : (dy > 0 ? "down" : "up"));
     touchStart = null;
   }, { passive: true });
-  document.addEventListener("visibilitychange", function () { if (document.hidden) pause("已自动暂停，回来后点击继续。 "); });
-  window.addEventListener("blur", function () { pause(); });
-  new MutationObserver(draw).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+  function onHidden() { if (document.hidden) pause("已自动暂停，回来后点击继续。 "); }
+  function onBlur() { pause(); }
+  document.addEventListener("visibilitychange", onHidden);
+  window.addEventListener("blur", onBlur);
+  var observer = new MutationObserver(draw);
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+  document.addEventListener("site:before-navigate", function () { clearInterval(timer); observer.disconnect(); document.removeEventListener("visibilitychange", onHidden); window.removeEventListener("blur", onBlur); }, { once: true });
   draw();
 
 })();
