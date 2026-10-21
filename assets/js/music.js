@@ -60,20 +60,21 @@
     if (loaded) return;
     loaded = true;
     status.textContent = "正在读取歌单…";
-    // The repository listing picks up newly uploaded MP3 files. A local catalog
-    // also works when GitHub's API is unavailable or rate limited.
-    var results = await Promise.allSettled([
-      readJSON("https://api.github.com/repos/DunYujian/myproject/contents/music?ref=main"),
-      readJSON(new URL("playlist.json", base).href)
-    ]);
-    if (results[0].status === "fulfilled" && Array.isArray(results[0].value)) {
-      tracks = normalize(results[0].value);
-    } else if (results[1].status === "fulfilled") {
-      tracks = normalize(results[1].value.tracks);
-    } else {
-      status.textContent = "歌单暂时无法加载，收起后展开可重试。";
-      loaded = false;
-      return;
+    var localCatalog = false;
+    // Display the local catalog immediately; only use GitHub as a fallback.
+    try {
+      var catalog = await readJSON(new URL("playlist.json", base).href);
+      tracks = normalize(catalog.tracks);
+      localCatalog = tracks.length > 0;
+    } catch (error) { tracks = []; }
+    if (!tracks.length) {
+      try {
+        tracks = normalize(await readJSON("https://api.github.com/repos/DunYujian/myproject/contents/music?ref=main"));
+      } catch (error) {
+        status.textContent = "歌单暂时无法加载，收起后展开可重试。";
+        loaded = false;
+        return;
+      }
     }
 
     if (!tracks.length) {
@@ -89,6 +90,20 @@
     controls.hidden = false;
     previous.disabled = next.disabled = tracks.length < 2;
     choose(0, false);
+    // Discover new uploads in the background without delaying local playback.
+    if (localCatalog) {
+      readJSON("https://api.github.com/repos/DunYujian/myproject/contents/music?ref=main").then(function (entries) {
+        normalize(entries).forEach(function (track) {
+          if (tracks.some(function (existing) { return existing.file === track.file; })) return;
+          var option = document.createElement("option");
+          option.value = String(tracks.length);
+          option.textContent = track.title;
+          tracks.push(track);
+          select.appendChild(option);
+        });
+        previous.disabled = next.disabled = tracks.length < 2;
+      }).catch(function () { /* The local playlist remains playable. */ });
+    }
   }
 
   player.addEventListener("toggle", function () {
@@ -103,4 +118,5 @@
   audio.addEventListener("error", function () {
     status.textContent = "这首音乐暂时无法播放，请切换其他曲目。";
   });
+  if (player.open) load();
 })();

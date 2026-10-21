@@ -7,7 +7,7 @@
   <title>游戏 · 再也的小站</title>
   <meta name="description" content="贪吃蛇、记忆翻牌与剧情解谜《雨夜邮局》，给思绪放个小假。">
 
- 
+
   <link rel="canonical" href="https://zxhtta.cc.cd/games.html">
   <meta property="og:type" content="website">
   <meta property="og:title" content="游戏 · 再也的小站">
@@ -18,7 +18,7 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/css/reading.css?v=20261019-4">
 
- 
+
   <script>
     (function () {
       var t = null;
@@ -32,6 +32,7 @@
 <link rel="preload" href="assets/fonts/ZCOOLXiaoWei-Regular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/fish.css?v=20261019-1">
 <link rel="stylesheet" href="assets/css/games.css?v=20261019-2">
+<link rel="stylesheet" href="assets/css/widgets.css?v=20261021-1">
 </head>
 
 <body data-page="games">
@@ -72,22 +73,12 @@
     </div>
   </header>
 
-  <main id="main" class="games-page wrap">
-    <header class="games-intro"><h1>游戏</h1><p>给思绪放个小假。选一个喜欢的故事，或玩一局小游戏。</p></header>
-    <div class="game-library">
-      <a class="game-entry" href="games/snake/"><span class="game-entry__number">01</span><div><h2>贪吃蛇</h2><p>绕过边界，吃到下一颗圆点。经典的小小挑战。</p><span class="game-entry__meta">键盘 / 触屏 · 最高分记录</span></div><span class="game-entry__arrow" aria-hidden="true">→</span></a>
-      <a class="game-entry" href="games/memory/"><span class="game-entry__number">02</span><div><h2>记忆翻牌</h2><p>鱼、月、舟、叶、雨、山。把十二张牌配成六对。</p><span class="game-entry__meta">汉字配对 · 轻松一局</span></div><span class="game-entry__arrow" aria-hidden="true">→</span></a>
-      <a class="game-entry" href="games/story/"><span class="game-entry__number">03</span><div><h2>雨夜邮局</h2><p>天亮以前，替自己寄一封信。循着线索，走到渡口。</p><span class="game-entry__meta">剧情解谜 · 两个结局 · 自动存档</span></div><span class="game-entry__arrow" aria-hidden="true">→</span></a>
-    </div>
-    <noscript><p class="games-note">启用 JavaScript 后即可游玩。</p></noscript>
-  </main>
-
-  <!-- ==================== 页脚 ==================== -->
-  <aside class="music-section wrap" aria-label="音乐播放器">
-    <details class="music-player" data-music-player>
-      <summary><span class="music-player__icon" aria-hidden="true">♫</span><span>听点音乐</span><span class="music-player__expand" aria-hidden="true">＋</span></summary>
+  <div class="site-layout">
+<aside class="site-sidebar site-sidebar--left" aria-label="音乐侧栏"><section class="sidebar-widget"><h2>听点音乐</h2><aside class="music-section wrap" aria-label="音乐播放器">
+    <details class="music-player" data-music-player open>
+      <summary><span class="music-player__icon" aria-hidden="true">♫</span><span>播放列表</span><span class="music-player__expand" aria-hidden="true">＋</span></summary>
       <div class="music-player__body">
-        <p class="music-player__status" data-music-status role="status">展开后加载歌单，点击播放即可聆听。</p>
+        <p class="music-player__status" data-music-status role="status">正在读取歌单…</p>
         <div data-music-controls hidden>
           <label class="sr-only" for="music-track">选择歌曲</label>
           <select id="music-track" data-music-select></select>
@@ -97,7 +88,36 @@
         <noscript><p>启用 JavaScript 后可使用音乐播放器。</p></noscript>
       </div>
     </details>
-  </aside>
+  </aside><p class="sidebar-caption">让旋律陪你读一会儿。</p></section></aside>
+<main id="main" class="games-page wrap">
+    <header class="games-intro"><h1>游戏</h1><p>给思绪放个小假。选一个喜欢的故事，或玩一局小游戏。</p></header>
+    <div class="game-library">
+      <a class="game-entry" href="games/snake/"><span class="game-entry__number">01</span><div><h2>贪吃蛇</h2><p>绕过边界，吃到下一颗圆点。经典的小小挑战。</p><span class="game-entry__meta">键盘 / 触屏 · 最高分记录</span></div><span class="game-entry__arrow" aria-hidden="true">→</span></a>
+      <a class="game-entry" href="games/memory/"><span class="game-entry__number">02</span><div><h2>记忆翻牌</h2><p>鱼、月、舟、叶、雨、山。把十二张牌配成六对。</p><span class="game-entry__meta">汉字配对 · 轻松一局</span></div><span class="game-entry__arrow" aria-hidden="true">→</span></a>
+      <a class="game-entry" href="games/story/"><span class="game-entry__number">03</span><div><h2>雨夜邮局</h2><p>天亮以前，替自己寄一封信。循着线索，走到渡口。</p><span class="game-entry__meta">剧情解谜 · 两个结局 · 自动存档</span></div><span class="game-entry__arrow" aria-hidden="true">→</span></a>
+    </div>
+    <noscript><p class="games-note">启用 JavaScript 后即可游玩。</p></noscript>
+  </main>
+<aside class="site-sidebar site-sidebar--right" aria-label="日历与网站详情">
+<section class="sidebar-widget" data-calendar>
+<h2>日历</h2>
+<div class="calendar-toolbar"><button type="button" data-calendar-step="-1" aria-label="上个月">‹</button><span class="calendar-label" data-calendar-label aria-live="polite"></span><button type="button" data-calendar-step="1" aria-label="下个月">›</button></div>
+<table class="widget-calendar" aria-label="日历"><thead><tr><th scope="col">一</th><th scope="col">二</th><th scope="col">三</th><th scope="col">四</th><th scope="col">五</th><th scope="col">六</th><th scope="col">日</th></tr></thead><tbody></tbody></table>
+<div class="calendar-footer"><span data-calendar-date></span><button type="button" class="calendar-today" data-calendar-today>今天</button></div>
+<noscript><p>启用 JavaScript 后显示日历。</p></noscript>
+</section>
+<section class="sidebar-widget" data-site-facts><h2>网站详情</h2><dl class="site-facts">
+<div><dt>站点</dt><dd>再也的小站</dd></div><div><dt>作者</dt><dd>再也</dd></div>
+<div><dt>文章</dt><dd><a href="posts/index.html" data-site-posts>查看归档 →</a></dd></div>
+<div><dt>分类</dt><dd><a href="posts/index.html" data-site-categories>查看分类 →</a></dd></div>
+<div><dt>最近发表</dt><dd data-site-latest>—</dd></div>
+<div class="site-fact-stat" id="busuanzi_container_site_uv"><dt>访客数</dt><dd><span id="busuanzi_value_site_uv">—</span> 人</dd></div>
+<div class="site-fact-stat" id="busuanzi_container_site_pv"><dt>浏览量</dt><dd><span id="busuanzi_value_site_pv">—</span> 次</dd></div>
+</dl><p class="sidebar-caption">访问统计由不蒜子提供，未加载时显示 —。</p></section></aside>
+</div>
+
+  <!-- ==================== 页脚 ==================== -->
+
 
   <footer class="site-footer">
     <div class="wrap site-footer__inner">
@@ -107,17 +127,14 @@
         <a href="about.html">关于</a>
         <a href="https://github.com/DunYujian" rel="me noopener">GitHub · 再也</a>
       </nav>
-          <div class="site-statistics" aria-label="站点访问统计" title="由不蒜子提供访问统计">
-        <span id="busuanzi_container_site_pv" style="display:none">访问 <span id="busuanzi_value_site_pv">—</span> 次</span>
-        <span id="busuanzi_container_site_uv" style="display:none">访客 <span id="busuanzi_value_site_uv">—</span> 人</span>
-      </div>
     </div>
   </footer>
 
   <script src="assets/js/main.js" defer></script>
-  <script src="assets/js/music.js?v=20261019-1" defer></script>
+  <script src="assets/js/music.js?v=20261021-1" defer></script>
   <script src="assets/js/fish.js?v=20261019-1" defer></script>
   <script src="assets/js/stats.js?v=20261019-1" defer></script>
     <script src="assets/js/games-hub.js?v=20261019-1" defer></script>
+  <script src="assets/js/widgets.js?v=20261021-1" defer></script>
 </body>
 </html>

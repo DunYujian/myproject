@@ -1,0 +1,55 @@
+/* Shared three-column blog layout. */
+.site-layout { display: grid; grid-template-columns: 240px minmax(0, 808px) 240px; gap: 24px; width: min(1360px, 100%); margin: 28px auto 45px; padding-inline: 24px; align-items: start; position: relative; z-index: 1; flex: 1 0 auto; }
+.site-layout > main { min-width: 0; width: 100%; }
+.site-layout > main.home-main, .site-layout > main.games-page, .site-layout > main.test-page { padding-top: 0; }
+.site-layout > main > .section, .site-layout > main > .post, .site-layout > main > .about { padding-top: 0; }
+.site-layout > main > .wrap, .site-layout > main.wrap { padding-inline: 20px; }
+.site-sidebar { min-width: 0; position: sticky; top: 24px; font-family: var(--font-sans); font-size: 13px; }
+.sidebar-widget { padding: 22px 18px; margin-bottom: 20px; border: 1px solid var(--line); background: var(--surface); border-radius: 8px; }
+.sidebar-widget h2 { font: 400 22px/1.6 var(--font-art); margin: 0 0 16px; }
+.sidebar-caption { color: var(--text-faint); font-size: 12px; margin: 18px 0 0; }
+.site-sidebar .music-section { padding: 0; margin: 0; }
+.site-sidebar .music-player { max-width: none; }
+.site-sidebar .music-player summary { width: 100%; font-size: 13px; }
+.site-sidebar .music-player__expand { margin-left: auto; }
+.site-sidebar .music-player audio { min-width: 0; }
+.site-sidebar .music-player__actions { gap: 8px; }
+.calendar-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 12px; }
+.calendar-toolbar button, .calendar-today { border: 1px solid var(--line); border-radius: 4px; background: var(--bg); color: var(--accent); cursor: pointer; font: inherit; padding: 4px 9px; }
+.calendar-toolbar button:hover, .calendar-today:hover { background: var(--accent-soft); }
+.calendar-label { font-size: 13px; font-weight: 500; }
+.widget-calendar { width: 100%; table-layout: fixed; border-collapse: separate; border-spacing: 0 4px; text-align: center; font-size: 12px; }
+.widget-calendar th { color: var(--text-faint); font-weight: 400; padding-bottom: 6px; }
+.widget-calendar td { height: 28px; padding: 0; }
+.widget-calendar td span { display: grid; place-items: center; width: 27px; height: 27px; margin: auto; border-radius: 50%; }
+.widget-calendar [aria-current="date"] span { background: var(--accent); color: var(--bg); font-weight: 600; }
+.calendar-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 12px; gap: 8px; color: var(--text-faint); font-size: 11px; }
+.site-facts { margin: 0; }
+.site-facts > div { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--line); }
+.site-facts > div:last-child { border: 0; padding-bottom: 0; }
+.site-facts dt { color: var(--text-faint); flex-shrink: 0; }
+.site-facts dd { margin: 0; text-align: right; overflow-wrap: anywhere; }
+.site-facts a { color: var(--accent); }
+/* Keep the labels and dash visible while the statistics provider is unavailable. */
+.site-facts > .site-fact-stat { display: flex !important; }
+.site-layout ~ .site-footer > .wrap, body:has(.site-layout) .site-header > .wrap { max-width: 1360px; }
+@media (min-width: 1051px) { .site-layout > main .wrap { padding-inline: 20px; } }
+@media (max-width: 1200px) and (min-width: 1051px) { .site-layout { grid-template-columns: 210px minmax(0, 1fr) 220px; gap: 14px; padding-inline: 18px; } .sidebar-widget { padding-inline: 13px; } }
+@media (max-width: 1050px) {
+  .site-layout { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); max-width: 808px; gap: 22px; padding-inline: 24px; }
+  .site-layout > main { grid-column: 1 / -1; grid-row: 1; }
+  .site-layout > main.wrap, .site-layout > main .wrap { padding-inline: 0; }
+  .site-sidebar { position: static; }
+  .site-sidebar--left { grid-column: 1; grid-row: 2; }
+  .site-sidebar--right { grid-column: 2; grid-row: 2; }
+  body:has(.site-layout) .site-header > .wrap, .site-layout ~ .site-footer > .wrap { max-width: 808px; }
+}
+@media (max-width: 600px) {
+  .site-layout { grid-template-columns: minmax(0, 1fr); margin-top: 24px; padding-inline: 22px; gap: 16px; }
+  .site-sidebar--left { grid-column: 1; grid-row: 2; }
+  .site-sidebar--right { grid-column: 1; grid-row: 3; }
+  .sidebar-widget { padding: 22px; margin-bottom: 16px; }
+  .site-layout .home-note, .site-layout .section, .site-layout .post, .site-layout .about { margin-bottom: 0; padding-bottom: 25px; }
+  .nav { flex-wrap: wrap; column-gap: 22px; row-gap: 0; }
+}
+@media print { .site-sidebar { display: none; } .site-layout { display: block; padding: 0; margin: 0; width: 100%; } }
