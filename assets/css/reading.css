@@ -24,6 +24,22 @@
   --font-serif: "Iowan Old Style", "Palatino Linotype", "Songti SC", "Noto Serif CJK SC", "Source Han Serif SC", "STSong", "SimSun", serif;
   --font-mono: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
 }
+[data-theme="pink"] {
+  color-scheme: light;
+  --bg: #fcf3f4;
+  --bg-soft: #f6e7ea;
+  --surface: #fffafb;
+  --surface-2: #f9ecef;
+  --text: #51353e;
+  --text-soft: #79535f;
+  --text-faint: #8d626e;
+  --line: #ead3da;
+  --line-strong: #d2a6b4;
+  --accent: #a53e60;
+  --accent-hover: #862c49;
+  --accent-soft: #f3dce4;
+  --accent-ink: #782e47;
+}
 [data-theme="dark"] {
   color-scheme: dark;
   --bg: #141c1b;
@@ -78,6 +94,8 @@ hr { border: 0; border-top: 1px solid var(--line); margin: 2.5em 0; }
 .theme-toggle { order: 2; font-size: 13px; min-width: 52px; }
 .theme-toggle .icon-sun, [data-theme="dark"] .theme-toggle .icon-moon { display: none; }
 [data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+[data-theme="pink"] .theme-toggle .icon-moon { display: none; }
+[data-theme="pink"] .theme-toggle .icon-sun { display: block; color: var(--accent); }
 .nav-toggle { display: none; order: 3; }
 /* Home: a small author introduction and a chronological list. */
 .home-main { padding-top: 44px; }

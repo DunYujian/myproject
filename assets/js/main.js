@@ -16,26 +16,31 @@
   // 说明：为避免首屏闪烁，<head> 里有一段内联脚本先设置 data-theme。
   // 这里只负责按钮点击与文字提示。
   var themeBtn = document.querySelector(".theme-toggle");
+  var themes = ["light", "dark", "pink"];
+  var themeNames = { light: "浅色", dark: "深色", pink: "胭脂粉" };
 
   function currentTheme() {
-    return root.getAttribute("data-theme") === "dark" ? "dark" : "light";
+    var theme = root.getAttribute("data-theme");
+    return themes.includes(theme) ? theme : "light";
   }
 
   function syncThemeLabel() {
     if (!themeBtn) return;
-    var isDark = currentTheme() === "dark";
-    themeBtn.setAttribute("aria-label", isDark ? "切换到浅色模式" : "切换到暗色模式");
-    themeBtn.setAttribute("title", isDark ? "切换到浅色模式" : "切换到暗色模式");
-    themeBtn.setAttribute("aria-pressed", String(isDark));
+    var theme = currentTheme();
+    var next = themes[(themes.indexOf(theme) + 1) % themes.length];
+    var description = "当前" + themeNames[theme] + "主题，切换到" + themeNames[next];
+    themeBtn.setAttribute("aria-label", description);
+    themeBtn.setAttribute("title", description);
+    themeBtn.removeAttribute("aria-pressed");
     var label = themeBtn.querySelector(".theme-toggle__label");
-    if (label) label.textContent = isDark ? "浅色" : "深色";
+    if (label) label.textContent = themeNames[theme];
     var meta = document.querySelector('meta[name="theme-color"]:not([media])');
-    if (meta) meta.setAttribute("content", isDark ? "#141c1b" : "#f5f7f6");
+    if (meta) meta.setAttribute("content", { light: "#f5f7f6", dark: "#141c1b", pink: "#fcf3f4" }[theme]);
   }
 
   if (themeBtn) {
     themeBtn.addEventListener("click", function () {
-      var next = currentTheme() === "dark" ? "light" : "dark";
+      var next = themes[(themes.indexOf(currentTheme()) + 1) % themes.length];
       root.setAttribute("data-theme", next);
       try {
         localStorage.setItem("theme", next);
@@ -55,7 +60,7 @@
       try {
         saved = localStorage.getItem("theme");
       } catch (err) {}
-      if (!saved) {
+      if (!themes.includes(saved)) {
         root.setAttribute("data-theme", e.matches ? "dark" : "light");
         syncThemeLabel();
       }

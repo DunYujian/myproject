@@ -13,12 +13,12 @@
     自定义域名部署在根目录，资源与链接统一从 / 开始。
   -->
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/assets/css/reading.css?v=20261019-4">
+  <link rel="stylesheet" href="/assets/css/reading.css?v=20261021-2">
   <script>
     (function () {
       var t = null;
       try { t = localStorage.getItem("theme"); } catch (e) {}
-      if (!t) {
+      if (!["light", "dark", "pink"].includes(t)) {
         t = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
       }
       document.documentElement.setAttribute("data-theme", t);
@@ -27,6 +27,7 @@
 <link rel="preload" href="/assets/fonts/ZCOOLXiaoWei-Regular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/fish.css?v=20261019-1">
 <link rel="stylesheet" href="/assets/css/widgets.css?v=20261021-1">
+<link rel="stylesheet" href="/assets/css/music.css?v=20261021-2">
 </head>
 
 <body data-page="404">
@@ -66,20 +67,27 @@
 
   <div class="site-layout">
 <aside class="site-sidebar site-sidebar--left" aria-label="音乐侧栏"><section class="sidebar-widget"><h2>听点音乐</h2><aside class="music-section wrap" aria-label="音乐播放器">
-    <details class="music-player" data-music-player open>
-      <summary><span class="music-player__icon" aria-hidden="true">♫</span><span>播放列表</span><span class="music-player__expand" aria-hidden="true">＋</span></summary>
-      <div class="music-player__body">
-        <p class="music-player__status" data-music-status role="status">正在读取歌单…</p>
-        <div data-music-controls hidden>
-          <label class="sr-only" for="music-track">选择歌曲</label>
-          <select id="music-track" data-music-select></select>
-          <audio controls preload="none" aria-label="音乐播放控制">浏览器不支持音频播放。</audio>
-          <div class="music-player__actions"><button type="button" data-music-previous>← 上一首</button><button type="button" data-music-next>下一首 →</button></div>
-        </div>
-        <noscript><p>启用 JavaScript 后可使用音乐播放器。</p></noscript>
-      </div>
-    </details>
-  </aside><p class="sidebar-caption">让旋律陪你读一会儿。</p></section></aside>
+<details class="music-player music-player--custom" data-music-player open>
+<summary><span>随身听</span><span class="music-track-count" data-music-count>载入中</span><span class="music-player__expand" aria-hidden="true">＋</span></summary>
+<div class="music-player__body">
+<div class="music-now"><div class="music-record" aria-hidden="true"><span>鱼</span></div><div class="music-now__text"><p class="music-title" data-music-title>等一首歌</p><p class="music-artist" data-music-artist>让旋律陪你读一会儿</p></div></div>
+<p class="music-player__status" data-music-status role="status">正在读取歌单…</p>
+<audio preload="none" data-music-audio></audio>
+<div data-music-controls hidden>
+<label class="sr-only" for="music-seek">播放进度</label><input class="music-range music-seek" id="music-seek" data-music-seek type="range" min="0" max="100" value="0" step="0.1" disabled>
+<div class="music-times"><span data-music-elapsed>0:00</span><span data-music-duration>--:--</span></div>
+<div class="music-transport">
+<button type="button" data-music-previous aria-label="上一首" title="上一首"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5v14M18 5l-9 7 9 7Z"/></svg></button>
+<button class="music-play" type="button" data-music-play aria-label="播放" title="播放"><svg class="music-icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 11 7-11 7Z"/></svg><svg class="music-icon-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14M16 5v14"/></svg></button>
+<button type="button" data-music-next aria-label="下一首" title="下一首"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 5v14M6 5l9 7-9 7Z"/></svg></button>
+</div>
+<div class="music-volume-row"><button type="button" data-music-mute aria-label="静音" title="静音" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4ZM17 8c3 2 3 6 0 8"/><path class="music-mute-cross" d="m17 9 5 6m0-6-5 6"/></svg></button><label class="sr-only" for="music-volume">音量</label><input class="music-range" id="music-volume" data-music-volume type="range" min="0" max="1" value="0.7" step="0.01"><span data-music-volume-label>70%</span></div>
+<div class="music-options"><button type="button" data-music-mode>列表循环</button><button type="button" data-music-list-toggle aria-expanded="false" aria-controls="music-track-list">歌单 ↓</button></div>
+<ol class="music-track-list" id="music-track-list" data-music-list hidden aria-label="播放列表"></ol>
+</div>
+<button type="button" class="music-retry" data-music-retry hidden>重新加载歌单</button>
+<noscript><p>启用 JavaScript 后可使用音乐播放器。</p></noscript>
+</div></details></aside><p class="sidebar-caption">让旋律陪你读一会儿。</p></section></aside>
 <main id="main">
     <section class="not-found">
       <div class="wrap">
@@ -123,8 +131,8 @@
     </div>
   </footer>
 
-  <script src="/assets/js/main.js" defer></script>
-  <script src="/assets/js/music.js?v=20261021-1" defer></script>
+  <script src="/assets/js/main.js?v=20261021-2" defer></script>
+  <script src="/assets/js/music.js?v=20261021-2" defer></script>
   <script src="/assets/js/fish.js?v=20261019-1" defer></script>
   <script src="/assets/js/stats.js?v=20261019-1" defer></script>
   <script src="/assets/js/widgets.js?v=20261021-1" defer></script>

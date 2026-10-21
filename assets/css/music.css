@@ -1,0 +1,42 @@
+.music-player--custom { --music-fill: 0%; }
+.music-player--custom .music-track-count { color: var(--text-faint); font-size: 10px; margin-left: auto; }
+.music-player--custom .music-player__expand { margin-left: 5px; }
+.music-now { display: flex; align-items: center; gap: 12px; margin: 6px 0 16px; }
+.music-record { flex: 0 0 56px; height: 56px; display: grid; place-items: center; border-radius: 50%; background: repeating-radial-gradient(circle, var(--text) 0 2px, color-mix(in srgb, var(--text), var(--surface) 14%) 3px 4px); animation: music-spin 12s linear infinite; animation-play-state: paused; }
+.music-record span { display: grid; place-items: center; width: 25px; height: 25px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); font: 17px/1 var(--font-art); }
+.music-player--custom.is-playing .music-record { animation-play-state: running; }
+.music-now__text { min-width: 0; }
+.music-title { font: 400 19px/1.55 var(--font-art); color: var(--text); margin: 0 0 4px; overflow-wrap: anywhere; }
+.music-artist { color: var(--text-faint); font-size: 11px; line-height: 1.5; margin: 0; overflow-wrap: anywhere; }
+.music-player--custom .music-player__status { min-height: 18px; margin-bottom: 12px; color: var(--text-soft); font-size: 11px; }
+.music-player--custom audio { display: none; }
+.music-range { display: block; width: 100%; min-width: 0; margin: 0; height: 20px; padding: 0; background: transparent; cursor: pointer; accent-color: var(--accent); }
+.music-range:disabled { cursor: default; opacity: .45; }
+.music-times { display: flex; justify-content: space-between; color: var(--text-faint); font: 10px/1.5 var(--font-mono); font-variant-numeric: tabular-nums; }
+.music-transport { display: flex; justify-content: center; align-items: center; gap: 16px; margin: 16px 0; }
+.music-player--custom button { font: inherit; cursor: pointer; }
+.music-transport button, .music-volume-row button { display: grid; place-items: center; flex-shrink: 0; width: 32px; height: 36px; border: 0; padding: 7px; border-radius: 50%; background: transparent; color: var(--accent); }
+.music-transport button:hover, .music-volume-row button:hover { background: var(--accent-soft); }
+.music-transport button:disabled { color: var(--text-faint); opacity: .45; cursor: default; }
+.music-transport svg, .music-volume-row svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.music-transport .music-play { width: 46px; height: 46px; background: var(--accent); color: var(--surface); }
+.music-transport .music-play:hover { background: var(--accent-hover); }
+.music-player--custom .music-icon-play { fill: currentColor; stroke-width: 1; }
+.music-player--custom .music-icon-pause { display: none; stroke-width: 3; }
+.music-player--custom.is-playing .music-icon-play { display: none; }
+.music-player--custom.is-playing .music-icon-pause { display: block; }
+.music-volume-row { display: flex; align-items: center; gap: 8px; }
+.music-volume-row button { width: 28px; padding: 4px; }
+.music-volume-row [data-music-volume-label] { min-width: 31px; text-align: right; font-size: 10px; color: var(--text-faint); }
+.music-mute-cross { display: none; }
+.music-volume-row button[aria-pressed="true"] .music-mute-cross { display: block; }
+.music-options { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 15px; border-top: 1px solid var(--line); padding-top: 10px; }
+.music-options button { background: none; border: 0; padding: 6px 0; color: var(--accent); font-size: 11px; }
+.music-track-list { list-style: none; max-height: 220px; overflow-y: auto; overscroll-behavior: contain; padding: 5px 0 0; margin: 10px 0 0; border-top: 1px solid var(--line); scrollbar-width: thin; }
+.music-track-list button { display: flex; width: 100%; gap: 8px; text-align: left; border: 0; border-radius: 4px; background: none; color: var(--text-soft); padding: 10px 6px; font-size: 12px; line-height: 1.6; overflow-wrap: anywhere; }
+.music-track-list button span:first-child { color: var(--text-faint); font: 10px/2 var(--font-mono); }
+.music-track-list button[aria-current="true"], .music-track-list button:hover { background: var(--accent-soft); color: var(--accent); }
+.music-retry { padding: 7px 10px; border: 1px solid var(--line-strong); border-radius: 4px; color: var(--accent); background: var(--surface); }
+.music-player--custom button:focus-visible, .music-range:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+@keyframes music-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .music-record { animation: none; } }
