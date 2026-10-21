@@ -23,6 +23,7 @@
 <link rel="stylesheet" href="../assets/css/fish.css?v=20261019-1">
 <link rel="stylesheet" href="../assets/css/widgets.css?v=20261021-3">
 <link rel="stylesheet" href="../assets/css/music.css?v=20261021-2">
+<link rel="stylesheet" href="../assets/css/comments.css?v=20261022-1">
 </head>
 
 <body data-page="post">
@@ -101,7 +102,7 @@
               <li><span class="tag">建站</span></li>
               <li><span class="tag">GitHub Pages</span></li>
             </ul>
-          </div>
+          <a class="post-comments-jump" href="#comments-title">评论 ↓</a></div>
         <nav aria-label="文章分类" class="post-categories"><a class="category-tag" href="index.html?category=%E5%AD%A6%E4%B9%A0">学习</a><a class="category-tag" href="index.html?category=%E5%B7%A5%E4%BD%9C">工作</a></nav>
 </header>
 
@@ -208,14 +209,18 @@
           </a>
         </nav>
 
-        <section class="post-comments" aria-labelledby="comments-title">
-          <h2 id="comments-title">评论</h2>
-          <p class="post-comments__hint">登录 GitHub 即可发表评论。评论公开保存在
-            <a href="https://github.com/DunYujian/myproject/issues">GitHub Issues</a>。
-          </p>
-          <div data-comments></div>
-          <noscript><p>请启用 JavaScript 加载评论，或前往上方 GitHub Issues 链接参与讨论。</p></noscript>
-        </section>
+        <section class="post-comments" aria-labelledby="comments-title" data-comments-section>
+  <div class="comments-heading"><h2 id="comments-title">评论</h2><span>读到这里，聊两句吧</span></div>
+  <p class="post-comments__hint">使用 GitHub 账号登录后即可发表评论，支持 Markdown。评论会公开展示。</p>
+  <div class="comments-card" data-comments-card>
+    <div class="comments-status" data-comments-status role="status" aria-live="polite">滚动到这里时自动加载，也可以点击下方按钮。</div>
+    <div class="comments-skeleton" data-comments-skeleton hidden aria-hidden="true"><span></span><span></span><span></span></div>
+    <div class="comments-actions"><button class="btn btn--primary btn--sm" type="button" data-comments-load aria-controls="comments-thread" aria-expanded="false">加载评论</button><a class="comments-github" data-comments-github href="https://github.com/DunYujian/myproject/issues" target="_blank" rel="noopener noreferrer">在 GitHub 查看讨论 ↗</a></div>
+    <p class="comments-network" data-comments-network hidden>连接较慢时，可以直接前往 GitHub 参与讨论。</p>
+    <div id="comments-thread" class="comments-thread" data-comments hidden></div>
+  </div>
+  <noscript><p>请启用 JavaScript 加载评论，或前往 <a href="https://github.com/DunYujian/myproject/issues" target="_blank" rel="noopener noreferrer">GitHub Issues</a> 参与讨论。</p></noscript>
+</section>
       </div>
     </article>
   </main>
@@ -256,9 +261,9 @@
   </footer>
 
   <script src="../assets/js/main.js?v=20261021-2" defer></script>
-  <script src="../assets/js/comments.js?v=20261021-3" defer></script>
+  <script src="../assets/js/comments.js?v=20261022-1" defer></script>
   <script src="../assets/js/music.js?v=20261021-2" defer></script>
-  <script src="../assets/js/fish.js?v=20261019-1" defer></script>
+  <script src="../assets/js/fish.js?v=20261022-1" defer></script>
   <script src="../assets/js/stats.js?v=20261021-3" defer></script>
   <script src="../assets/js/widgets.js?v=20261021-3" defer></script>
 <script src="../assets/js/calendar-engine.js?v=20261021-3" defer></script>

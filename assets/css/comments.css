@@ -1,0 +1,26 @@
+.post-comments { scroll-margin-top: 30px; }
+.comments-heading { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 10px 18px; margin-bottom: 10px; }
+.comments-heading h2 { margin: 0; font: 400 26px/1.6 var(--font-art); }
+.comments-heading > span { color: var(--text-faint); font: 12px/1.8 var(--font-sans); }
+.post-comments .post-comments__hint { margin: 0 0 20px; }
+.comments-card { padding: 22px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); font-family: var(--font-sans); }
+.comments-status { color: var(--text-soft); font-size: 13px; line-height: 1.9; }
+.comments-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 12px 18px; margin-top: 15px; }
+.comments-actions .btn { min-height: 36px; font: 12px/1.8 var(--font-sans); }
+.comments-actions button:disabled { cursor: progress; opacity: .65; }
+.comments-github { font-size: 12px; }
+.comments-network { color: var(--text-faint); font-size: 12px; line-height: 1.9; margin: 12px 0 0; }
+.comments-thread { margin-top: 20px; border-top: 1px solid var(--line); padding-top: 10px; min-height: 180px; }
+.comments-thread .utterances { max-width: 100%; }
+.comments-thread iframe { border-radius: 5px; }
+.comments-skeleton { padding: 20px 0 0; }
+.comments-skeleton span { display: block; height: 9px; margin-bottom: 12px; border-radius: 3px; background: var(--accent-soft); animation: comments-pulse 1.5s ease-in-out infinite; }
+.comments-skeleton span:nth-child(2) { width: 86%; animation-delay: .15s; }
+.comments-skeleton span:nth-child(3) { width: 58%; animation-delay: .3s; }
+.post-comments [hidden] { display: none !important; }
+.comments-card[data-state="error"], .comments-card[data-state="slow"] { border-color: var(--line-strong); }
+.post-comments-jump { font: 12px/1.8 var(--font-sans); color: var(--accent); }
+.comments-actions button:focus-visible, .comments-actions a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+@keyframes comments-pulse { 50% { opacity: .4; } }
+@media (max-width: 600px) { .comments-card { padding: 16px; } .comments-heading h2 { font-size: 23px; } }
+@media (prefers-reduced-motion: reduce) { .comments-skeleton span { animation: none; } }
