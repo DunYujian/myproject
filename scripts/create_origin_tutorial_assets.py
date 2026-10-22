@@ -70,6 +70,8 @@ ax.legend(frameon=False, loc="upper left", fontsize=7.5, handlelength=2)
 ax.text(.99, .02, "Illustrative data", transform=ax.transAxes, ha="right", va="bottom", fontsize=6.5, color="#666666")
 fig.savefig(DEST / "style-preview.png", dpi=600, facecolor="white")
 fig.savefig(DEST / "style-preview.svg", facecolor="white")
+svg_path = DEST / "style-preview.svg"
+svg_path.write_text("\n".join(line.rstrip() for line in svg_path.read_text(encoding="utf-8").splitlines()) + "\n", encoding="utf-8")
 plt.close(fig)
 with zipfile.ZipFile(DEST / "tutorial-materials.zip", "w", zipfile.ZIP_DEFLATED) as archive:
     for name in ["demo.csv", "origin-mcp.toml", "plot-prompt.txt", "README.txt"]:
