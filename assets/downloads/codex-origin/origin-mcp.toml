@@ -1,0 +1,11 @@
+# Example only: merge this table into your Codex config.toml.
+# Create C:\origin-paper\.venv and install origin-mcp there first.
+[mcp_servers.origin]
+command = 'C:\origin-paper\.venv\Scripts\python.exe'
+args = ['-m', 'origin_mcp']
+cwd = 'C:\origin-paper'
+startup_timeout_sec = 30
+tool_timeout_sec = 180
+
+[mcp_servers.origin.env]
+ORIGIN_MCP_ALLOWED_ROOTS = 'C:\origin-paper'

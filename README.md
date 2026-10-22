@@ -217,6 +217,11 @@ GitHub 备用入口按原有 pathname 键搜索当前文章的讨论，不更改
 
 ## 站内连续播放与导航
 
+
 `assets/js/navigation.js` 只拦截本站 HTML 页面链接，保留左右侧栏和音频节点，更新正文、标题、导航、页面样式及所需脚本。支持浏览器前进/后退、分类与页面锚点；邮件、外链、下载和新标签页沿用浏览器默认行为。
 页面切换前触发 `site:before-navigate`，游戏与评论模块清理定时器和全局监听器；切换完成触发 `site:after-navigate`。统计在站内跳转后按新页面重新加载。
 请求失败或遇到不支持的页面会退回普通整页跳转，此时音乐会中断。没有 JavaScript 时，原始静态页面及链接仍可直接访问。
+
+## Codex + Origin 教程资料
+
+科研绘图教程位于 `posts/codex-origin-paper-figures.html`，配套 CSV、配置示例、提示词和下载包位于 `assets/downloads/codex-origin/`。`python scripts/create_origin_tutorial_assets.py` 可重建教学数据及 Matplotlib 样式示意图；这不是 Origin 运行测试，不会安装 MCP 或修改本机 Codex 配置。

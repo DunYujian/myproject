@@ -1,0 +1,250 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f7f6">
+  <title>用 Codex 接入 Origin：从数据到精美论文图表 · 再也的小站</title>
+  <meta name="description" content="在 Windows 上通过 origin-mcp 连接 Codex 与 Origin/OriginPro：安装、桥接、TOML 配置、演示数据、绘图提示词与论文图表导出。">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/css/reading.css?v=20261021-2">
+  <script>
+    (function () {
+      var t = null;
+      try { t = localStorage.getItem("theme"); } catch (e) {}
+      if (!["light", "dark", "pink"].includes(t)) {
+        t = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      }
+      document.documentElement.setAttribute("data-theme", t);
+    })();
+  </script>
+<meta content="学习,工作" name="categories"/>
+<link rel="preload" href="../assets/fonts/ZCOOLXiaoWei-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/css/fish.css?v=20261019-1">
+<link rel="stylesheet" href="../assets/css/widgets.css?v=20261021-3">
+<link rel="stylesheet" href="../assets/css/music.css?v=20261021-2">
+<link rel="stylesheet" href="../assets/css/comments.css?v=20261022-1">
+<link rel="canonical" href="https://dunyujian.cc.cd/posts/codex-origin-paper-figures.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用 Codex 接入 Origin：从数据到精美论文图表">
+<meta property="og:description" content="在 Windows 上通过 origin-mcp 连接 Codex 与 Origin/OriginPro：安装、桥接、TOML 配置、演示数据、绘图提示词与论文图表导出。">
+<meta property="og:url" content="https://dunyujian.cc.cd/posts/codex-origin-paper-figures.html">
+<meta property="og:image" content="https://dunyujian.cc.cd/assets/downloads/codex-origin/style-preview.png">
+<meta property="article:published_time" content="2026-10-22T00:00:00+08:00">
+</head>
+
+<body data-page="post">
+  <a class="skip-link" href="#main">跳到主要内容</a>
+
+  <header class="site-header">
+    <div class="wrap site-header__inner">
+      <a class="brand" aria-label="再也的小站首页" href="../index.html">
+        <span>再也的小站</span>
+      </a>
+
+      <button class="icon-btn theme-toggle" type="button" aria-label="切换主题" aria-pressed="false">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+             stroke-linecap="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>
+        </svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"></path>
+        </svg>
+        <span class="theme-toggle__label">深色</span>
+      </button>
+
+      <button class="icon-btn nav-toggle" type="button" aria-label="打开菜单" aria-expanded="false" aria-controls="nav">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true">
+          <path d="M4 7h16M4 12h16M4 17h16"></path>
+        </svg>
+      </button>
+
+      <nav class="nav" id="nav" aria-label="主导航">
+        <a href="../index.html" data-nav="home">首页</a>
+        <a href="../posts/index.html" data-nav="posts">文章</a>
+        <a href="../about.html" data-nav="about">关于</a>
+              <a href="../games.html" data-nav="games">游戏</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="site-layout">
+<aside class="site-sidebar site-sidebar--left" aria-label="音乐侧栏"><section class="sidebar-widget"><h2>听点音乐</h2><aside class="music-section wrap" aria-label="音乐播放器">
+<details class="music-player music-player--custom" data-music-player open>
+<summary><span>随身听</span><span class="music-track-count" data-music-count>载入中</span><span class="music-player__expand" aria-hidden="true">＋</span></summary>
+<div class="music-player__body">
+<div class="music-now"><div class="music-record" aria-hidden="true"><span>鱼</span></div><div class="music-now__text"><p class="music-title" data-music-title>等一首歌</p><p class="music-artist" data-music-artist>让旋律陪你读一会儿</p></div></div>
+<p class="music-player__status" data-music-status role="status">正在读取歌单…</p>
+<audio preload="none" data-music-audio></audio>
+<div data-music-controls hidden>
+<label class="sr-only" for="music-seek">播放进度</label><input class="music-range music-seek" id="music-seek" data-music-seek type="range" min="0" max="100" value="0" step="0.1" disabled>
+<div class="music-times"><span data-music-elapsed>0:00</span><span data-music-duration>--:--</span></div>
+<div class="music-transport">
+<button type="button" data-music-previous aria-label="上一首" title="上一首"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5v14M18 5l-9 7 9 7Z"/></svg></button>
+<button class="music-play" type="button" data-music-play aria-label="播放" title="播放"><svg class="music-icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 11 7-11 7Z"/></svg><svg class="music-icon-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14M16 5v14"/></svg></button>
+<button type="button" data-music-next aria-label="下一首" title="下一首"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 5v14M6 5l9 7-9 7Z"/></svg></button>
+</div>
+<div class="music-volume-row"><button type="button" data-music-mute aria-label="静音" title="静音" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4ZM17 8c3 2 3 6 0 8"/><path class="music-mute-cross" d="m17 9 5 6m0-6-5 6"/></svg></button><label class="sr-only" for="music-volume">音量</label><input class="music-range" id="music-volume" data-music-volume type="range" min="0" max="1" value="0.7" step="0.01"><span data-music-volume-label>70%</span></div>
+<div class="music-options"><button type="button" data-music-mode>列表循环</button><button type="button" data-music-list-toggle aria-expanded="false" aria-controls="music-track-list">歌单 ↓</button></div>
+<ol class="music-track-list" id="music-track-list" data-music-list hidden aria-label="播放列表"></ol>
+</div>
+<button type="button" class="music-retry" data-music-retry hidden>重新加载歌单</button>
+<noscript><p>启用 JavaScript 后可使用音乐播放器。</p></noscript>
+</div></details></aside><p class="sidebar-caption">让旋律陪你读一会儿。</p></section></aside>
+<main id="main"><article class="post"><div class="wrap">
+<header class="post__head"><span class="kicker">教程 · 科研绘图</span><h1>用 Codex 接入 Origin：从数据到精美论文图表</h1><div class="post__meta"><time datetime="2026-10-22">2026 年 10 月 22 日</time><span class="post-views" id="busuanzi_container_page_pv" style="display:none">阅读 <span id="busuanzi_value_page_pv">—</span> 次</span><span class="sep" aria-hidden="true"></span><span>约 12 分钟读完</span><ul class="tags"><li><span class="tag">教程</span></li><li><span class="tag">Codex</span></li><li><span class="tag">Origin</span></li></ul><a class="post-comments-jump" href="#comments-title">评论 ↓</a></div>
+<nav aria-label="文章分类" class="post-categories"><a class="category-tag" href="index.html?category=%E5%AD%A6%E4%B9%A0">学习</a><a class="category-tag" href="index.html?category=%E5%B7%A5%E4%BD%9C">工作</a></nav></header>
+<div class="prose"><p>把数据放进 Origin，再逐项调整线条、字号、图例和导出尺寸，是科研绘图里很容易重复的工作。接入 Codex 后，可以用一段明确的要求驱动这些操作，再对生成的图逐轮检查。</p>
+<p>这篇教程从 Windows 本机环境出发，使用社区项目 <a href="https://github.com/Ge-Shun/origin-mcp" target="_blank" rel="noopener noreferrer">Ge-Shun/origin-mcp</a> 连接 Codex 与 Origin/OriginPro，完成一张双系列点线图。这里的 Origin 指 OriginLab 科研作图软件。</p>
+<blockquote><p><strong>阅读说明：</strong>配置依据 2026 年 10 月 22 日可查文档整理，示例固定使用 origin-mcp 0.1.4。它是仍在测试的社区项目，不是 OpenAI 或 OriginLab 官方插件。本文核对了发布包中的命令与入口；Origin GUI 的完整出图流程仍需在你自己的已授权环境中验证。</p></blockquote>
+<nav aria-label="文章目录"><strong>目录</strong><ol><li><a href="#connection">连接后能做什么</a></li><li><a href="#prepare">准备与安装</a></li><li><a href="#bridge">启动 Origin 桥接程序</a></li><li><a href="#codex-config">配置 Codex MCP</a></li><li><a href="#first-figure">生成第一张论文风格图</a></li><li><a href="#polish">审图、修改与导出</a></li><li><a href="#troubleshooting">常见问题</a></li><li><a href="#references">资料与验证范围</a></li></ol></nav>
+<h2 id="connection">一、先理解这条连接链路</h2>
+<p><code>你的要求 → Codex → 本机 MCP 服务 → Origin 内的 Bridge → 数据表、图页与导出文件</code></p>
+<p>Codex 负责拆解任务、调用工具和检查结果；MCP 服务提供作图工具；Bridge 将请求交给 Origin 执行。图页与工程保存在本机，完成后仍能在 Origin 中继续编辑。桥接结构与运行方式见项目的 <a href="https://github.com/Ge-Shun/origin-mcp/blob/main/docs/origin-bridge.md" target="_blank" rel="noopener noreferrer">Bridge 文档</a>。</p>
+<p>适合交给它的任务包括导入表格、创建点线图、统一坐标轴和图例、复用图形模板、批量输出。你仍需要决定图的科学含义：变量对应关系、单位、误差定义，以及是否应该做拟合。</p>
+<h2 id="prepare">二、准备环境，再装到独立目录</h2>
+<table><thead><tr><th>组件</th><th>本文使用的方式</th></tr></thead><tbody><tr><td>Windows 与 Origin</td><td>本机已安装并授权的 Origin/OriginPro；项目当前面向 2026/2026b。</td></tr><tr><td>外部 Python</td><td>项目要求 3.10+，以下命令以已安装 Python 3.11 为例。</td></tr><tr><td>Codex</td><td>能在这台 Windows 上启动本地 STDIO MCP 的 Codex 环境；CLI 命令仅在已安装 Codex CLI 时使用。</td></tr></tbody></table>
+<p>版本要求来自 <a href="https://pypi.org/project/origin-mcp/0.1.4/" target="_blank" rel="noopener noreferrer">origin-mcp 0.1.4 发布页</a>。外部 Python 用来运行 MCP；Origin 里的 Bridge 使用 Origin 自带的 Python，两者的安装位置可以不同。</p>
+<p>在 PowerShell 中运行下面的命令。没有 3.11 时，先用 <code>py -0p</code> 查看已安装版本，再把建环境命令中的版本改成实际可用的 3.10+。</p>
+<pre data-lang="powershell"><code>New-Item -ItemType Directory -Force C:\origin-paper\data, C:\origin-paper\output | Out-Null
+py -3.11 -m venv C:\origin-paper\.venv
+&amp; &#x27;C:\origin-paper\.venv\Scripts\python.exe&#x27; -m pip install &#x27;origin-mcp==0.1.4&#x27;
+&amp; &#x27;C:\origin-paper\.venv\Scripts\python.exe&#x27; -m pip show origin-mcp</code></pre>
+<p>这里不依赖虚拟环境的激活状态，后续全部使用可执行文件的完整路径。成功后，<code>pip show</code> 应能显示包信息及这个虚拟环境中的安装位置。</p>
+<p>工作目录建议这样整理：</p>
+<pre data-lang="text"><code>C:\origin-paper\
+  .venv\               # MCP 运行环境
+  data\demo.csv        # 原始或教学数据
+  output\              # 图与 Origin 工程</code></pre>
+<h2 id="bridge">三、在 Origin 中启动 Bridge</h2>
+<p>只装 Python 包还不够，还需要在 Origin 内建立连接。这里采用项目提供的 Start/Stop App 方式：</p>
+<pre data-lang="powershell"><code>&amp; &#x27;C:\origin-paper\.venv\Scripts\origin-mcp.exe&#x27; install-origin-app --force</code></pre>
+<ol><li>查看命令输出，找到它打印的两条 <code>mkOPX</code> 命令。</li><li>打开 Origin 的 Command Window，在那里执行这两条命令，生成 Start 和 Stop 的 OPX 文件。<strong>这两条不是 PowerShell 命令。</strong></li><li>把生成的两个 OPX 文件拖入 Origin，完成 App 注册。</li><li>在 Apps 中点击 <strong>Origin MCP Bridge Start</strong>。每次重新启动 Origin 后，都需要重新启动 Bridge。</li></ol>
+<p>OPX 的完整路径以你本机打印结果为准，打包路径保留 Windows 反斜杠。具体注册说明见 <a href="https://github.com/Ge-Shun/origin-mcp/blob/main/docs/origin-ui-buttons.md" target="_blank" rel="noopener noreferrer">项目的 Origin UI Buttons 文档</a>。</p>
+<p>Bridge 启动后，回到 PowerShell 检查：</p>
+<pre data-lang="powershell"><code>&amp; &#x27;C:\origin-paper\.venv\Scripts\origin-mcp.exe&#x27; status
+&amp; &#x27;C:\origin-paper\.venv\Scripts\origin-mcp.exe&#x27; doctor --ping-origin</code></pre>
+<p>先确认诊断能够联系到 Bridge，并完成与 Origin 的实际握手，再开始绘图。Bridge 的前台运行方式可能持续占用启动它的 Python 控制台，这是该项目的运行方式；停止时使用 <strong>Origin MCP Bridge Stop</strong> App。停止前先保存需要保留的工程。</p>
+<h2 id="codex-config">四、把本地服务接入 Codex</h2>
+<p>Codex 的 MCP 配置使用 <code>config.toml</code>。以下按 <a href="https://developers.openai.com/codex/mcp/" target="_blank" rel="noopener noreferrer">OpenAI 官方 MCP 文档</a> 写成 TOML；不要把其他客户端的 <code>mcpServers</code> JSON 直接粘进 TOML 文件。</p>
+<p>在 Windows 的 <code>%USERPROFILE%\.codex\config.toml</code> 中合并下面这段，保留已有配置。如果已经存在同名的 <code>[mcp_servers.origin]</code>，修改原表即可，不要重复添加。</p>
+<pre data-lang="toml"><code># Example only: merge this table into your Codex config.toml.
+# Create C:\origin-paper\.venv and install origin-mcp there first.
+[mcp_servers.origin]
+command = &#x27;C:\origin-paper\.venv\Scripts\python.exe&#x27;
+args = [&#x27;-m&#x27;, &#x27;origin_mcp&#x27;]
+cwd = &#x27;C:\origin-paper&#x27;
+startup_timeout_sec = 30
+tool_timeout_sec = 180
+
+[mcp_servers.origin.env]
+ORIGIN_MCP_ALLOWED_ROOTS = &#x27;C:\origin-paper&#x27;</code></pre>
+<p>单引号表示 TOML 字面量字符串，Windows 路径不需要把反斜杠写成两次。<code>command</code> 必须指向前面安装了包的 Python；<code>cwd</code> 和允许访问的目录要与实际工作目录一致。这里的 30 秒启动超时、180 秒工具超时是本文的示例设置，可按本机情况调整。</p>
+<p>如果使用 Codex CLI，也可以通过命令登记服务，再按需补充 TOML 中的工作目录、超时与环境变量：</p>
+<pre data-lang="powershell"><code>codex mcp add origin -- &#x27;C:\origin-paper\.venv\Scripts\python.exe&#x27; -m origin_mcp
+codex mcp list</code></pre>
+<p>CLI 登记与手动配置选择一种即可。完成后重新启动或重新连接 Codex 会话。先发出一条诊断请求：</p>
+<pre data-lang="prompt"><code>请检查已配置的 Origin MCP 工具，调用连接诊断并确认 Origin 可以响应。先只检查连接和可用工具，不新建项目、不改动数据、不关闭现有窗口。</code></pre>
+<p>如果 Codex 只列出了服务名称，却还无法执行 Origin 诊断，先回到上一步处理 Bridge；服务登记成功和软件连接成功是两件事。</p>
+<h2 id="first-figure">五、从一份小数据开始出图</h2>
+<p><a href="../assets/downloads/codex-origin/tutorial-materials.zip" download>下载教程示例包</a>，其中包含 CSV、TOML 配置示例、绘图提示词和说明。也可以单独下载 <a href="../assets/downloads/codex-origin/demo.csv" download>demo.csv</a>，将它放到 <code>C:\origin-paper\data\demo.csv</code>。</p>
+<p>数据只有三列，方便检查映射。<strong>下面的数字全部为人为构造的教学数据，不代表真实实验结果。</strong></p>
+<pre data-lang="csv"><code>time_h,control,treatment
+0,1.0,1.0
+2,1.1,1.24
+4,1.19,1.56
+6,1.27,1.82
+8,1.35,2.03
+10,1.41,2.2
+12,1.47,2.31</code></pre>
+<p>第一轮先做两条带点折线，暂不加入误差棒、拟合曲线和显著性标记。把以下要求发给已经连接 Origin 的 Codex：</p>
+<pre data-lang="prompt"><code>请用已经连接的 Origin MCP 处理 C:\origin-paper\data\demo.csv。
+先读取表头与数据范围，报告列映射；这份数据是人为构造的教学数据。
+以 time_h 为 X，control、treatment 为 Y，创建双系列点线图。
+只绘制原始点和连接线，不做平滑、拟合，也不要添加误差棒或显著性标记。
+成图尺寸 85 mm × 60 mm，白底、Arial 8.5 pt，线宽约 1.2 pt。
+Control 用 #287C8E 圆点实线，Treatment 用 #C35A46 方点虚线。
+X 轴为 Time (h)，Y 轴为 Signal (a.u.)，图例不要遮挡数据。
+请根据实际工具 schema 和可用模板完成操作，不要猜测不存在的工具。
+先生成预览检查裁切、图例和轴标题，再导出 output 中的新文件：
+fig1.pdf（矢量）、fig1.png（600 dpi），以及可继续编辑的 Origin 项目。
+如果导出工具不能直接设置 dpi，请换算物理尺寸对应的像素并说明实际设置。
+保留原始 CSV，另存项目；同时记录采用的列映射、样式和导出路径。</code></pre>
+<p>这种写法同时交代了数据位置、列含义、图型、系列区分、物理尺寸和交付文件，Codex 更容易逐项完成。若当前版本的工具参数不同，让它先读取工具 schema 和项目知识库，再选择可用操作。</p>
+<figure><img src="../assets/downloads/codex-origin/style-preview.png" alt="教学数据双系列点线图的目标样式示意：蓝绿色圆点实线与砖红色方点虚线，白底、简洁坐标轴和不遮挡数据的图例。" width="2007" height="1417" loading="lazy" decoding="async"><figcaption>目标样式示意。此图由 Matplotlib 根据同一份教学 CSV 绘制，用于解释排版目标；不是 Origin 运行截图。</figcaption></figure>
+<p>项目提供 <code>origin_view_graph</code> 一类预览能力，工具与格式支持见 <a href="https://github.com/Ge-Shun/origin-mcp/blob/main/docs/tools.md" target="_blank" rel="noopener noreferrer">工具文档</a>。让 Codex 取得实际 Origin 图页的预览后再继续修改，尤其检查数据是否对应正确、图例是否挡住曲线。</p>
+<h2 id="polish">六、把精修要求分成几轮</h2>
+<p>第二轮只改视觉层次，让修改范围清楚：</p>
+<pre data-lang="prompt"><code>只修改刚才那张图的样式：统一字体、轴标题与刻度字号，调整图例到不遮挡数据的位置，保留两组不同点型与线型。不要修改数据、重新拟合或改变列映射。修改后给我实际图页预览，并列出改动。</code></pre>
+<p>第三轮检查交付文件，而不是仅看软件窗口里的效果：</p>
+<ul><li><strong>物理尺寸：</strong>按论文版面确定单栏或双栏宽度。85 × 60 mm 是本文示例，不是所有期刊的统一要求。</li><li><strong>导出格式：</strong>保留可编辑的 Origin 工程，同时导出 PDF 与 PNG。85 × 60 mm 在 600 dpi 下约为 2008 × 1417 像素；DPI、像素和物理尺寸要能相互对应。</li><li><strong>最终可读性：</strong>把图按论文中实际放置大小查看，确认文字、点型、虚线和细线仍能辨认；打开导出的 PDF 检查字体与边界。</li><li><strong>信息完整性：</strong>图例名称、轴单位、样本量和误差定义应当与论文正文一致；具体交付要求以目标期刊作者指南为准。</li></ul>
+<p>如果后续需要误差棒，请提供重复测量数据，并明确使用 SD、SEM 还是置信区间以及样本量。只有每个 X 对应一个 Y 的表格时，不应让模型自动补出误差或统计显著性。</p>
+<p>满意后，可以让 Codex 将当前图页保存为可复用的 Origin 模板，并记录配色、尺寸、字号和输出参数。下一次处理同类型数据时，先匹配模板再生成，风格会更一致。</p>
+<h2 id="troubleshooting">七、遇到问题，按连接层次排查</h2>
+<table><thead><tr><th>现象</th><th>先检查什么</th></tr></thead><tbody><tr><td>提示找不到 origin_mcp</td><td>比较安装包与 MCP command 使用的 Python 是否为同一个完整路径。</td></tr><tr><td>服务存在，但 Origin 没有响应</td><td>在 Origin 内重新启动 Bridge，再运行 status 和 doctor --ping-origin。</td></tr><tr><td>Origin 的 Python 控制台一直忙</td><td>前台 Bridge 会持续服务请求；按项目说明使用 Stop App 停止，不要直接反复启动多个实例。</td></tr><tr><td>CSV 被拒绝访问</td><td>文件是否存在于 C:\origin-paper 下，是否与允许访问目录一致，列名是否与提示词一致。</td></tr><tr><td>部分图型、分析或导出参数不可用</td><td>检查本机 Origin 版本、授权与实际工具 schema；让 Codex报告限制，再选择可用操作。</td></tr><tr><td>软件里好看，导出的字太小或被裁切</td><td>核对图页物理尺寸、导出像素、边距和字体，打开导出文件重新审图。</td></tr></tbody></table>
+<h2 id="references">资料与验证范围</h2>
+<p>本文已检查教学 CSV、TOML 语法和示意图，并静态核对 origin-mcp 0.1.4 发布包内的 CLI、模块入口和 App 资源。本文没有在 Origin GUI 中运行端到端绘图测试；上面的提示词描述目标输出，实际能力以本机诊断和工具返回结果为准。</p>
+<ul><li><a href="https://developers.openai.com/codex/mcp/" target="_blank" rel="noopener noreferrer">OpenAI 官方文档：Codex MCP 配置与 CLI</a></li><li><a href="https://github.com/Ge-Shun/origin-mcp" target="_blank" rel="noopener noreferrer">origin-mcp 项目与 README</a></li><li><a href="https://github.com/Ge-Shun/origin-mcp/blob/main/docs/origin-ui-buttons.md" target="_blank" rel="noopener noreferrer">Start/Stop App 注册步骤</a></li><li><a href="https://github.com/Ge-Shun/origin-mcp/blob/main/docs/origin-bridge.md" target="_blank" rel="noopener noreferrer">Bridge 启动与故障排查</a></li><li><a href="https://github.com/Ge-Shun/origin-mcp/blob/main/docs/tools.md" target="_blank" rel="noopener noreferrer">工具、预览、模板与导出说明</a></li><li><a href="https://docs.originlab.com/python/" target="_blank" rel="noopener noreferrer">OriginLab 官方文档：嵌入式与外部 Python</a></li></ul></div>
+<footer class="post__foot"><ul class="tags"><li><span class="tag">科研绘图</span></li><li><span class="tag">MCP</span></li></ul><a class="btn btn--ghost btn--sm" href="index.html">← 返回文章列表</a></footer>
+<nav class="post-nav" aria-label="文章翻页"><a class="next" href="welcome.html"><span>下一篇</span>从一个空仓库开始：这个站是怎么搭起来的</a></nav>
+<section class="post-comments" aria-labelledby="comments-title" data-comments-section>
+  <div class="comments-heading"><h2 id="comments-title">评论</h2><span>读到这里，聊两句吧</span></div>
+  <p class="post-comments__hint">使用 GitHub 账号登录后即可发表评论，支持 Markdown。评论会公开展示。</p>
+  <div class="comments-card" data-comments-card>
+    <div class="comments-status" data-comments-status role="status" aria-live="polite">滚动到这里时自动加载，也可以点击下方按钮。</div>
+    <div class="comments-skeleton" data-comments-skeleton hidden aria-hidden="true"><span></span><span></span><span></span></div>
+    <div class="comments-actions"><button class="btn btn--primary btn--sm" type="button" data-comments-load aria-controls="comments-thread" aria-expanded="false">加载评论</button><a class="comments-github" data-comments-github href="https://github.com/DunYujian/myproject/issues" target="_blank" rel="noopener noreferrer">在 GitHub 查看讨论 ↗</a></div>
+    <p class="comments-network" data-comments-network hidden>连接较慢时，可以直接前往 GitHub 参与讨论。</p>
+    <div id="comments-thread" class="comments-thread" data-comments hidden></div>
+  </div>
+  <noscript><p>请启用 JavaScript 加载评论，或前往 <a href="https://github.com/DunYujian/myproject/issues" target="_blank" rel="noopener noreferrer">GitHub Issues</a> 参与讨论。</p></noscript>
+</section></div></article></main>
+<aside class="site-sidebar site-sidebar--right" aria-label="日历与网站详情">
+<section class="sidebar-widget" data-clock aria-label="实时钟表">
+<h2>此刻</h2><time class="widget-clock" datetime="">--:--:--</time><p class="clock-date" data-clock-date></p><p class="clock-zone" data-clock-zone>当地时间 · 24小时制</p>
+</section>
+<section class="sidebar-widget calendar-widget" data-calendar>
+<h2>日历</h2>
+<div class="calendar-toolbar"><button type="button" data-calendar-step="-1" aria-label="上个月">‹</button><span class="calendar-label" data-calendar-label aria-live="polite"></span><button type="button" data-calendar-step="1" aria-label="下个月">›</button></div>
+<table class="widget-calendar" aria-label="公历与农历"><thead><tr><th scope="col">一</th><th scope="col">二</th><th scope="col">三</th><th scope="col">四</th><th scope="col">五</th><th scope="col">六</th><th scope="col">日</th></tr></thead><tbody></tbody></table>
+<div class="calendar-detail" aria-live="polite"><p data-calendar-date></p><p data-calendar-lunar></p><p class="calendar-festival" data-calendar-festival></p></div>
+<div class="calendar-footer"><span>点击日期查看 · 农历/节日</span><button type="button" class="calendar-today" data-calendar-today>今天</button></div>
+<details class="calendar-events"><summary>本月节日</summary><ul data-calendar-events></ul><p data-calendar-events-empty>本月暂无收录的节日。</p></details>
+<noscript><p>启用 JavaScript 后显示日历。</p></noscript>
+</section>
+<section class="sidebar-widget" data-site-facts><h2>网站详情</h2><dl class="site-facts">
+<div><dt>站点</dt><dd>再也的小站</dd></div><div><dt>作者</dt><dd>再也</dd></div>
+<div><dt>文章</dt><dd><a href="../posts/index.html" data-site-posts>查看归档 →</a></dd></div>
+<div><dt>分类</dt><dd><a href="../posts/index.html" data-site-categories>查看分类 →</a></dd></div>
+<div><dt>最近发表</dt><dd data-site-latest>—</dd></div>
+<div class="site-fact-stat" id="busuanzi_container_site_uv"><dt>访客数</dt><dd><span id="busuanzi_value_site_uv">—</span> 人</dd></div>
+<div class="site-fact-stat" id="busuanzi_container_site_pv"><dt>浏览量</dt><dd><span id="busuanzi_value_site_pv">—</span> 次</dd></div>
+</dl><p class="sidebar-caption">访问统计由不蒜子提供，未加载时显示 —。</p></section></aside>
+</div>
+
+
+
+<footer class="site-footer">
+    <div class="wrap site-footer__inner">
+      <p style="margin:0">© <span data-year>2026</span> 再也的小站</p>
+      <nav class="footer-links" aria-label="页脚导航">
+        <a href="../posts/index.html">文章</a>
+        <a href="../about.html">关于</a>
+        <a href="https://github.com/DunYujian" rel="me noopener">GitHub · 再也</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js?v=20261021-2" defer></script>
+  <script src="../assets/js/comments.js?v=20261022-1" defer></script>
+  <script src="../assets/js/music.js?v=20261021-2" defer></script>
+  <script src="../assets/js/fish.js?v=20261022-1" defer></script>
+  <script src="../assets/js/stats.js?v=20261021-3" defer></script>
+  <script src="../assets/js/widgets.js?v=20261021-3" defer></script>
+<script src="../assets/js/calendar-engine.js?v=20261021-3" defer></script>
+<script src="../assets/js/calendar.js?v=20261021-3" defer></script>
+<script src="../assets/js/navigation.js?v=20261021-3" defer></script>
+</body>
+</html>
