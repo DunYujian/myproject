@@ -1,227 +1,61 @@
 # 再也的小站
 
-一个**零依赖**的静态博客框架：纯 HTML + CSS + JavaScript，没有构建步骤、没有 npm、没有框架。
-改完文件直接提交，GitHub Pages 就会更新。
+个人博客与小游戏网站，使用 HTML、CSS 和原生 JavaScript，无需前端构建。提交到 GitHub 后由 GitHub Pages 发布。
 
-## 目录结构
+**网站：[dunyujian.cc.cd](https://dunyujian.cc.cd/)** · **仓库：[DunYujian/myproject](https://github.com/DunYujian/myproject)**
 
-```
-.
-├── index.html              # 首页：作者简介 + 最近文章
-├── about.html              # 关于页：头像、简介、经历时间线
-├── 404.html                # 404 页（GitHub Pages 会自动使用）
-├── posts/
-│   ├── index.html          # 文章列表
-│   ├── welcome.html        # 示例文章：长文（含代码块 / 表格）
-│   ├── essay-writing.html  # 示例文章：短文（含引用 / 列表）
-│   └── toolkit.html        # 示例文章：清单体（含表格）
+## 目录
+
+```text
+myproject/
+├── index.html              首页
+├── about.html              关于与联系邮箱
+├── games.html              游戏选择页
+├── 404.html                错误页
+├── posts/                  文章页面与文章列表
+├── games/                  每个游戏各自的页面、脚本和样式
+├── test/                   独立测试页
+├── music/                  MP3、歌单和音乐上传说明
 ├── assets/
-│   ├── css/reading.css       # 全站样式（含暗色模式、响应式、打印样式）
-│   ├── js/main.js          # 主题切换、移动端菜单、导航高亮
-│   ├── favicon.svg         # 站点图标
-│   └── avatar.svg          # 头像占位图
-├── .nojekyll               # 告诉 GitHub Pages 不要跑 Jekyll
-└── README.md
+│   ├── css/                公共样式
+│   ├── js/                 公共交互与组件
+│   ├── fonts/              字体及授权文件
+│   ├── images/             文章图片，按文章分目录
+│   └── downloads/          教程数据、配置示例和下载包
+├── scripts/                内容维护脚本
+├── docs/                   发布、写作与功能说明
+├── CNAME                   自定义域名
+├── .nojekyll               GitHub Pages 静态发布标记
+└── .gitignore              本地资料与临时文件忽略规则
 ```
+
+## 常用操作
+
+| 要做什么 | 入口 |
+| --- | --- |
+| 预览与发布网站 | [发布说明](docs/deployment.md) |
+| 新增文章或导入微信文章 | [内容维护](docs/content.md) · [文章目录](posts/README.md) |
+| 上传或整理 MP3 | [音乐说明](music/README.md) |
+| 调整主题、评论、侧栏、统计和游鱼 | [功能说明](docs/features.md) |
+| 修改小游戏 | [游戏目录](games/README.md) |
+| 添加测试内容 | [测试页说明](test/README.md) |
+| 运行维护脚本 | [脚本说明](scripts/README.md) |
+| 查找字体、图片、教程附件 | [资源目录](assets/README.md) |
 
 ## 本地预览
 
-不用装任何东西，任选一种：
+在仓库根目录运行以下命令（需要已安装 Python），然后打开 [http://localhost:8000](http://localhost:8000)：
 
 ```powershell
-# Python（本机已装）
 python -m http.server 8000
-# 然后浏览器打开 http://localhost:8000
 ```
 
-直接双击 `index.html` 也能看，但用服务器预览更接近线上效果。
+网站提供浅色、深色、胭脂粉主题，支持文章交叉分类、评论、音乐连续播放、农历日历、时钟和访问统计。详细配置见 [文档目录](docs/README.md)。
 
-## 写一篇新文章
+## 文件放置约定
 
-1. 复制 `posts/welcome.html`，重命名为 `posts/你的标题.html`（建议用英文短横线，如 `reading-2026.html`）。
-2. 改这几处：
-   - `<title>` 和 `<meta name="description">`
-   - `<span class="kicker">` 分类文字
-   - `<h1>` 标题、`<time datetime="...">` 日期、阅读时间
-   - `<div class="prose">` 里的正文
-   - 文末的标签，以及上一篇 / 下一篇
-3. 把文章加进两个列表：
-   - `posts/index.html` 的 `<ul class="post-list">` 里复制一个 `<li>`
-   - `index.html` 首页「最近文章」的 `.recent-list` 里复制一个 `<li>`
-
-正文可用的样式（见示例文章）：`<h2>` `<h3>`、`<p>`、`<ul>`/`<ol>`、`<blockquote>`、
-`<pre data-lang="js"><code>` 代码块（会自动显示语言角标）、`<table>`、`<figure>` + `<figcaption>`、`<hr>`。
-
-## 修改站点信息
-
-| 想改什么 | 改哪里 |
-| --- | --- |
-| 站点名「再也的小站」 | 每个页面里 `.brand` 的文字，以及 `<title>` |
-| 头像 / 站点图标 | `assets/avatar.svg` / `assets/favicon.svg` |
-| 作者名 / 简介 | `index.html` 的 `.home-intro` |
-| 头像 | 替换 `assets/avatar.svg`，或改 `about.html` 里 `img.avatar` 的 `src` |
-| 邮箱 / GitHub 链接 | 搜索 `you@example.com` 和 `href="#"` |
-| 配色 | `reading.css` 开头的 `:root` 变量（`--accent` 是主色） |
-| 暗色模式配色 | `[data-theme="dark"]` 那一组变量 |
-
-站点采用衬线字体和日期列表，提供雾白松绿、墨绿深色和胭脂粉三种主题。页头主题按钮依次切换，选择保存在本机；未选择时跟随系统浅深模式。
-页面右上角可切换浅色、深色和胭脂粉三种主题；评论外框跟随配色，Utterances 内部使用对应的浅色或深色主题。
-
-主题切换会记住你的选择（存在 `localStorage`），没选过时跟随系统设置。颜色全部集中在 CSS 变量里，改一处全站生效。
-
-## 部署到 GitHub Pages
-
-```
-Settings → Pages → Build and deployment
-  Source: Deploy from a branch
-  Branch: main  /  (root)
-```
-
-站点地址：**https://zxhtta.cc.cd/**。
-
-仓库根目录的 `CNAME` 文件保存自定义域名 `zxhtta.cc.cd`。
-在仓库 Settings → Pages 中确认 Custom domain 为 `zxhtta.cc.cd`，并启用 Enforce HTTPS。
-
-域名 DNS 使用以下四条 A 记录（当前已配置）：
-
-| 类型 | 主机记录（以 zxhtta.cc.cd 为 DNS 区域） | 目标 |
-| --- | --- | --- |
-| A | @ | 185.199.108.153 |
-| A | @ | 185.199.109.153 |
-| A | @ | 185.199.110.153 |
-| A | @ | 185.199.111.153 |
-
-DNS 和证书变更可能需要最多 24 小时生效。配置说明见 [GitHub 官方文档](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site)。
-
-**路径说明**：自定义域名将网站部署在 `/` 根目录。
-普通页面使用相对链接；`404.html` 使用 `/assets/...`、`/posts/...` 等根路径，确保访问任意层级的错误地址时仍能加载样式并返回首页。
-更换域名时同步修改 `CNAME` 和 `index.html` 的 canonical、og:url。
-
-## 文章评论（Utterances）
-
-文章页已接入 [Utterances](https://utteranc.es/)，评论公开存储在 `DunYujian/myproject` 的 Issues 中。
-
-首次启用：
-
-1. 保持仓库为公开仓库，并开启 Settings → General → Features → Issues。
-2. 安装 [Utterances GitHub App](https://github.com/apps/utterances/installations/new)，选择 **Only select repositories**，只授权 `myproject`。
-3. 打开文章页面，登录 GitHub 发表评论；首次评论会自动创建对应的 Issue。
-
-每篇文章以 `pathname` 关联独立评论，更改文章标题或域名不会改变关联；更改文章路径会对应新的讨论。
-`assets/js/comments.js` 在评论区进入视口附近时加载官方客户端，也支持手动加载、12 秒慢连接提示与失败重试。没有 IntersectionObserver 的浏览器仍可点击按钮加载。
-文章日期旁的「评论」链接可直接跳到评论区；收起/展开不会重新创建 iframe，当前页未提交的文字得以保留。离开文章后草稿不保留，重试加载也会重建评论区。
-GitHub 备用入口按原有 pathname 键搜索当前文章的讨论，不更改已存在的文章关联，也不自动发表或创建 Issue。
-主题切换通过官方消息接口同步；来自 iframe 的就绪消息会校验来源域名和窗口。页面切换前清理本地观察器、消息监听与超时任务。
-样式位于 `assets/css/comments.css`。复制现有文章创建新文章时，保留 `.post-comments` 区块、`comments.js` 与 `comments.css` 引用。
-页面不需要配置 GitHub Token、Client Secret 或自建数据库。访客登录授权由 Utterances 处理。
-如果评论无法加载，可使用评论区的 GitHub Issues 链接；若提示未安装应用，请检查 App 对 `myproject` 的授权。
-
-## 下一步可以加什么
-
-- 标签归档页：新建 `tags.html`，用 JS 扫描文章列表生成
-- RSS：手写一个 `feed.xml`，注意日期用 RFC 822 格式
-- 全文搜索：把文章标题和摘要写成 `search.json`，用 JS 做客户端搜索
-- 文章内目录（TOC）：JS 扫描 `.prose h2, h3` 生成侧边栏
-
-## 说明
-
-- 没有构建步骤：不需要 node、npm、打包工具
-- 艺术字体随网站本地托管，不依赖字体 CDN；文章正文保留系统字体。字体采用 font-display: swap，加载期间文字仍可阅读。
-- 已做基础可访问性：跳过导航链接、`aria-current`、键盘焦点样式、`prefers-reduced-motion`
-- 已做打印样式：打印时只留正文
-
-## 微信文章存档
-
-已迁入 `posts/lanqiao-hal-key-click.html`，原文《3、蓝桥杯嵌入式—HAL库-按键单击》，发布日期保留为 2024-03-03。
-正文的 10 张图片已存入 `assets/images/wechat-key-click/`，代码、表格与原文出处均已保留，评论沿用 Utterances。
-`wxgzh` 中第 1、2 篇目前只有资源目录，缺少文章 HTML，尚未导入。原始下载资料保留在本地，不随此次发布上传。
-
-## 音乐播放器
-
-各页左侧提供可展开的音乐播放器，默认不自动播放。MP3 放入根目录 `music/` 后提交到 `main` 即可被播放器识别。
-上传音乐前运行 `python scripts/update_music.py` 更新备用歌单；详细用法见 [music/README.md](music/README.md)。
-播放器无需 Token，优先读取本站 `music/playlist.json`，在后台通过 GitHub API 发现新歌曲。
-提供唱片动效、播放/暂停、进度拖动、音量/静音、上一首/下一首、可展开歌单，以及列表循环/单曲循环/随机播放。
-歌曲、进度、音量和播放模式保存在本机。站内点击首页、文章、关于和游戏时，只更新正文并保留播放器，音乐可连续播放。首次打开、手动刷新、新标签页或外站跳转后需再次点击播放。
-共享样式为 `assets/css/music.css`，逻辑为 `assets/js/music.js`，均无第三方依赖。系统设置减少动态效果时停用唱片旋转。
-
-## 字体与交叉分类
-
-博客界面优先匹配本机瘦金体，使用站酷小薇体作为未安装时的兼容字体；首页寄语使用志莽行书。
-文章标题、正文与代码保留原字体。字体来源、OFL 许可和瘦金字体替换入口见 [assets/fonts/README.md](assets/fonts/README.md)。
-
-分类固定为：生活、学习、工作、小叙、闲谈、感悟。一篇文章可以属于多个分类。
-文章列表支持多选交集：同时选择“学习”和“工作”时，只显示同时属于这两类的文章；点击“全部”清空筛选。
-筛选会写入 URL，可复制分享，浏览器前进/后退也会恢复所选分类。没有交集时显示空状态，不会自动放宽条件。
-
-新增或调整分类时，保持两处一致：
-
-1. 文章页的 `<meta name="categories" content="学习,工作">` 和 `.post-categories` 分类链接。
-2. `posts/index.html` 对应 `.post-item` 的 `data-categories="学习 工作"` 和分类标记。
-
-首页的六个分类入口和文章页的分类链接会打开相应的筛选结果。原有技术标签继续保留。
-
-## 线条游鱼动效
-
-全站使用原生 Canvas 绘制少量线条鱼，缓慢摆尾游动，配色跟随浅色/深色/胭脂粉主题。
-鱼在页面留白处更清晰，在正文区域降低透明度；装饰层不拦截鼠标、触摸或键盘操作。
-导航栏的鱼形按钮可以暂停或开启动效，选择保存在本机。
-鱼在边缘缓慢转向，不再突然从对侧出现；摆尾和鳍随游速轻微变化，正文边缘平滑淡出。窗口调整时保留位置比例，站内跳转后重新测量正文范围。
-系统开启“减少动态效果”时关闭动画，后台标签页也会暂停；桌面最多 30 帧/秒、手机最多 24 帧/秒。手机缩小画布像素倍率和鱼的数量，低核心数设备也会减少鱼的数量。
-样式与绘制逻辑分别位于 `assets/css/fish.css` 和 `assets/js/fish.js`，无额外依赖或图片请求。
-
-## 网页小游戏
-
-全站导航的“游戏”入口指向 `games.html`，包含三个纯前端小游戏：
-
-- 贪吃蛇：方向键/WASD、手机滑动和方向按钮；空格暂停；三档速度；本机最高分；后台或切换游戏时暂停。
-- 记忆翻牌：六对汉字卡片，统计尝试次数，支持重新洗牌和键盘操作。
-- 剧情解谜《雨夜邮局》：三处场景、两道机关、两个结局，支持线索提示和本机存档。
-
-游戏适配现有浅色/深色/胭脂粉主题。无需账号、数据库、外部脚本或游戏素材。
-每个游戏的页面、脚本与样式分别放在 `games/snake/`、`games/memory/`、`games/story/`。
-`games.html` 仅作为游戏选择页，`assets/css/games.css` 只用于该选择页。
-
-## 浏览统计（不蒜子）
-
-文章日期旁显示本页阅读次数；右侧网站详情显示浏览量（PV）与访客数（UV）。
-统计由 [不蒜子](https://busuanzi.ibruce.info/) 提供，通过 `assets/js/stats.js` 异步加载官方脚本，不需要安装、账号或 Token。
-计数在服务返回真实数据后显示；服务无法访问或被拦截时，侧栏显示「—」，文章阅读计数保持隐藏，不用本地数字或假数据代替。
-本地 localhost、127.0.0.1 和直接打开的文件不会发送统计请求。
-
-统计从接入后开始累计，无法补回历史访问；阅读次数不等于独立读者数，也不保证排除刷新或所有自动访问。
-各篇文章按统计服务识别的页面地址计数，更改文章路径可能使统计分开。
-新增文章时保留 `.post__meta` 中的 `busuanzi_container_page_pv`、侧栏统计元素和 `stats.js` 引用。
-
-## 剧情解谜《雨夜邮局》
-
-从游戏选择页进入“雨夜邮局”，或直接打开 `games/story/`；旧链接 `games.html#story` 会自动跳转。
-短篇原创故事约 5–10 分钟：探索候信厅、旧值班室和渡口，收集物品，解开数字锁和图案锁，完成两个可切换的结局。
-提供随身物品、线索手记、分阶段提示与重新开始；进度保存在本机 localStorage，刷新或切换游戏后可继续，不需要注册或联网存档。
-浏览器禁止本地存储时仍可游玩，但不能保留刷新后的进度。
-
-故事规则与存档检查位于 `games/story/engine.js`，界面与线稿位于 `games/story/game.js`，样式为 `games/story/style.css`。
-
-## 左右侧栏小组件
-
-所有页面使用 `.site-layout` 三栏布局：左侧音乐播放器，中间正文，右侧时钟、日历和网站详情。
-桌面左侧播放器随滚动停留；较长的右侧组件随页面正常滚动。平板和手机将组件排列在正文下方，打印时隐藏侧栏。
-共享样式为 `assets/css/widgets.css`，网站信息逻辑为 `assets/js/widgets.js`。
-时钟与日历界面为 `assets/js/calendar.js`，按设备本地时间显示，精确到秒，跨午夜自动更新日期。隐藏页面时暂停刷新，回来后重新同步时间。
-`assets/js/calendar-engine.js` 使用浏览器 [Intl 农历支持](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/formatToParts) 生成农历日期、干支年和生肖，支持闰月识别。
-日历支持月份切换、返回今天、点击日期和方向键选日，以及本月节日列表。收录常见公历节日、春节/元宵/端午/七夕/中秋/重阳/腊八等农历节日、除夕和母亲节/父亲节；不展示调休安排。
-清明日期目前收录 2025—2028 年，依据[香港天文台公历与农历对照表](https://www.hko.gov.hk/tc/gts/time/conversion.htm)核对，后续年份需补充。浏览器不支持农历时仍显示公历、固定节日与时钟。
-文章数、分类数和最近发表日期从 `posts/index.html` 读取，新增文章时无需手动修改侧栏数字。
-音乐默认展开但不自动播放、不预下载音频；优先读取本站 `music/playlist.json`，后台检查 GitHub 新上传歌曲，接口不可用也不阻塞已有歌单。
-新增页面时复制 `.site-layout` 结构及共享 CSS/JS 引用，并按页面所在层级调整相对路径。
-
-## 站内连续播放与导航
-
-
-`assets/js/navigation.js` 只拦截本站 HTML 页面链接，保留左右侧栏和音频节点，更新正文、标题、导航、页面样式及所需脚本。支持浏览器前进/后退、分类与页面锚点；邮件、外链、下载和新标签页沿用浏览器默认行为。
-页面切换前触发 `site:before-navigate`，游戏与评论模块清理定时器和全局监听器；切换完成触发 `site:after-navigate`。统计在站内跳转后按新页面重新加载。
-请求失败或遇到不支持的页面会退回普通整页跳转，此时音乐会中断。没有 JavaScript 时，原始静态页面及链接仍可直接访问。
-
-## Codex + Origin 教程资料
-
-科研绘图教程位于 `posts/codex-origin-paper-figures.html`，配套 CSV、配置示例、提示词和下载包位于 `assets/downloads/codex-origin/`。`python scripts/create_origin_tutorial_assets.py` 可重建教学数据及 Matplotlib 样式示意图；这不是 Origin 运行测试，不会安装 MCP 或修改本机 Codex 配置。
+- 音乐统一上传到 `music/`，不要放在仓库根目录；上传后运行 `python scripts/update_music.py` 更新歌单。
+- 文章放在 `posts/`，配图放在 `assets/images/<文章名>/`，下载材料放在 `assets/downloads/<专题名>/`。
+- 每个游戏独立放在 `games/<游戏名>/`；网站的公共样式与脚本放在 `assets/`。
+- `CNAME`、`.nojekyll` 和根页面保留位置，以兼容现有发布方式和网址。
+- 本地 `wxgzh/`、`头像/`、SSH 日志与开发缓存不上传；仓库中的图片、字体授权、音乐及教程附件正常保留。

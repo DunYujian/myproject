@@ -1,0 +1,17 @@
+# Local source material; published article assets live under assets/.
+/wxgzh/
+/头像/
+
+# Local connection logs and editor / OS scratch files.
+/ssh_*.log
+*.tmp
+*.swp
+.DS_Store
+Thumbs.db
+
+# Optional Python tooling, not needed to serve the website.
+__pycache__/
+*.py[cod]
+.venv/
+.venv-*/
+.pytest_cache/
