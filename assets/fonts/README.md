@@ -15,3 +15,5 @@
 - [Zhi Mang Xing](https://github.com/google/fonts/tree/main/ofl/zhimangxing)：`ZhiMangXing-OFL.txt`
 
 两款字体均按 SIL Open Font License 1.1 分发，许可证全文随字体保留。
+
+- Bodoni Moda clock numerals: [Google Fonts](https://fonts.google.com/specimen/Bodoni+Moda), SIL OFL 1.1. Local WOFF2 subset for digits, colon and dash.

@@ -8,7 +8,8 @@
 .site-sidebar--right { position: static; }
 .is-navigating { cursor: progress; }
 .is-navigating .site-layout > main { opacity: .55; }
-.widget-clock { display: block; font: italic 400 clamp(29px, 3vw, 38px)/1.3 Georgia, "Times New Roman", serif; font-variant-numeric: lining-nums tabular-nums; letter-spacing: .035em; color: var(--accent); white-space: nowrap; }
+@font-face { font-family: "Bodoni Moda Clock"; src: url("../fonts/BodoniModa-Clock.woff2") format("woff2"); font-style: normal; font-weight: 700; font-display: swap; }
+.widget-clock { display: block; padding: .14em 0 .2em; border-block: 3px double var(--line-strong); font: 700 clamp(29px, 3.1vw, 40px)/1.25 "Bodoni Moda Clock", Georgia, serif; font-variant-numeric: lining-nums tabular-nums; letter-spacing: .025em; text-align: center; color: var(--accent); white-space: nowrap; }
 .clock-date { font-size: 11px; color: var(--text-soft); margin: 10px 0 4px; }
 .clock-zone { font-size: 10px; color: var(--text-faint); margin: 0; overflow-wrap: anywhere; }
 .sidebar-widget { padding: 22px 18px; margin-bottom: 20px; border: 1px solid var(--line); background: var(--surface); border-radius: 8px; }
