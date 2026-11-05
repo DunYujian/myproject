@@ -1,0 +1,1 @@
+Google Noto Emoji, SVG files from 2D/svg at commit 99701e07d3d1fe1bdbcdb14964547f0fd592966f. Files renamed and incidental whitespace normalized. See LICENSE (Apache 2.0). https://github.com/googlefonts/noto-emoji/tree/99701e07d3d1fe1bdbcdb14964547f0fd592966f/2D/svg

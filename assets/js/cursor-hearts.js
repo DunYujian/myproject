@@ -9,11 +9,36 @@
   canvas.hidden = true;
   document.body.append(canvas);
 
-  const heart = new Path2D();
-  heart.moveTo(0, 7);
-  heart.bezierCurveTo(-14, -2, -7, -12, 0, -5);
-  heart.bezierCurveTo(7, -12, 14, -2, 0, 7);
-  heart.closePath();
+  const keys = ["heart", "cake", "star", "fish", "dog", "cat"];
+  const names = ["爱心", "蛋糕", "星星", "小鱼", "小狗头", "小猫头", "随机混合", "关闭"];
+  const options = [...keys, "random", "off"];
+  const imageBase = new URL("../images/cursor/", document.currentScript.src);
+  const images = new Map();
+  function sprite(key) {
+    if (!images.has(key)) {
+      const img = new Image();
+      img.src = new URL(key + ".svg", imageBase);
+      images.set(key, img);
+    }
+    return images.get(key);
+  }
+  let style = "heart";
+  try { const saved = localStorage.getItem("zaiye-cursor-style"); if (options.includes(saved)) style = saved; } catch {}
+  const controls = document.createElement("label");
+  controls.style.cssText = "position:fixed;right:.75rem;bottom:.75rem;z-index:30;padding:.3rem .5rem;border:1px solid var(--line,#c8d9ce);border-radius:.5rem;background:var(--surface,white);color:var(--text,var(--ink,#21392e));font:13px system-ui";
+  controls.append("鼠标特效 ");
+  const select = document.createElement("select");
+  select.style.cssText = "width:auto;display:inline-block;font:inherit;padding:.25rem;color:inherit;background:inherit";
+  options.forEach((value, index) => select.add(new Option(names[index], value)));
+  select.value = style;
+  controls.append(select);
+  document.body.append(controls);
+  select.addEventListener("change", () => {
+    style = select.value;
+    try { localStorage.setItem("zaiye-cursor-style", style); } catch {}
+    stop();
+  });
+
   const particles = [];
   let frame = 0, last = -Infinity, width, height;
   function resize() {
@@ -43,10 +68,9 @@
       ctx.rotate(p.spin * t);
       ctx.scale(size, size);
       ctx.globalAlpha = .78 * (1 - t);
-      ctx.fillStyle = p.color;
-      ctx.shadowColor = p.color;
-      ctx.shadowBlur = 10;
-      ctx.fill(heart);
+      ctx.shadowColor = "#ee7892";
+      ctx.shadowBlur = 7;
+      if (p.image.complete && p.image.naturalWidth) ctx.drawImage(p.image, -13, -13, 26, 26);
       ctx.restore();
     }
     if (particles.length) frame = requestAnimationFrame(draw);
@@ -54,7 +78,7 @@
   }
   window.addEventListener("pointermove", event => {
     const now = performance.now();
-    if (event.pointerType !== "mouse" || reduce.matches || document.hidden || now - last < 35) return;
+    if (style === "off" || event.pointerType !== "mouse" || reduce.matches || document.hidden || now - last < 35) return;
     last = now;
     if (!frame) { resize(); canvas.hidden = false; }
     for (let i = 0; i < 2; i++) {
@@ -63,7 +87,7 @@
         start: now, x: event.clientX, y: event.clientY,
         dx: (Math.random() - .5) * 65, dy: -12 - Math.random() * 42,
         size: .45 + Math.random() * .75, spin: (Math.random() - .5) * 1.8,
-        color: i ? "#f25779" : "#dc3158"
+        image: sprite(style === "random" ? keys[Math.floor(Math.random() * keys.length)] : style)
       });
     }
     if (!frame) frame = requestAnimationFrame(draw);
