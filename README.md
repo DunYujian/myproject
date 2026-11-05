@@ -8,7 +8,10 @@
 
 ```text
 myproject/
-├── index.html              首页
+├── index.html              小站入口
+├── blog.html               博客首页
+├── projects/               项目管理
+├── schedule/               日程管理
 ├── about.html              关于与联系邮箱
 ├── games.html              游戏选择页
 ├── 404.html                错误页
@@ -59,3 +62,5 @@ python -m http.server 8000
 - 每个游戏独立放在 `games/<游戏名>/`；网站的公共样式与脚本放在 `assets/`。
 - `CNAME`、`.nojekyll` 和根页面保留位置，以兼容现有发布方式和网址。
 - 本地 `wxgzh/`、`头像/`、SSH 日志与开发缓存不上传；仓库中的图片、字体授权、音乐及教程附件正常保留。
+
+项目和日程页面使用当前浏览器的本地存储；没有账号、云同步或日程通知。博客最近文章维护在 `blog.html`。

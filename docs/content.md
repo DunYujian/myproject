@@ -13,7 +13,7 @@
    - 文末的标签，以及上一篇 / 下一篇
 3. 把文章加进两个网页列表，并维护 [文章目录](../posts/README.md)：
    - `posts/index.html` 的 `<ul class="post-list">` 里复制一个 `<li>`
-   - `index.html` 首页「最近文章」的 `.recent-list` 里复制一个 `<li>`
+   - `blog.html` 首页「最近文章」的 `.recent-list` 里复制一个 `<li>`
 
 正文可用的样式（见示例文章）：`<h2>` `<h3>`、`<p>`、`<ul>`/`<ol>`、`<blockquote>`、
 `<pre data-lang="js"><code>` 代码块（会自动显示语言角标）、`<table>`、`<figure>` + `<figcaption>`、`<hr>`。

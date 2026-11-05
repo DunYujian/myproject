@@ -1,0 +1,193 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f7f6">
+  <title>再也的小站 · 写作与记录</title>
+  <meta name="description" content="再也的小站，记录技术、阅读和生活。">
+
+
+  <link rel="canonical" href="https://dunyujian.cc.cd/blog.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="再也的小站">
+  <meta property="og:description" content="把想法写下来，让日子慢慢清晰。">
+  <meta property="og:url" content="https://dunyujian.cc.cd/blog.html">
+  <meta property="og:locale" content="zh_CN">
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/reading.css?v=20261021-2">
+
+
+  <script>
+    (function () {
+      var t = null;
+      try { t = localStorage.getItem("theme"); } catch (e) {}
+      if (!["light", "dark", "pink"].includes(t)) {
+        t = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      }
+      document.documentElement.setAttribute("data-theme", t);
+    })();
+  </script>
+<link rel="preload" href="assets/fonts/ZCOOLXiaoWei-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/fish.css?v=20261019-1">
+<link rel="stylesheet" href="assets/css/widgets.css?v=20261105-1">
+<link rel="stylesheet" href="assets/css/music.css?v=20261021-2">
+</head>
+
+<body data-page="home">
+  <a class="skip-link" href="#main">跳到主要内容</a>
+
+  <!-- ==================== 页头（全站统一，改这里要同步其他页面） ==================== -->
+  <header class="site-header">
+    <div class="wrap site-header__inner">
+      <a class="brand" aria-label="再也的小站首页" href="blog.html">
+        <span>再也的小站</span>
+      </a>
+
+      <button class="icon-btn theme-toggle" type="button" aria-label="切换主题" aria-pressed="false">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+             stroke-linecap="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>
+        </svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"></path>
+        </svg>
+        <span class="theme-toggle__label">深色</span>
+      </button>
+
+      <button class="icon-btn nav-toggle" type="button" aria-label="打开菜单" aria-expanded="false" aria-controls="nav">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true">
+          <path d="M4 7h16M4 12h16M4 17h16"></path>
+        </svg>
+      </button>
+
+      <nav class="nav" id="nav" aria-label="主导航">
+        <a href="blog.html" data-nav="home">首页</a>
+        <a href="posts/index.html" data-nav="posts">文章</a>
+        <a href="about.html" data-nav="about">关于</a>
+              <a href="games.html" data-nav="games">游戏</a>
+        <a href="test/" data-nav="test">测试</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="site-layout">
+<aside class="site-sidebar site-sidebar--left" aria-label="音乐侧栏"><section class="sidebar-widget"><h2>听点音乐</h2><aside class="music-section wrap" aria-label="音乐播放器">
+<details class="music-player music-player--custom" data-music-player open>
+<summary><span>随身听</span><span class="music-track-count" data-music-count>载入中</span><span class="music-player__expand" aria-hidden="true">＋</span></summary>
+<div class="music-player__body">
+<div class="music-now"><div class="music-record" aria-hidden="true"><span>鱼</span></div><div class="music-now__text"><p class="music-title" data-music-title>等一首歌</p><p class="music-artist" data-music-artist>让旋律陪你读一会儿</p></div></div>
+<p class="music-player__status" data-music-status role="status">正在读取歌单…</p>
+<audio preload="none" data-music-audio></audio>
+<div data-music-controls hidden>
+<label class="sr-only" for="music-seek">播放进度</label><input class="music-range music-seek" id="music-seek" data-music-seek type="range" min="0" max="100" value="0" step="0.1" disabled>
+<div class="music-times"><span data-music-elapsed>0:00</span><span data-music-duration>--:--</span></div>
+<div class="music-transport">
+<button type="button" data-music-previous aria-label="上一首" title="上一首"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5v14M18 5l-9 7 9 7Z"/></svg></button>
+<button class="music-play" type="button" data-music-play aria-label="播放" title="播放"><svg class="music-icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 11 7-11 7Z"/></svg><svg class="music-icon-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14M16 5v14"/></svg></button>
+<button type="button" data-music-next aria-label="下一首" title="下一首"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 5v14M6 5l9 7-9 7Z"/></svg></button>
+</div>
+<div class="music-volume-row"><button type="button" data-music-mute aria-label="静音" title="静音" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4ZM17 8c3 2 3 6 0 8"/><path class="music-mute-cross" d="m17 9 5 6m0-6-5 6"/></svg></button><label class="sr-only" for="music-volume">音量</label><input class="music-range" id="music-volume" data-music-volume type="range" min="0" max="1" value="0.7" step="0.01"><span data-music-volume-label>70%</span></div>
+<div class="music-options"><button type="button" data-music-mode>列表循环</button><button type="button" data-music-list-toggle aria-expanded="false" aria-controls="music-track-list">歌单 ↓</button></div>
+<ol class="music-track-list" id="music-track-list" data-music-list hidden aria-label="播放列表"></ol>
+</div>
+<button type="button" class="music-retry" data-music-retry hidden>重新加载歌单</button>
+<noscript><p>启用 JavaScript 后可使用音乐播放器。</p></noscript>
+</div></details></aside><p class="sidebar-caption">让旋律陪你读一会儿。</p></section></aside>
+<main id="main" class="home-main">
+    <section class="home-intro wrap" aria-labelledby="home-name">
+      <img class="home-avatar" src="assets/avatar.svg" alt="再也的站点头像" width="72" height="72">
+      <div class="home-intro__text">
+        <p class="home-eyebrow">写作 · 记录 · 分享</p>
+        <h1 id="home-name">再也</h1>
+        <p class="home-motto">把想法写下来，让日子慢慢清晰。</p>
+        <div class="home-links"><a href="./" data-portal-link>返回小站入口</a><span aria-hidden="true">/</span>
+          <a href="https://github.com/DunYujian" rel="me noopener" aria-label="再也的 GitHub">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-4.3 1.3-4.3-2.2-6-2.7M15 22v-3.5c.1-1-.3-1.8-.8-2.2 2.8-.3 5.8-1.4 5.8-6.3 0-1.4-.5-2.5-1.3-3.4.1-.3.6-1.6-.1-3.3 0 0-1.1-.4-3.6 1.3a12 12 0 0 0-6 0C6.5 2.9 5.4 3.3 5.4 3.3c-.7 1.7-.2 3-.1 3.3A5 5 0 0 0 4 10c0 4.9 3 6 5.8 6.3-.5.4-.9 1.2-.8 2.2V22"/></svg>
+            <span>GitHub</span>
+          </a>
+          <span aria-hidden="true">/</span>
+          <a href="about.html">关于我 <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+
+    <nav class="category-links wrap" aria-label="按分类阅读">
+      <span class="category-links__label">归档</span>
+      <a href="posts/index.html?category=%E7%94%9F%E6%B4%BB">生活</a>
+      <a href="posts/index.html?category=%E5%AD%A6%E4%B9%A0">学习</a>
+      <a href="posts/index.html?category=%E5%B7%A5%E4%BD%9C">工作</a>
+      <a href="posts/index.html?category=%E5%B0%8F%E5%8F%99">小叙</a>
+      <a href="posts/index.html?category=%E9%97%B2%E8%B0%88">闲谈</a>
+      <a href="posts/index.html?category=%E6%84%9F%E6%82%9F">感悟</a>
+    </nav>
+
+    <section class="home-recent wrap" aria-labelledby="recent-title">
+      <div class="section__head">
+        <h2 id="recent-title">最近文章</h2>
+        <a class="more" href="posts/index.html">全部文章 <span aria-hidden="true">→</span></a>
+      </div>
+      <ol class="recent-list">
+<li><a href="posts/codex-origin-paper-figures.html"><time datetime="2026-10-22">2026-10-22</time><span class="recent-list__title">用 Codex 接入 Origin：从数据到精美论文图表</span><span class="recent-list__arrow" aria-hidden="true">↗</span></a></li>
+        <li><a href="posts/welcome.html"><time datetime="2026-10-18">2026-10-18</time><span class="recent-list__title">从一个空仓库开始：这个站是怎么搭起来的</span><span class="recent-list__arrow" aria-hidden="true">↗</span></a></li>
+        <li><a href="posts/essay-writing.html"><time datetime="2026-10-12">2026-10-12</time><span class="recent-list__title">写作是思考的副产品</span><span class="recent-list__arrow" aria-hidden="true">↗</span></a></li>
+        <li><a href="posts/toolkit.html"><time datetime="2026-10-03">2026-10-03</time><span class="recent-list__title">我的极简工具清单</span><span class="recent-list__arrow" aria-hidden="true">↗</span></a></li>
+        <li><a href="posts/lanqiao-hal-key-click.html"><time datetime="2024-03-03">2024-03-03</time><span class="recent-list__title">3、蓝桥杯嵌入式—HAL库-按键单击</span><span class="recent-list__arrow" aria-hidden="true">↗</span></a></li>
+      </ol>
+    </section>
+
+    <aside class="home-note wrap" aria-label="博客简介">
+      <span class="home-note__mark" aria-hidden="true">记</span>
+      <p>关于技术、阅读和生活的笔记。<br>不必每次都有答案，记录本身就有意义。</p>
+    </aside>
+  </main>
+<aside class="site-sidebar site-sidebar--right" aria-label="日历与网站详情">
+<section class="sidebar-widget" data-clock aria-label="实时钟表">
+<h2>此刻</h2><time class="widget-clock" datetime="">--:--:--</time><p class="clock-date" data-clock-date></p><p class="clock-zone" data-clock-zone>当地时间 · 24小时制</p>
+</section>
+<section class="sidebar-widget calendar-widget" data-calendar>
+<h2>日历</h2>
+<div class="calendar-toolbar"><button type="button" data-calendar-step="-1" aria-label="上个月">‹</button><span class="calendar-label" data-calendar-label aria-live="polite"></span><button type="button" data-calendar-step="1" aria-label="下个月">›</button></div>
+<table class="widget-calendar" aria-label="公历与农历"><thead><tr><th scope="col">一</th><th scope="col">二</th><th scope="col">三</th><th scope="col">四</th><th scope="col">五</th><th scope="col">六</th><th scope="col">日</th></tr></thead><tbody></tbody></table>
+<div class="calendar-detail" aria-live="polite"><p data-calendar-date></p><p data-calendar-lunar></p><p class="calendar-festival" data-calendar-festival></p></div>
+<div class="calendar-footer"><span>点击日期查看 · 农历/节日</span><button type="button" class="calendar-today" data-calendar-today>今天</button></div>
+<details class="calendar-events"><summary>本月节日</summary><ul data-calendar-events></ul><p data-calendar-events-empty>本月暂无收录的节日。</p></details>
+<noscript><p>启用 JavaScript 后显示日历。</p></noscript>
+</section>
+<section class="sidebar-widget" data-site-facts><h2>网站详情</h2><dl class="site-facts">
+<div><dt>站点</dt><dd>再也的小站</dd></div><div><dt>作者</dt><dd>再也</dd></div>
+<div><dt>文章</dt><dd><a href="posts/index.html" data-site-posts>查看归档 →</a></dd></div>
+<div><dt>分类</dt><dd><a href="posts/index.html" data-site-categories>查看分类 →</a></dd></div>
+<div><dt>最近发表</dt><dd data-site-latest>—</dd></div>
+<div class="site-fact-stat" id="busuanzi_container_site_uv"><dt>访客数</dt><dd><span id="busuanzi_value_site_uv">—</span> 人</dd></div>
+<div class="site-fact-stat" id="busuanzi_container_site_pv"><dt>浏览量</dt><dd><span id="busuanzi_value_site_pv">—</span> 次</dd></div>
+</dl><p class="sidebar-caption">访问统计由不蒜子提供，未加载时显示 —。</p></section></aside>
+</div>
+
+  <!-- ==================== 页脚 ==================== -->
+
+
+  <footer class="site-footer">
+    <div class="wrap site-footer__inner">
+      <p style="margin:0">© <span data-year>2026</span> 再也的小站</p>
+      <nav class="footer-links" aria-label="页脚导航">
+        <a href="posts/index.html">文章</a>
+        <a href="about.html">关于</a>
+        <a href="https://github.com/DunYujian" rel="me noopener">GitHub · 再也</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js?v=20261021-2" defer></script>
+  <script src="assets/js/music.js?v=20261021-2" defer></script>
+  <script src="assets/js/fish.js?v=20261022-1" defer></script>
+  <script src="assets/js/stats.js?v=20261021-3" defer></script>
+  <script src="assets/js/widgets.js?v=20261021-3" defer></script>
+<script src="assets/js/calendar-engine.js?v=20261021-3" defer></script>
+<script src="assets/js/calendar.js?v=20261021-3" defer></script>
+<script src="assets/js/navigation.js?v=20261105-2" defer></script>
+</body>
+</html>

@@ -104,7 +104,7 @@
   }
   document.addEventListener("click", function (event) {
     var link = event.target.closest("a[href]");
-    if (!link || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || link.hasAttribute("download") || (link.target && link.target !== "_self")) return;
+    if (!link || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || (link.hasAttribute("download") || link.hasAttribute("data-portal-link")) || (link.target && link.target !== "_self")) return;
     var url = new URL(link.href);
     if (url.origin !== root.origin || !url.pathname.startsWith(root.pathname) || !/(\.html|\/)$/i.test(url.pathname)) return;
     if (url.pathname === location.pathname && url.search === location.search && url.hash && !/^#(snake|memory|story)$/.test(url.hash)) return;

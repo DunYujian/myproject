@@ -1,0 +1,34 @@
+:root { color-scheme: light dark; --bg:#f4f7f5; --ink:#21392e; --muted:#50685b; --surface:#fff; --line:#c8d9ce; --accent:#315e49; --button-ink:white; }
+@media (prefers-color-scheme:dark) { :root { --bg:#16211d; --ink:#e6f1e9; --muted:#adc1b4; --surface:#202f28; --line:#435b4d; --accent:#9bd0b1; --button-ink:#16211d; } }
+* { box-sizing:border-box; }
+[hidden] { display:none !important; }
+body { margin:0; color:var(--ink); background:var(--bg); font:16px/1.6 system-ui,sans-serif; }
+a { color:var(--accent); }
+h1,h2,p { margin:0 0 .6em; }
+h1 { font-family:Georgia,"Songti SC",serif; font-size:clamp(2rem,6vw,3.2rem); }
+h2 { font-size:1.25rem; }
+.landing,.workspace { width:min(100% - 2rem,58rem); margin:auto; }
+.landing { text-align:center; padding:clamp(3rem,15vh,9rem) 0 3rem; }
+.eyebrow { letter-spacing:.3em; color:var(--accent); }
+.intro,small { color:var(--muted); }
+.entries { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin-top:2rem; }
+.entries a,.panel,.records li { padding:1.4rem; background:var(--surface); border:1px solid var(--line); border-radius:1rem; }
+.entries a { text-decoration:none; text-align:left; }
+.entries a:hover { border-color:var(--accent); }
+.entries strong,.entries small { display:block; }
+.entries strong { font-size:1.25rem; color:var(--ink); }
+.entries span { display:block; margin-bottom:.75rem; }
+.workspace { max-width:44rem; padding:2rem 0 4rem; }
+.workspace-nav,.actions { display:flex; flex-wrap:wrap; gap:.75rem; }
+.workspace-nav { justify-content:space-between; margin-bottom:2rem; }
+.panel { margin:1.5rem 0 1rem; }
+.fields { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+label { display:block; margin-bottom:.9rem; min-width:0; }
+input,select,textarea,button { font:inherit; border:1px solid var(--line); border-radius:.5rem; padding:.45rem .65rem; }
+input,select,textarea { width:100%; display:block; background:var(--bg); color:var(--ink); }
+button { cursor:pointer; background:var(--surface); color:var(--ink); }
+button[type=submit] { background:var(--accent); color:var(--button-ink); border-color:var(--accent); }
+.records { list-style:none; padding:0; display:grid; gap:.65rem; }
+.records li { overflow-wrap:anywhere; }
+.records p { white-space:pre-wrap; }
+@media(max-width:560px) { .entries,.fields { grid-template-columns:1fr; } }
