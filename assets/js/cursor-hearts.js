@@ -10,8 +10,6 @@
   document.body.append(canvas);
 
   const keys = ["heart", "cake", "star", "fish", "dog", "cat"];
-  const names = ["爱心", "蛋糕", "星星", "小鱼", "小狗头", "小猫头", "随机混合", "关闭"];
-  const options = [...keys, "random", "off"];
   const imageBase = new URL("../images/cursor/", document.currentScript.src);
   const images = new Map();
   function sprite(key) {
@@ -22,20 +20,33 @@
     }
     return images.get(key);
   }
-  let style = "heart";
-  try { const saved = localStorage.getItem("zaiye-cursor-style"); if (options.includes(saved)) style = saved; } catch {}
-  const controls = document.createElement("label");
-  controls.style.cssText = "position:fixed;right:.75rem;bottom:.75rem;z-index:30;padding:.3rem .5rem;border:1px solid var(--line,#c8d9ce);border-radius:.5rem;background:var(--surface,white);color:var(--text,var(--ink,#21392e));font:13px system-ui";
-  controls.append("鼠标特效 ");
-  const select = document.createElement("select");
-  select.style.cssText = "width:auto;display:inline-block;font:inherit;padding:.25rem;color:inherit;background:inherit";
-  options.forEach((value, index) => select.add(new Option(names[index], value)));
-  select.value = style;
-  controls.append(select);
-  document.body.append(controls);
-  select.addEventListener("change", () => {
-    style = select.value;
-    try { localStorage.setItem("zaiye-cursor-style", style); } catch {}
+  let enabled = true;
+  try { enabled = localStorage.getItem("zaiye-cursor-style") !== "off"; } catch {}
+  const header = document.querySelector(".site-header__inner");
+  const intro = document.querySelector(".landing .intro");
+  const button = document.createElement("button");
+  button.type = "button";
+  button.setAttribute("aria-label", "鼠标特效");
+  if (header) {
+    button.className = "icon-btn";
+    button.style.cssText = "order:2;flex:none;min-width:28px";
+    const theme = header.querySelector(".theme-toggle");
+    if (theme) theme.after(button); else header.append(button);
+  } else if (intro) {
+    intro.after(button);
+  }
+  function syncButton() {
+    button.hidden = reduce.matches;
+    button.style.display = reduce.matches ? "none" : "";
+    button.setAttribute("aria-pressed", String(enabled));
+    button.title = enabled ? "关闭鼠标特效" : "开启鼠标特效";
+    button.textContent = header ? (enabled ? "✦" : "✧") : (enabled ? "✦ 鼠标特效：开" : "✧ 鼠标特效：关");
+  }
+  syncButton();
+  button.addEventListener("click", () => {
+    enabled = !enabled;
+    try { localStorage.setItem("zaiye-cursor-style", enabled ? "random" : "off"); } catch {}
+    syncButton();
     stop();
   });
 
@@ -78,7 +89,7 @@
   }
   window.addEventListener("pointermove", event => {
     const now = performance.now();
-    if (style === "off" || event.pointerType !== "mouse" || reduce.matches || document.hidden || now - last < 35) return;
+    if (!enabled || event.pointerType !== "mouse" || reduce.matches || document.hidden || now - last < 35) return;
     last = now;
     if (!frame) { resize(); canvas.hidden = false; }
     for (let i = 0; i < 2; i++) {
@@ -87,12 +98,12 @@
         start: now, x: event.clientX, y: event.clientY,
         dx: (Math.random() - .5) * 65, dy: -12 - Math.random() * 42,
         size: .45 + Math.random() * .75, spin: (Math.random() - .5) * 1.8,
-        image: sprite(style === "random" ? keys[Math.floor(Math.random() * keys.length)] : style)
+        image: sprite(keys[Math.floor(Math.random() * keys.length)])
       });
     }
     if (!frame) frame = requestAnimationFrame(draw);
   }, { passive: true });
   window.addEventListener("resize", () => { if (frame) resize(); });
   document.addEventListener("visibilitychange", () => { if (document.hidden) stop(); });
-  reduce.addEventListener("change", () => { if (reduce.matches) stop(); });
+  reduce.addEventListener("change", () => { syncButton(); if (reduce.matches) stop(); });
 })();
