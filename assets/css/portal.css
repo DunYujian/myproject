@@ -32,3 +32,7 @@ button[type=submit] { background:var(--accent); color:var(--button-ink); border-
 .records li { overflow-wrap:anywhere; }
 .records p { white-space:pre-wrap; }
 @media(max-width:560px) { .entries,.fields { grid-template-columns:1fr; } }
+
+.portal-stats { display:flex; justify-content:center; flex-wrap:wrap; gap:.5rem 1.5rem; margin:1.5rem 0 0; color:var(--muted); font-size:.9rem; }
+.portal-stats > div { display:flex !important; gap:.4rem; }
+.portal-stats dd { margin:0; font-variant-numeric:tabular-nums; }
