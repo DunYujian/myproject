@@ -14,7 +14,12 @@
       if (caption) caption.replaceWith(status); else panel.append(status);
     }
   }
-  var cacheKey = "zaiye-site-stats-v1";
+  // Set to the deployed HTTPS Worker origin to switch providers.
+  var endpoint = "";
+  var provider = endpoint ? "本站统计" : "不蒜子";
+  var cacheKey = endpoint ? "zaiye-owned-site-stats-v1" : "zaiye-site-stats-v1";
+  var pending;
+  var visitor;
   var timer;
   var observer;
   function valid(value) { return typeof value === "string" && /^\d+$/.test(value); }
@@ -41,7 +46,7 @@
       mutations.forEach(function (record) { changed.add(uv.contains(record.target) ? uv : pv); });
       if (changed.size < 2 || !valid(uv.textContent) || !valid(pv.textContent)) return;
       clearTimeout(timer);
-      status.textContent = "数据来自不蒜子";
+      status.textContent = "数据来自" + provider;
       try { localStorage.setItem(cacheKey, JSON.stringify({ uv: uv.textContent, pv: pv.textContent, at: Date.now() })); } catch (error) {}
     });
     observer.observe(uv, { childList: true, subtree: true, characterData: true });
@@ -63,6 +68,32 @@
     // Local previews do not send statistics requests.
     if (!/^https?:$/.test(location.protocol) || /^(localhost|127\.[\d.]+|\[::1\])$/.test(location.hostname)) return;
     watch();
+    if (endpoint) {
+      if (pending) pending.abort();
+      var request = pending = new AbortController();
+      try {
+        if (!visitor) {
+          visitor = localStorage.getItem("zaiye-visitor-v1") || crypto.randomUUID();
+          localStorage.setItem("zaiye-visitor-v1", visitor);
+        }
+      } catch (error) { visitor = visitor || crypto.randomUUID(); }
+      fetch(new URL("/view", endpoint), {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        credentials: "omit", signal: request.signal,
+        body: JSON.stringify({ visitor: visitor, event: crypto.randomUUID(), path: location.pathname })
+      }).then(function (response) {
+        if (!response.ok) throw new Error("Statistics unavailable");
+        return response.json();
+      }).then(function (data) {
+        if (pending !== request || request.signal.aborted) return;
+        if (![data.uv, data.pv, data.pagePv].every(function (value) { return Number.isSafeInteger(value) && value >= 0; })) throw new Error("Invalid statistics");
+        if (uv && pv) { uv.textContent = data.uv; pv.textContent = data.pv; }
+        var article = document.getElementById("busuanzi_value_page_pv");
+        var wrapper = document.getElementById("busuanzi_container_page_pv");
+        if (article && wrapper) { article.textContent = data.pagePv; wrapper.style.display = ""; }
+      }).catch(function () { if (pending === request && !request.signal.aborted) fallback(); });
+      return;
+    }
     var previous = document.querySelector("script[data-site-stats]");
     if (previous) previous.remove();
     var script = document.createElement("script");
