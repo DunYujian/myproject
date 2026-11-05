@@ -4,9 +4,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>入口 · 再也的小站</title>
 <link rel="icon" href="assets/favicon.svg">
-<link rel="stylesheet" href="assets/css/portal.css?v=20261105-2">
+<link rel="stylesheet" href="assets/css/portal.css?v=20261105-3">
 
 <script defer src="assets/js/stats.js"></script>
+<script defer src="assets/js/daily-quote.js?v=1"></script>
 <body>
 <main class="landing">
 <img src="assets/avatar.svg" alt="" width="72" height="72">
@@ -22,6 +23,14 @@
 <div id="busuanzi_container_site_uv"><dt>访客数</dt><dd><span id="busuanzi_value_site_uv">—</span> 人</dd></div>
 <div id="busuanzi_container_site_pv"><dt>浏览量</dt><dd><span id="busuanzi_value_site_pv">—</span> 次</dd></div>
 </dl>
+<figure class="daily-quote" aria-labelledby="daily-quote-title" hidden>
+  <figcaption id="daily-quote-title">每日一句 <span lang="en">Daily Quote</span></figcaption>
+  <blockquote>
+    <p data-quote-zh></p>
+    <p data-quote-en lang="en"></p>
+  </blockquote>
+  <p class="quote-credit"><a data-quote-source></a><small data-quote-translation></small></p>
+</figure>
 </main>
 </body>
 </html>

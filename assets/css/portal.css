@@ -36,3 +36,12 @@ button[type=submit] { background:var(--accent); color:var(--button-ink); border-
 .portal-stats { display:flex; justify-content:center; flex-wrap:wrap; gap:.5rem 1.5rem; margin:1.5rem 0 0; color:var(--muted); font-size:.9rem; }
 .portal-stats > div { display:flex !important; gap:.4rem; }
 .portal-stats dd { margin:0; font-variant-numeric:tabular-nums; }
+
+.daily-quote { max-width:42rem; margin:2rem auto 0; padding:1.3rem clamp(1rem,4vw,2rem); text-align:left; border:1px solid var(--line); border-radius:1rem; background:var(--surface); }
+.daily-quote figcaption { color:var(--accent); font-weight:600; }
+.daily-quote figcaption span { margin-inline-start:.45rem; color:var(--muted); font-size:.8rem; font-weight:400; }
+.daily-quote blockquote { margin:1rem 0; }
+.daily-quote [data-quote-zh] { font:1.25rem/1.7 Georgia,"Songti SC",serif; }
+.daily-quote [data-quote-en] { color:var(--muted); font:italic 1.05rem/1.6 Georgia,serif; }
+.quote-credit { margin:0; font-size:.85rem; overflow-wrap:anywhere; }
+.quote-credit small { display:block; }
