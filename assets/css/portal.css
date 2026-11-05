@@ -45,3 +45,5 @@ button[type=submit] { background:var(--accent); color:var(--button-ink); border-
 .daily-quote [data-quote-en] { color:var(--muted); font:italic 1.05rem/1.6 Georgia,serif; }
 .quote-credit { margin:0; font-size:.85rem; overflow-wrap:anywhere; }
 .quote-credit small { display:block; }
+
+.portal-stats-status { margin:.35rem 0 0; color:var(--muted); font-size:.8rem; }
