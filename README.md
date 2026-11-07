@@ -12,6 +12,7 @@ myproject/
 ├── blog.html               博客首页
 ├── projects/               项目管理
 ├── schedule/               日程管理
+├── tools/                  工具列表与 SerialWeb 串口调试
 ├── about.html              关于与联系邮箱
 ├── games.html              游戏选择页
 ├── 404.html                错误页

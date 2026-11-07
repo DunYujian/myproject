@@ -11,7 +11,7 @@ h2 { font-size:1.25rem; }
 .landing { text-align:center; padding:clamp(3rem,15vh,9rem) 0 3rem; }
 .eyebrow { letter-spacing:.3em; color:var(--accent); }
 .intro,small { color:var(--muted); }
-.entries { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin-top:2rem; }
+.entries { display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; margin-top:2rem; }
 .entries a,.panel,.records li { padding:1.4rem; background:var(--surface); border:1px solid var(--line); border-radius:1rem; }
 .entries a { text-decoration:none; text-align:left; }
 .entries a:hover { border-color:var(--accent); }
@@ -31,6 +31,7 @@ button[type=submit] { background:var(--accent); color:var(--button-ink); border-
 .records { list-style:none; padding:0; display:grid; gap:.65rem; }
 .records li { overflow-wrap:anywhere; }
 .records p { white-space:pre-wrap; }
+@media(max-width:760px) { .entries { grid-template-columns:repeat(2,1fr); } }
 @media(max-width:560px) { .entries,.fields { grid-template-columns:1fr; } }
 
 .portal-stats { display:flex; justify-content:center; flex-wrap:wrap; gap:.5rem 1.5rem; margin:1.5rem 0 0; color:var(--muted); font-size:.9rem; }
