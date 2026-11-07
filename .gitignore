@@ -17,3 +17,6 @@ __pycache__/
 .pytest_cache/
 /backend/stats/wrangler.toml
 /backend/stats/.wrangler/
+/backend/drive/wrangler.toml
+/backend/drive/.wrangler/
+/backend/drive/.dev.vars*

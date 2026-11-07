@@ -20,6 +20,7 @@ myproject/
 ├── games/                  每个游戏各自的页面、脚本和样式
 ├── test/                   独立测试页
 ├── music/                  MP3、歌单和音乐上传说明
+├── backend/                访问统计和云盘的可独立部署服务
 ├── assets/
 │   ├── css/                公共样式
 │   ├── js/                 公共交互与组件
@@ -45,6 +46,7 @@ myproject/
 | 添加测试内容 | [测试页说明](test/README.md) |
 | 运行维护脚本 | [脚本说明](scripts/README.md) |
 | 查找字体、图片、教程附件 | [资源目录](assets/README.md) |
+| 部署私有上传、凭链接下载的云盘 | [云盘部署](backend/drive/README.md) |
 
 ## 本地预览
 

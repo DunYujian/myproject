@@ -1,0 +1,9 @@
+name = "zaiye-drive"
+main = "worker.mjs"
+compatibility_date = "2026-11-07"
+workers_dev = true
+preview_urls = false
+
+[[r2_buckets]]
+binding = "FILES"
+bucket_name = "zaiye-drive-files"
