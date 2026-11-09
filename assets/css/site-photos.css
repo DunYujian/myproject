@@ -1,0 +1,48 @@
+.site-photo { margin: 0; min-width: 0; }
+.site-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border: 1px solid var(--line);
+  border-radius: .75rem;
+}
+.site-photo figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: .15rem .65rem;
+  margin-top: .4rem;
+  color: var(--muted, var(--text-soft));
+  font: .75rem/1.5 system-ui, sans-serif;
+}
+.site-photo figcaption a { color: inherit; text-decoration: underline; text-underline-offset: .16em; }
+
+.landing:has(.portal-hero) { padding-top: clamp(2rem, 9vh, 6rem); }
+.portal-hero {
+  display: grid;
+  grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+  align-items: center;
+  gap: clamp(1.5rem, 5vw, 4rem);
+  text-align: left;
+}
+.portal-hero h1 { line-height: 1.25; margin-bottom: .35em; }
+.portal-photo img { aspect-ratio: 2 / 1; height: auto; }
+
+.home-photos { margin-top: clamp(2.2rem, 6vw, 3.5rem); }
+.home-photos__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr);
+  gap: clamp(.65rem, 2vw, 1rem);
+}
+.home-photos__grid img { height: clamp(7rem, 24vw, 13rem); }
+
+@media (max-width: 560px) {
+  .landing:has(.portal-hero) { padding-top: 2rem; }
+  .portal-hero { grid-template-columns: 1fr; gap: 1.25rem; text-align: center; }
+  .portal-photo img { aspect-ratio: 2.4 / 1; }
+}
+@media (360px <= width <= 560px) {
+  .portal-hero + .entries { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; }
+  .portal-hero + .entries a { padding: .9rem; }
+}
